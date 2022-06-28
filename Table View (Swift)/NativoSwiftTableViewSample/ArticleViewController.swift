@@ -47,12 +47,15 @@ extension ArticleViewController: WKNavigationDelegate {
 }
 
 extension ArticleViewController: NtvSectionDelegate {
-    
-    func section(_ sectionUrl: String, needsPlaceAdInViewAtLocation identifier: Any) {
+    func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
         
     }
     
-    func section(_ sectionUrl: String, needsRemoveAdViewAtLocation identifier: Any) {
+    func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation identifier: Any, container: UIView) {
+        
+    }
+    
+    func section(_ sectionUrl: String, didFailAdAtLocation identifier: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
         // Set height to 0 instead of remove (If removed from parent view you will need to reapply autolayout constraints)
         self.nativoAdView.widthAnchor.constraint(equalToConstant: 0).isActive = true
         print("Removed Nativo ad view")

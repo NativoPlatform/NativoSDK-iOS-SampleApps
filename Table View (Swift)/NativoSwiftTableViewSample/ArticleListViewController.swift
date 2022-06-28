@@ -43,11 +43,17 @@ class ArticleListViewController: UIViewController {
 
 extension ArticleListViewController: NtvSectionDelegate {
     
-    func section(_ sectionUrl: String, needsPlaceAdInViewAtLocation identifier: Any) {
-        self.tableView.reloadData()
+    func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
+        if (didGetFill) {
+            self.tableView.reloadData()
+        }
     }
     
-    func section(_ sectionUrl: String, needsRemoveAdViewAtLocation identifier: Any) {
+    func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation identifier: Any, container: UIView) {
+        
+    }
+    
+    func section(_ sectionUrl: String, didFailAdAtLocation identifier: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
         self.tableView.reloadData()
     }
     
@@ -56,7 +62,7 @@ extension ArticleListViewController: NtvSectionDelegate {
             self.navigationController?.pushViewController(landingPage, animated: true)
         }
     }
-    
+
     func section(_ sectionUrl: String, needsDisplayClickoutURL url: URL) {
         let clickoutAdVC = UIViewController()
         let webView = WKWebView(frame: clickoutAdVC.view.frame)
@@ -71,7 +77,7 @@ extension ArticleListViewController: NtvSectionDelegate {
 extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let numAds = NativoSDK.getNumberOfAds(inSection: NativoSectionUrl, inTableOrCollectionSection: section, forNumberOfItemsInDatasource: self.articlesDataSource.count)
+        let numAds = NativoSDK.getNumberOfAds(inSection: NativoSectionUrl, inTableOrCollectionSection: section, forNumberOfItemsInDatasource: self.articlesDataSource.count, inContainer: self.tableView)
         let totalRows = self.articlesDataSource.count + numAds
         return totalRows
     }
@@ -93,9 +99,8 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
             let articleCell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: ArticleCellIdentifier, for: indexPath) as! ArticleCell
             
             // Get the adjusted index path so we account for possible ad displacement in datasource
-            let custom : IndexPath = NativoSDK.getAdjustedIndexPath(indexPath, forAdsInjectedInSection: NativoSectionUrl)
-            let row = custom.row
-            let data = self.articlesDataSource[row]
+            let custom : IndexPath = NativoSDK.getAdjustedIndexPath(indexPath, forAdsInjectedInSection: NativoSectionUrl, inContainer: self.tableView)
+            let data = self.articlesDataSource[custom.row]
             self.injectCell(articleCell, withData: data)
             cell = articleCell
         }
@@ -104,7 +109,7 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let adAdjustedIndexPath : IndexPath = NativoSDK.getAdjustedIndexPath(indexPath, forAdsInjectedInSection: NativoSectionUrl)
+        let adAdjustedIndexPath : IndexPath = NativoSDK.getAdjustedIndexPath(indexPath, forAdsInjectedInSection: NativoSectionUrl, inContainer: self.tableView)
         if adAdjustedIndexPath.row < self.articlesDataSource.count {
             let articleItem = self.articlesDataSource[adAdjustedIndexPath.row]
             let articleUrlStr = "https://www.nativo.com\(articleItem["fullUrl"]!)"
