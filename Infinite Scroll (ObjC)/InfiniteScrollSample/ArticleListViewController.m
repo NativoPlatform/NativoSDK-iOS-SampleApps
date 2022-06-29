@@ -58,14 +58,6 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
 
 #pragma mark - NtvSectionDelegate Methods
 
-- (void)section:(NSString *)sectionUrl needsPlaceAdInViewAtLocation:(id)identifier {
-    [self.tableView reloadData];
-}
-
-- (void)section:(NSString *)sectionUrl needsRemoveAdViewAtLocation:(id)identifier {
-    [self.tableView reloadData];
-}
-
 - (void)section:(NSString *)sectionUrl needsDisplayLandingPage:(nullable UIViewController *)sponsoredLandingPageViewController {
     //Push the sponsored landing page to the navigationController
     [self.navigationController pushViewController:sponsoredLandingPageViewController animated:YES];
@@ -81,6 +73,23 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
     [webView loadRequest: clickoutReq];
     [self.navigationController pushViewController:clickoutAdVC animated:YES];
 }
+
+- (void)section:(nonnull NSString *)sectionUrl didAssignAd:(nonnull NtvAdData *)adData toLocation:(nonnull id)identifier container:(nonnull UIView *)container {
+    [self.tableView reloadData];
+}
+
+
+- (void)section:(nonnull NSString *)sectionUrl didFailAdAtLocation:(nullable id)identifier inView:(nullable UIView *)view withError:(nullable NSString *)errMsg container:(nullable UIView *)container {
+    [self.tableView reloadData];
+}
+
+
+- (void)section:(nonnull NSString *)sectionUrl didReceiveAd:(BOOL)didGetFill {
+    if (didGetFill) {
+        NSLog(@"Did get Nativo ad");
+    }
+}
+
 
 #pragma mark - UITableViewDataSource methods
 
@@ -103,18 +112,18 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
         cell = [tableView dequeueReusableCellWithIdentifier:ArticleCellIdentifier];
         
         // One last step. Here we ask the NativoSDK to adjust the indexpath to account for any ads we may have recieved.
-        NSIndexPath *adjustedIndexPathWithAds = [NativoSDK getAdjustedIndexPath:indexPath forAdsInjectedInSection:NativoSectionUrl];
+        NSIndexPath *adjustedIndexPathWithAds = [NativoSDK getAdjustedIndexPath:indexPath forAdsInjectedInSection:NativoSectionUrl inContainer:tableView];
         NSDictionary *feedItem = self.articlesDataSource[adjustedIndexPathWithAds.row];
         
         // Populate cell with data
         [self populateCell:(ArticleCell *)cell WithData:feedItem];
     }
-
+    
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger numAds = [NativoSDK getNumberOfAdsInSection:NativoSectionUrl inTableOrCollectionSection:section forNumberOfItemsInDatasource:self.articlesDataSource.count];
+    NSInteger numAds = [NativoSDK getNumberOfAdsInSection:NativoSectionUrl inTableOrCollectionSection:section forNumberOfItemsInDatasource:self.articlesDataSource.count inContainer:tableView];
     return self.articlesDataSource.count + numAds;
 }
 
@@ -125,7 +134,7 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Ask the NativoSDK for adjusted indexpath in order to get the correct data for the row.
-    NSIndexPath *adAdjustedIndexPath = [NativoSDK getAdjustedIndexPath:indexPath forAdsInjectedInSection:NativoSectionUrl];
+    NSIndexPath *adAdjustedIndexPath = [NativoSDK getAdjustedIndexPath:indexPath forAdsInjectedInSection:NativoSectionUrl inContainer:tableView];
     
     NSDictionary *feedItem = [self.articlesDataSource objectAtIndex:adAdjustedIndexPath.row];
     ArticleViewController *article = [[ArticleViewController alloc] initWithNibName:@"ArticleViewController" bundle:nil];
@@ -213,5 +222,4 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
     }
     return _dateFormatter;
 }
-
 @end

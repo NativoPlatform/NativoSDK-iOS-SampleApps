@@ -143,14 +143,18 @@ class CollectionViewController: UICollectionViewController {
 }
 
 extension CollectionViewController: NtvSectionDelegate {
+    func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
+        
+    }
     
-    func section(_ sectionUrl: String, needsPlaceAdInViewAtLocation identifier: Any) {
+    func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation identifier: Any, container: UIView) {
         self.collectionView.reloadData()
     }
     
-    func section(_ sectionUrl: String, needsRemoveAdViewAtLocation identifier: Any) {
+    func section(_ sectionUrl: String, didFailAdAtLocation identifier: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
         self.collectionView.reloadData()
     }
+    
     
     func section(_ sectionUrl: String, needsDisplayLandingPage sponsoredLandingPageViewController: (UIViewController & NtvLandingPageInterface)?) {
         if let landingPage = sponsoredLandingPageViewController {
@@ -174,7 +178,7 @@ extension CollectionViewController: UICollectionViewDataSourcePrefetching {
         // Prefetch Nativo SDK ads at specified index paths
         for indexPath in indexPaths {
             if isNativoIndexPath(indexPath) {
-                NativoSDK.prefetchAd(forSection: SectionUrl, atLocationIdentifier: indexPath, options: nil)
+                NativoSDK.prefetchAd(forSection: SectionUrl, atLocationIdentifier: indexPath, inContainer: collectionView, options: nil)
             }
         }
     }

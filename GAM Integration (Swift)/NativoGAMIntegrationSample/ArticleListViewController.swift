@@ -70,7 +70,7 @@ extension ArticleListViewController : GADBannerViewDelegate, GADAdSizeDelegate, 
             bannerView.isHidden = true
             
             // Since this is the size of our Nativo ads, we pass this bannerView to Nativo where it will return the appropriate ad
-            NativoSDK.makeGAMRequest(withBannerView: bannerView, forSection: NativoSectionUrl, at: IndexPath(row: NativoAdRow1, section: 0))
+            NativoSDK.makeGAMRequest(withBannerView: bannerView, forSection: NativoSectionUrl, at: IndexPath(row: NativoAdRow1, section: 0), inContainer: self.tableView)
         } else {
             print("GAM :: Did recieve Banner ad")
             bannerView.isHidden = false
@@ -88,12 +88,15 @@ extension ArticleListViewController : GADBannerViewDelegate, GADAdSizeDelegate, 
 }
 
 extension ArticleListViewController: NtvSectionDelegate {
+    func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
+        
+    }
     
-    func section(_ sectionUrl: String, needsPlaceAdInViewAtLocation identifier: Any) {
+    func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation identifier: Any, container: UIView) {
         self.tableView.reloadData()
     }
     
-    func section(_ sectionUrl: String, needsRemoveAdViewAtLocation identifier: Any) {
+    func section(_ sectionUrl: String, didFailAdAtLocation identifier: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
         self.tableView.reloadData()
     }
     
@@ -117,7 +120,7 @@ extension ArticleListViewController: NtvSectionDelegate {
 extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let numAds = NativoSDK.getNumberOfAds(inSection: NativoSectionUrl, inTableOrCollectionSection: section, forNumberOfItemsInDatasource: self.articlesDataSource.count)
+        let numAds = NativoSDK.getNumberOfAds(inSection: NativoSectionUrl, inTableOrCollectionSection: section, forNumberOfItemsInDatasource: self.articlesDataSource.count, inContainer: tableView)
         let totalRows = self.articlesDataSource.count + numAds
         print("-- Total Rows: \(totalRows)")
         return totalRows
@@ -137,7 +140,7 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
             let articleCell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: ArticleCellIdentifier, for: indexPath) as! ArticleCell
             
             // Get the adjusted index path so we account for possible ad displacement in datasource
-            let custom : IndexPath = NativoSDK.getAdjustedIndexPath(indexPath, forAdsInjectedInSection: NativoSectionUrl)
+            let custom : IndexPath = NativoSDK.getAdjustedIndexPath(indexPath, forAdsInjectedInSection: NativoSectionUrl, inContainer: tableView)
             let row = custom.row
             let data = self.articlesDataSource[row]
             self.injectCell(articleCell, withData: data)
@@ -148,7 +151,7 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let adAdjustedIndexPath : IndexPath = NativoSDK.getAdjustedIndexPath(indexPath, forAdsInjectedInSection: NativoSectionUrl)
+        let adAdjustedIndexPath : IndexPath = NativoSDK.getAdjustedIndexPath(indexPath, forAdsInjectedInSection: NativoSectionUrl, inContainer: tableView)
         if adAdjustedIndexPath.row < self.articlesDataSource.count {
             let articleItem = self.articlesDataSource[adAdjustedIndexPath.row]
             let articleUrlStr = "https://www.nativo.com\(articleItem["fullUrl"]!)"
