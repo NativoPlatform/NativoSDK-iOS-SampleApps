@@ -15,8 +15,8 @@ static NSString * const VideoCellIdentifier = @"videocell";
 static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
 
 // Define the frequency of Ad cells for infinite scroll
-#define AD_ROW_START 4
-#define AD_ROW_INTERVAL 10
+#define AD_ROW_START 2
+#define AD_ROW_INTERVAL 6
 
 @interface ArticleListViewController () <UITableViewDataSource, UITableViewDelegate, NtvSectionDelegate>
 @property (nonatomic) NSCache *feedImgCache;
