@@ -29,6 +29,7 @@ class ArticleListViewController: UIViewController {
         setupView()
         
         NativoSDK.enableDevLogs()
+        NativoSDK.enableGAMRequests(withVersion: "8.8.0");
         NativoSDK.setSectionDelegate(self, forSection: NativoSectionUrl)
         NativoSDK.registerReuseId(ArticleCellIdentifier, for: .native) // These identifiers correlate to the dynamic prototype cells set in Main.storyboard
         NativoSDK.registerReuseId(VideoCellIdentifier, for: .video)
@@ -42,7 +43,6 @@ class ArticleListViewController: UIViewController {
     }
     
     func setupGAM() {
-        NativoSDK.enableGAMRequests(withVersion: "8.8.0");
         GADMobileAds.sharedInstance().start { (status: GADInitializationStatus) in
             GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ kGADSimulatorID ]
             let nativoAdSize = GADAdSizeFromCGSize(kGADAdSizeNativoDefault)
