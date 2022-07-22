@@ -18,9 +18,10 @@ class ArticleListViewController: UIViewController {
     let VideoCellIdentifier = "videocell"
     let NativoReuseIdentifier = "nativoCell"
     let NativoSectionUrl = "http://www.publisher.com/test"
-    let NativoAdRow1 = 3
-    let NativoAdRow2 = 7
+    let NativoAdRow1 = 2
+    let NativoAdRow2 = 6
     let NativoAdRow3 = 12
+    let NativoAdRow4 = 17
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,16 +45,20 @@ class ArticleListViewController: UIViewController {
 extension ArticleListViewController: NtvSectionDelegate {
     
     func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
-        if (didGetFill) {
-            self.tableView.reloadData()
+
+    }
+    
+    func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation location: Any, container: UIView) {
+        // Reload the first ad in this range once it is assigned
+        // Subsequent rows don't need reload since ad data will be ready to load from auto prefetch
+        if let index = location as? IndexPath {
+            if index.row < 8 {
+                tableView.reloadRows(at: [index], with: .automatic)
+            }
         }
     }
     
-    func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation identifier: Any, container: UIView) {
-        
-    }
-    
-    func section(_ sectionUrl: String, didFailAdAtLocation identifier: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
+    func section(_ sectionUrl: String, didFailAdAtLocation location: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
         self.tableView.reloadData()
     }
     
@@ -86,7 +91,8 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
         
         let isNativoAdPlacement: Bool = indexPath.row == NativoAdRow1
                                         || indexPath.row == NativoAdRow2
-                                        || indexPath.row == NativoAdRow3;
+                                        || indexPath.row == NativoAdRow3
+                                        || indexPath.row == NativoAdRow4;
         var didGetNativoAdFill: Bool = false
         var cell: UITableViewCell! // Will always be initialized in this control flow so we can safely declare as implicitley unwrapped optional
         if isNativoAdPlacement {
@@ -97,7 +103,7 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
         
         if !didGetNativoAdFill {
             let articleCell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: ArticleCellIdentifier, for: indexPath) as! ArticleCell
-            
+            articleCell.displaySponsoredIndicators(false)
             // Get the adjusted index path so we account for possible ad displacement in datasource
             let custom : IndexPath = NativoSDK.getAdjustedIndexPath(indexPath, forAdsInjectedInSection: NativoSectionUrl, inContainer: self.tableView)
             let data = self.articlesDataSource[custom.row]
@@ -132,6 +138,7 @@ extension ArticleListViewController {
         let feedData = try! Data.init(contentsOf: URL(fileURLWithPath: filePath!))
         let feed = try! JSONSerialization.jsonObject(with: feedData) as! Dictionary<String, Any>
         let feedItems = feed["items"] as! Array<Dictionary<String, Any>>
+        self.articlesDataSource.append(contentsOf: feedItems)
         self.articlesDataSource.append(contentsOf: feedItems)
     }
     

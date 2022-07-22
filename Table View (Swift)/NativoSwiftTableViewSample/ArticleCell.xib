@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -17,11 +15,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="0.0" rowHeight="100" id="dRr-UQ-CZj" customClass="ArticleCell" customModule="NativoSwiftTableViewSample" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="376" height="100"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="0.0" rowHeight="162" id="dRr-UQ-CZj" customClass="ArticleCell" customModule="NativoSwiftTableViewSample" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="376" height="112"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dRr-UQ-CZj" id="4WS-vd-wcU">
-                <rect key="frame" x="0.0" y="0.0" width="376" height="99.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="376" height="112"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" restorationIdentifier="Image-restore" translatesAutoresizingMaskIntoConstraints="NO" id="Suf-sg-ble" userLabel="ImageContainer">
@@ -51,15 +49,15 @@
                         <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" restorationIdentifier="Title-restore" text="Article Title" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="isu-2Y-BzM">
-                        <rect key="frame" x="94" y="31" width="270" height="17.5"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" restorationIdentifier="Title-restore" text="Article Title this is a test to see just how big this freaking thing can grow" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="isu-2Y-BzM">
+                        <rect key="frame" x="94" y="31" width="270" height="34.5"/>
                         <accessibility key="accessibilityConfiguration" hint="Title-hint" identifier="Title-identifier" label="Title-label"/>
                         <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVd-mt-cYv">
-                        <rect key="frame" x="94" y="46.5" width="273" height="20"/>
+                        <rect key="frame" x="94" y="63.5" width="273" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="CVB-7x-vGB"/>
                         </constraints>
@@ -69,7 +67,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="By" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlv-Su-i5L">
-                        <rect key="frame" x="94" y="80" width="17" height="11"/>
+                        <rect key="frame" x="94" y="97" width="17" height="11"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="11" id="MRN-w0-9Bd"/>
                             <constraint firstAttribute="width" constant="17" id="XIk-GD-3sD"/>
@@ -96,7 +94,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Author" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ysn-dZ-Nnk">
-                        <rect key="frame" x="109" y="80" width="255" height="11"/>
+                        <rect key="frame" x="109" y="97" width="255" height="11"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="11" id="lUJ-K4-ISP"/>
                         </constraints>
@@ -107,11 +105,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="bU6-eB-gSm" secondAttribute="trailing" id="1aE-ff-Zw6"/>
+                    <constraint firstItem="qlv-Su-i5L" firstAttribute="top" secondItem="BVd-mt-cYv" secondAttribute="bottom" constant="13.5" id="7V7-nq-f49"/>
                     <constraint firstItem="Xfs-cH-ej9" firstAttribute="top" secondItem="4WS-vd-wcU" secondAttribute="top" constant="15" id="8b6-Nx-SU8"/>
                     <constraint firstAttribute="trailing" secondItem="BVd-mt-cYv" secondAttribute="trailing" constant="9" id="8h6-1p-BbX"/>
                     <constraint firstAttribute="trailing" secondItem="Ysn-dZ-Nnk" secondAttribute="trailing" constant="12" id="AUu-cz-Mev"/>
                     <constraint firstItem="Suf-sg-ble" firstAttribute="top" secondItem="4WS-vd-wcU" secondAttribute="top" priority="999" constant="16" id="CqX-6Q-D1S"/>
-                    <constraint firstItem="qlv-Su-i5L" firstAttribute="top" secondItem="4WS-vd-wcU" secondAttribute="top" constant="80" id="CsY-LE-FcB"/>
                     <constraint firstItem="isu-2Y-BzM" firstAttribute="leading" secondItem="Suf-sg-ble" secondAttribute="trailing" constant="8" id="GSy-G7-b8U"/>
                     <constraint firstItem="Ysn-dZ-Nnk" firstAttribute="centerY" secondItem="qlv-Su-i5L" secondAttribute="centerY" id="KMU-0r-1n3"/>
                     <constraint firstItem="QGk-jU-CEn" firstAttribute="centerY" secondItem="Xfs-cH-ej9" secondAttribute="centerY" id="Mpw-iR-HzA"/>
@@ -140,6 +138,7 @@
                 <outlet property="sponsoredLabel" destination="QGk-jU-CEn" id="Xsa-gj-0KD"/>
                 <outlet property="titleLabel" destination="isu-2Y-BzM" id="fXc-xi-oqi"/>
             </connections>
+            <point key="canvasLocation" x="137.59999999999999" y="143.92803598200899"/>
         </tableViewCell>
     </objects>
     <resources>

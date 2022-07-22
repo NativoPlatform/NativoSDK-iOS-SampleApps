@@ -21,10 +21,12 @@ class ArticleCell: UITableViewCell, NtvAdInterface {
     
     func displaySponsoredIndicators(_ isSponsored: Bool) {
         if isSponsored {
+            self.titleLabel.alpha = 1.0;
             self.sponsoredLabel.isHidden = false
             self.sponsoredIndicator.isHidden = false
             self.contentView.backgroundColor = UIColor.init(red: 230/255.0, green: 235/255.0, blue: 242/255.0, alpha: 1)
         } else {
+            self.titleLabel.alpha = 0.8;
             self.sponsoredLabel.isHidden = true
             self.sponsoredIndicator.isHidden = true
             self.contentView.backgroundColor = UIColor.white
