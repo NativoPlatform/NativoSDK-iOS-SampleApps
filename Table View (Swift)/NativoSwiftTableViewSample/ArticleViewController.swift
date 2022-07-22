@@ -38,17 +38,16 @@ extension ArticleViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.spinner.stopAnimating()
         self.webView.expandToFitContents()
-                
-        // Place bottom-of-article Nativo ad in view when webview has finished loading
-        if self.nativoAdView.subviews.count == 0 {
-            NativoSDK.placeAd(in: self.nativoAdView, atLocationIdentifier: self.articleURL as Any, inContainer: self.scrollView, forSection: ArticleNativoSectionUrl, options: nil)
-        }
+        
+        // Wait until web view finished loading to render bottom-of-article Nativo ad
+        NativoSDK.placeAd(in: self.nativoAdView, atLocationIdentifier:self.articleURL as Any, inContainer: self.scrollView, forSection: ArticleNativoSectionUrl, options: nil)
     }
 }
 
 extension ArticleViewController: NtvSectionDelegate {
+    
     func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
-        
+
     }
     
     func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation identifier: Any, container: UIView) {
