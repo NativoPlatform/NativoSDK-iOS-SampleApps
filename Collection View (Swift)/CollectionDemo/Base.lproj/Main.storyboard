@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Bia-dB-16r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Bia-dB-16r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,7 +12,7 @@
             <objects>
                 <navigationController id="Bia-dB-16r" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EaV-6Y-rrE">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -75,7 +73,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" text="Preview Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDa-oe-smE">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" text="Preview Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDa-oe-smE">
                                             <rect key="frame" x="20" y="44.5" width="295" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -92,7 +90,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sponsored Content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHY-Bk-lHh">
-                                            <rect key="frame" x="245.5" y="4" width="85.5" height="11"/>
+                                            <rect key="frame" x="237.5" y="4" width="85.5" height="11"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="11" id="19f-B7-xZc"/>
                                             </constraints>
@@ -106,7 +104,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailingMargin" secondItem="drU-Y2-xzv" secondAttribute="trailing" constant="12" id="7yN-Rw-tec"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="cDa-oe-smE" secondAttribute="trailing" constant="12" id="9jj-nr-7aZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="IHY-Bk-lHh" secondAttribute="trailing" constant="4" id="BYd-fL-9vh"/>
+                                    <constraint firstAttribute="trailing" secondItem="IHY-Bk-lHh" secondAttribute="trailing" constant="12" id="BYd-fL-9vh"/>
                                     <constraint firstItem="QjN-YD-JWn" firstAttribute="leading" secondItem="jSy-OW-5AF" secondAttribute="trailing" constant="2" id="GZE-Y7-xnc"/>
                                     <constraint firstItem="QjN-YD-JWn" firstAttribute="top" secondItem="cDa-oe-smE" secondAttribute="bottom" constant="21" id="Ouo-ya-9CK"/>
                                     <constraint firstItem="WRi-zD-GB1" firstAttribute="leading" secondItem="QBl-rD-yuU" secondAttribute="leadingMargin" constant="12" id="PqB-7a-LAa"/>
