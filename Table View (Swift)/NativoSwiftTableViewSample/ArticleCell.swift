@@ -2,7 +2,7 @@
 //  ArticleCell.swift
 //  NativoSwiftTableViewSample
 //
-//  Copyright © 2019 Nativo. All rights reserved.
+//  Copyright © 2022 Nativo. All rights reserved.
 //
 
 import UIKit
@@ -19,6 +19,7 @@ class ArticleCell: UITableViewCell, NtvAdInterface {
     @IBOutlet weak var sponsoredIndicator: UIImageView!
     
     
+    // Use this to switch UI between Nativo ad cell and Article cell
     func displaySponsoredIndicators(_ isSponsored: Bool) {
         if isSponsored {
             self.titleLabel.alpha = 1.0;
@@ -26,7 +27,7 @@ class ArticleCell: UITableViewCell, NtvAdInterface {
             self.sponsoredIndicator.isHidden = false
             self.contentView.backgroundColor = UIColor.init(red: 230/255.0, green: 235/255.0, blue: 242/255.0, alpha: 1)
         } else {
-            self.titleLabel.alpha = 0.8;
+            self.titleLabel.alpha = 0.7;
             self.sponsoredLabel.isHidden = true
             self.sponsoredIndicator.isHidden = true
             self.contentView.backgroundColor = UIColor.white
@@ -34,7 +35,7 @@ class ArticleCell: UITableViewCell, NtvAdInterface {
     }
  
     func shouldPrependAuthorByline() -> Bool {
-        return false
+        return true
     }
     
 

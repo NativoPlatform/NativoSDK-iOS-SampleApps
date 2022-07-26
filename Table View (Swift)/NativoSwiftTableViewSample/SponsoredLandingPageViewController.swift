@@ -2,7 +2,7 @@
 //  SponsoredLandingPageViewController.swift
 //  NativoSwiftTableViewSample
 //
-//  Copyright © 2019 Nativo. All rights reserved.
+//  Copyright © 2022 Nativo. All rights reserved.
 //
 
 import UIKit

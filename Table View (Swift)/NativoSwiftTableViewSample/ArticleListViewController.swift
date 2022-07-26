@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  NativoSwiftTableViewSample
 //
-//  Copyright © 2019 Nativo. All rights reserved.
+//  Copyright © 2022 Nativo. All rights reserved.
 //
 
 import UIKit
@@ -31,8 +31,9 @@ class ArticleListViewController: UIViewController {
         NativoSDK.enableTestAdvertisements()
         
         NativoSDK.setSectionDelegate(self, forSection: NativoSectionUrl)
-        NativoSDK.registerReuseId(ArticleCellIdentifier, for: .native) // These identifiers correlate to the dynamic prototype cells set in Main.storyboard
-        NativoSDK.registerReuseId(VideoCellIdentifier, for: .video)
+        // This identifier correlates to the prototype cell set in Main.storyboard
+        NativoSDK.registerReuseId(ArticleCellIdentifier, for: .native)
+        NativoSDK.register(UINib(nibName: "ArticleVideoAdCell", bundle: nil), for: .video)
         NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
         
         // Register blank cell to be used as container for Nativo ads
