@@ -54,7 +54,7 @@ extension ArticleListViewController: NtvSectionDelegate {
         // Subsequent rows don't need reload since ad data will be ready to load from auto prefetch
         if let index = location as? IndexPath {
             if index.row < 8 {
-                tableView.reloadRows(at: [index], with: .automatic)
+                tableView.insertRows(at: [index], with: .automatic)
             }
         }
     }

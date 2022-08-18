@@ -47,7 +47,7 @@ class CollectionViewController: UICollectionViewController {
                 }
                 
                 NativoSDK.enableDevLogs()
-                NativoSDK.enableTestAdvertisements(with: .noFill)
+                NativoSDK.enableTestAdvertisements()
                 NativoSDK.setSectionDelegate(self, forSection: self.SectionUrl)
                 NativoSDK.registerReuseId(self.ReuseIdentifier, for: .native) // reuseIdentifier "Cell" comes from Main.storyboard dynamic prototype cell
                 NativoSDK.register(UINib(nibName: "NativoVideoViewCell", bundle: nil), for: .video)
