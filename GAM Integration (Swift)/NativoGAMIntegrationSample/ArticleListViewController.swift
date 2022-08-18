@@ -70,7 +70,7 @@ extension ArticleListViewController : GADBannerViewDelegate, GADAdSizeDelegate, 
             bannerView.isHidden = true
             
             // Since this is the size of our Nativo ads, we pass this bannerView to Nativo where it will return the appropriate ad
-            NativoSDK.makeGAMRequest(withBannerView: bannerView, forSection: NativoSectionUrl, at: IndexPath(row: NativoAdRow1, section: 0), inContainer: self.tableView)
+            NativoSDK.makeGAMRequest(withBannerView: bannerView, forSection: NativoSectionUrl)
         } else {
             print("GAM :: Did recieve Banner ad")
             bannerView.isHidden = false
@@ -89,11 +89,13 @@ extension ArticleListViewController : GADBannerViewDelegate, GADAdSizeDelegate, 
 
 extension ArticleListViewController: NtvSectionDelegate {
     func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
-        
+        if didGetFill {
+            self.tableView.reloadData()
+        }
     }
     
     func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation identifier: Any, container: UIView) {
-        self.tableView.reloadData()
+        
     }
     
     func section(_ sectionUrl: String, didFailAdAtLocation identifier: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
@@ -202,7 +204,7 @@ extension ArticleListViewController {
             }
             if let imgData = try? Data.init(contentsOf: url) {
                 let image = UIImage.init(data: imgData)
-                if (image != nil) {
+                if (image != nil && url != nil) {
                     self.feedImgCache[url] = image
                 }
                 DispatchQueue.main.async {
