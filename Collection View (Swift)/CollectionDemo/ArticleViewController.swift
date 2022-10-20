@@ -10,7 +10,7 @@ import NativoSDK
 
 class ArticleViewController: UIViewController {
     
-    let spinner = UIActivityIndicatorView(style: .gray)
+    let spinner = UIActivityIndicatorView(style: .medium)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +23,7 @@ class ArticleViewController: UIViewController {
         webView.navigationDelegate = self
         webView.uiDelegate = self
         self.view.addSubview(webView)
+        self.navigationItem.title = "Article"
         
         if let webUrl = URL(string: "http://dsp.test-sites.internal.nativo.net/external/moblie_web.html") {
             webView.load(URLRequest(url: webUrl))

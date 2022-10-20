@@ -24,41 +24,39 @@ class CollectionViewController: UICollectionViewController {
             collectionLayout.estimatedItemSize = CGSize(width: 342.0, height: 300.0)
         }
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavBar()
         
         // Initialize datasource
         for i in 1...20 {
-            articleDatasource.append("Article row \(i)")
+            articleDatasource.append("Article \(i)")
         }
         
-        if #available(iOS 14, *) {
-            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-              // Tracking authorization completed. Start loading ads here.
-              print("idfa request complete")
-                
-                let status = ATTrackingManager.trackingAuthorizationStatus
-                print("IDFA status: \(status)")
-                if status == .authorized {
-                    let idfaVal = ASIdentifierManager.shared().advertisingIdentifier
-                    print("Idfa val: \(idfaVal)")
-                }
-                
-                NativoSDK.enableDevLogs()
-                NativoSDK.enableTestAdvertisements()
-                NativoSDK.setSectionDelegate(self, forSection: self.SectionUrl)
-                NativoSDK.registerReuseId(self.ReuseIdentifier, for: .native) // reuseIdentifier "Cell" comes from Main.storyboard dynamic prototype cell
-                NativoSDK.register(UINib(nibName: "NativoVideoViewCell", bundle: nil), for: .video)
-                NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
-            })
+        // Initialize advertiser app tracking request
+        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+          // Tracking authorization completed. Start loading ads here.
+          print("idfa request complete")
+            
+            let status = ATTrackingManager.trackingAuthorizationStatus
+            print("IDFA status: \(status)")
+            if status == .authorized {
+                let idfaVal = ASIdentifierManager.shared().advertisingIdentifier
+                print("Idfa val: \(idfaVal)")
+            }
+            
+            NativoSDK.enableDevLogs()
+            NativoSDK.enableTestAdvertisements()
+            NativoSDK.setSectionDelegate(self, forSection: self.SectionUrl)
+            NativoSDK.registerReuseId(self.ReuseIdentifier, for: .native) // reuseIdentifier "Cell" comes from Main.storyboard dynamic prototype cell
+            NativoSDK.register(UINib(nibName: "NativoVideoViewCell", bundle: nil), for: .video)
+            NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
+        })
 
-        }
         
         // Register specialized collectionViewCell for Nativo
         self.collectionView.register(NtvCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: NativoReuseIdentifier)
-        self.collectionView.prefetchDataSource = self
     }
 
     
@@ -120,36 +118,40 @@ class CollectionViewController: UICollectionViewController {
         cell.titleLabel.text = title
         cell.authorNameLabel.text = "John"
         cell.previewTextLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-        let imgUrl = URL.init(string: "https://images.unsplash.com/photo-1527664557558-a2b352fcf203?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4341976025ae49162643ccdb47a72a4d&w=1000&q=80")
-        let authorUrl = URL.init(string: "https://www.logolynx.com/images/logolynx/6a/6aa959dca0e6c62f593e94e02332a67f.jpeg")
-        getAsyncImage(forUrl: imgUrl!) { (img) in
-            cell.adImageView.image = img
-        }
-        getAsyncImage(forUrl: authorUrl!) { (authorimg) in
-            cell.authorImageView.image = authorimg
-        }
+        let imgUrl = "https://images.unsplash.com/photo-1527664557558-a2b352fcf203?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4341976025ae49162643ccdb47a72a4d&w=1000&q=80"
+        let authorUrl = "https://www.logolynx.com/images/logolynx/6a/6aa959dca0e6c62f593e94e02332a67f.jpeg"
+        ImageDownloader.shared.downloadImage(with: imgUrl, completionHandler: { theImage, success in
+            cell.adImageView.image = theImage
+        }, placeholderImage: nil)
+        ImageDownloader.shared.downloadImage(with: authorUrl, completionHandler: { theImage, success in
+            cell.authorImageView.image = theImage
+        }, placeholderImage: nil)
     }
     
-    func getAsyncImage(forUrl url: URL, completion: @escaping (UIImage?) -> Void) {
-        DispatchQueue.global(qos: .default).sync {
-            if let image = self.feedImgCache[url]  {
-                DispatchQueue.main.async {
-                    completion(image)
-                }
-                return
-            }
-            if let imgData = try? Data.init(contentsOf: url) {
-                let image = UIImage.init(data: imgData)
-                if (image != nil) {
-                    self.feedImgCache[url] = image
-                }
-                DispatchQueue.main.async {
-                    completion(image)
-                }
-            }
-        }
+    func setupNavBar() {
+        let ntvLogoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        ntvLogoView.contentMode = .scaleAspectFit
+        ntvLogoView.image = UIImage(named: "AppIcon")
+        navigationItem.titleView = ntvLogoView
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44)))
+        
+        let privacyMenu = UIMenu(
+            title: "Privacy Consent",
+            children: [
+                UIAction(title: "Give Consent", image: UIImage(systemName: "plus"), handler: { action in
+                    UserDefaults.standard.set("BOXjEnFOXjEnFAKALBENB5-AAAAid7_______9______9uz_Gv_v_f__33e8__9v_l_7_-___u_-33d4-_1vf99yfm1-7ftr3tp_87ues2_Xur_959__3z3_EA", forKey: "IABTCF_TCString")
+                    UserDefaults.standard.set("1YNY", forKey: "IABUSPrivacy_String")
+                }),
+                UIAction(title: "Remove Consent", image: UIImage(systemName: "minus"), handler: { action in
+                    UserDefaults.standard.set("BOXjEnFOXjEnFAKALBENB5-AAAAid7_______9______9uz_Gv_v_f__33e8__9v_l_7_-___u_-33d4-_1vf99yfm1-7ftr3tp_87ues2_Xur_959__3z3_EA", forKey: "IABTCF_TCString")
+                    UserDefaults.standard.set("1YNY", forKey: "IABUSPrivacy_String")
+                })
+            ]
+        )
+        navigationItem.rightBarButtonItem = UIBarButtonItem()
+        navigationItem.rightBarButtonItem?.menu = privacyMenu
+        navigationItem.rightBarButtonItem?.image = UIImage(systemName: "hand.raised");
     }
-
 }
 
 extension CollectionViewController: NtvSectionDelegate {
@@ -160,11 +162,16 @@ extension CollectionViewController: NtvSectionDelegate {
     func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation location: Any, container: UIView) {
         print("didAssignAdAtLocation \(String(describing: location))")
         if let index = location as? IndexPath {
+            
             // Add Nativo cell to our datasource, so that we offset correctly
             articleDatasource.insert("Nativo", at: index.row)
             
-            // Notify collectionView that we have inserted a new row (for the assigned Nativo ad)
-            self.collectionView.insertItems(at: [index])
+            if (index.row == 1) {
+                // Since we loaded this row before before we received an ad,
+                // we need to update the collectionView by inserting new item here.
+                // We don't need to do this for subsequent rows since we'll already have the ad loaded.
+                self.collectionView.insertItems(at: [index])
+            }
         }
         
     }
@@ -197,18 +204,5 @@ extension CollectionViewController: NtvSectionDelegate {
         self.navigationController?.pushViewController(clickoutAdVC, animated: true)
         clickoutAdVC.view.addSubview(webView)
     }
-}
-
-extension CollectionViewController: UICollectionViewDataSourcePrefetching {
-    
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        // Prefetch Nativo SDK ads at specified index paths
-        for indexPath in indexPaths {
-            if isNativoIndexPath(indexPath) {
-                NativoSDK.prefetchAd(forSection: SectionUrl, atLocationIdentifier: indexPath, inContainer: collectionView, options: nil)
-            }
-        }
-    }
-
 }
 

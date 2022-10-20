@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4214FDAB2901CA6A00ED175D /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4214FDAA2901CA6A00ED175D /* ImageDownloader.swift */; };
 		719D611080CD135DB3BA8DD3 /* Pods_CollectionDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B053EB41D9CD95F3DFF61A67 /* Pods_CollectionDemo.framework */; };
 		A78E384C22B2F27C00C4D5D4 /* NativoVideoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78E384A22B2F27C00C4D5D4 /* NativoVideoViewCell.swift */; };
 		A78E384D22B2F27C00C4D5D4 /* NativoVideoViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A78E384B22B2F27C00C4D5D4 /* NativoVideoViewCell.xib */; };
@@ -35,6 +36,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4214FDAA2901CA6A00ED175D /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		42222FB523A2EA600008B6BD /* NativoSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NativoSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DF3B3ED8086B53D1FF47A5F /* Pods-CollectionDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectionDemo.debug.xcconfig"; path = "Target Support Files/Pods-CollectionDemo/Pods-CollectionDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		A78E384A22B2F27C00C4D5D4 /* NativoVideoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativoVideoViewCell.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				A78E384A22B2F27C00C4D5D4 /* NativoVideoViewCell.swift */,
 				A7D3DBC12303587D005E23A8 /* SponsoredLandingPageViewController.swift */,
 				A7FC4590230488FB00D2F8AA /* ArticleViewController.swift */,
+				4214FDAA2901CA6A00ED175D /* ImageDownloader.swift */,
 				A78E384B22B2F27C00C4D5D4 /* NativoVideoViewCell.xib */,
 				A7D3DBC423035DD5005E23A8 /* SponsoredLandingPageViewController.xib */,
 				A7A8E13221ACB09200CF37F6 /* Main.storyboard */,
@@ -242,6 +245,7 @@
 			files = (
 				A7D3DBC32303587D005E23A8 /* SponsoredLandingPageViewController.swift in Sources */,
 				A7FC4592230488FB00D2F8AA /* ArticleViewController.swift in Sources */,
+				4214FDAB2901CA6A00ED175D /* ImageDownloader.swift in Sources */,
 				A7A8E14B21ACB0CA00CF37F6 /* CollectionViewController.swift in Sources */,
 				A7A8E12F21ACB09200CF37F6 /* AppDelegate.swift in Sources */,
 				A7A8E14D21ACB2D500CF37F6 /* CollectionViewCell.swift in Sources */,
@@ -323,7 +327,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -379,7 +383,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -403,7 +407,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = CollectionDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -430,7 +434,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = CollectionDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

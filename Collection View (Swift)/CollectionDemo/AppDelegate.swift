@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        setupNavBar()
         return true
     }
 
@@ -40,6 +40,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func setupNavBar() {
+        let ntvAppearance = UINavigationBarAppearance()
+        ntvAppearance.configureWithOpaqueBackground()
+        ntvAppearance.backgroundColor = UIColor(red: 31.0 / 255, green: 117.0 / 255, blue: 254.0 / 255, alpha: 1.0)
+        ntvAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().standardAppearance = ntvAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = ntvAppearance
+    }
 
 }
 
