@@ -5,6 +5,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self setupNavBar];
     return YES;
 }
 
@@ -34,5 +35,17 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (void)setupNavBar {
+    UINavigationBarAppearance *ntvAppearance = [[UINavigationBarAppearance alloc] init];
+    [ntvAppearance configureWithOpaqueBackground];
+    ntvAppearance.backgroundColor = [UIColor colorWithRed:31.0/255 green:117.0/255 blue:254.0/255 alpha:1.0];
+    ntvAppearance.titleTextAttributes = @{ NSForegroundColorAttributeName : UIColor.whiteColor };
+    [[UINavigationBar appearance] setTintColor:UIColor.whiteColor];
+    [[UINavigationBar appearance] setStandardAppearance:ntvAppearance];
+    [[UINavigationBar appearance] setScrollEdgeAppearance:ntvAppearance];
+}
+
+
 
 @end

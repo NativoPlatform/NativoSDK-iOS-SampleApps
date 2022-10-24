@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4214FDAD2901DE3C00ED175D /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4214FDAC2901DE3C00ED175D /* ImageDownloader.swift */; };
 		4268C9AE25CA36AE0061BE8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4268C9AD25CA36AE0061BE8F /* AppDelegate.swift */; };
 		4268C9B025CA36AE0061BE8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4268C9AF25CA36AE0061BE8F /* SceneDelegate.swift */; };
 		4268C9B725CA36B00061BE8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4268C9B625CA36B00061BE8F /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		0BEE6E5F1DBEC948899C6B86 /* Pods-NativoGAMIntegrationSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NativoGAMIntegrationSample.release.xcconfig"; path = "Target Support Files/Pods-NativoGAMIntegrationSample/Pods-NativoGAMIntegrationSample.release.xcconfig"; sourceTree = "<group>"; };
 		2CCE6331C49EDD58A216ECF3 /* Pods-NativoGAMIntegrationSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NativoGAMIntegrationSample.debug.xcconfig"; path = "Target Support Files/Pods-NativoGAMIntegrationSample/Pods-NativoGAMIntegrationSample.debug.xcconfig"; sourceTree = "<group>"; };
+		4214FDAC2901DE3C00ED175D /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageDownloader.swift; path = "../../Collection View (Swift)/CollectionDemo/ImageDownloader.swift"; sourceTree = "<group>"; };
 		4268C9AA25CA36AE0061BE8F /* NativoGAMIntegrationSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NativoGAMIntegrationSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4268C9AD25CA36AE0061BE8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4268C9AF25CA36AE0061BE8F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				4268C9CD25CA37CC0061BE8F /* ArticleViewController.swift */,
 				4268C9CE25CA37CC0061BE8F /* ArticleViewController.xib */,
 				4268C9E325CA389B0061BE8F /* SponsoredLandingPageViewController.swift */,
+				4214FDAC2901DE3C00ED175D /* ImageDownloader.swift */,
 				4268C9E225CA389B0061BE8F /* SponsoredLandingPageViewController.xib */,
 				4268C9FE25CA40250061BE8F /* LaunchScreen.storyboard */,
 				4268C9FC25CA40250061BE8F /* Main.storyboard */,
@@ -239,6 +242,7 @@
 			files = (
 				4268C9D725CA37CC0061BE8F /* ArticleVideoAdCell.swift in Sources */,
 				4268C9E525CA389B0061BE8F /* SponsoredLandingPageViewController.swift in Sources */,
+				4214FDAD2901DE3C00ED175D /* ImageDownloader.swift in Sources */,
 				4268C9D325CA37CC0061BE8F /* ArticleCell.swift in Sources */,
 				4268C9D425CA37CC0061BE8F /* ArticleViewController.swift in Sources */,
 				4268C9D625CA37CC0061BE8F /* ArticleListViewController.swift in Sources */,
@@ -394,7 +398,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NativoGAMIntegrationSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -415,7 +419,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NativoGAMIntegrationSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

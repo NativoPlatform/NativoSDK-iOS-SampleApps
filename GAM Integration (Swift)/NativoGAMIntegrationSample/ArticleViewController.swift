@@ -18,6 +18,7 @@ class ArticleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Article"
         self.view.addSubview(spinner)
         self.spinner.center = self.view.center
         self.spinner.startAnimating()

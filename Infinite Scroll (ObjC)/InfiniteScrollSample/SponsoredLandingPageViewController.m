@@ -13,6 +13,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.title = @"Sponsored Article";
     
     //Create the share button
     self.shareButton = [[UIBarButtonItem alloc]

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4214FDAF290720EC00ED175D /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4214FDAE290720EC00ED175D /* ImageDownloader.swift */; };
 		A7007E63230DEFC5009663D1 /* SponsoredLandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7007E62230DEFC5009663D1 /* SponsoredLandingPageViewController.swift */; };
 		A739EB17230C961900D5DE52 /* ArticleVideoAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A739EB15230C961900D5DE52 /* ArticleVideoAdCell.xib */; };
 		A76EB25C217A58BF00EFDBAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76EB25B217A58BF00EFDBAE /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4214FDAE290720EC00ED175D /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageDownloader.swift; path = "../../Collection View (Swift)/CollectionDemo/ImageDownloader.swift"; sourceTree = "<group>"; };
 		422B2DDF240DAFFB001A519A /* NativoSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NativoSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AF07B29C48BDC025A84F7C4 /* Pods-NativoSwiftTableViewSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NativoSwiftTableViewSample.debug.xcconfig"; path = "Target Support Files/Pods-NativoSwiftTableViewSample/Pods-NativoSwiftTableViewSample.debug.xcconfig"; sourceTree = "<group>"; };
 		65DB2CA83A30FA0953B51E99 /* Pods-NativoSwiftTableViewSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NativoSwiftTableViewSample.release.xcconfig"; path = "Target Support Files/Pods-NativoSwiftTableViewSample/Pods-NativoSwiftTableViewSample.release.xcconfig"; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				A76EB283217AA4EF00EFDBAE /* ArticleVideoAdCell.swift */,
 				A76EB27B217AA09000EFDBAE /* ArticleViewController.swift */,
 				A7007E62230DEFC5009663D1 /* SponsoredLandingPageViewController.swift */,
+				4214FDAE290720EC00ED175D /* ImageDownloader.swift */,
 				A739EB15230C961900D5DE52 /* ArticleVideoAdCell.xib */,
 				A76EB27D217AA48500EFDBAE /* SponsoredLandingPageViewController.xib */,
 				A76EB27F217AA49600EFDBAE /* ArticleViewController.xib */,
@@ -264,6 +267,7 @@
 			files = (
 				A76EB284217AA4EF00EFDBAE /* ArticleVideoAdCell.swift in Sources */,
 				A7007E63230DEFC5009663D1 /* SponsoredLandingPageViewController.swift in Sources */,
+				4214FDAF290720EC00ED175D /* ImageDownloader.swift in Sources */,
 				A76EB282217AA4CB00EFDBAE /* ArticleCell.swift in Sources */,
 				A76EB25E217A58BF00EFDBAE /* ArticleListViewController.swift in Sources */,
 				A76EB27C217AA09000EFDBAE /* ArticleViewController.swift in Sources */,
@@ -345,7 +349,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -402,7 +406,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -424,7 +428,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = NativoSwiftTableViewSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -450,7 +454,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = NativoSwiftTableViewSample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -26,6 +26,7 @@ class ArticleListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupNavBar()
         
         NativoSDK.enableDevLogs()
         NativoSDK.enableTestAdvertisements()
@@ -129,6 +130,31 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
 
 extension ArticleListViewController {
     
+    func setupNavBar() {
+        let ntvLogoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        ntvLogoView.contentMode = .scaleAspectFit
+        ntvLogoView.image = UIImage(named: "AppIcon")
+        navigationItem.titleView = ntvLogoView
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44)))
+        
+        let privacyMenu = UIMenu(
+            title: "Privacy Consent",
+            children: [
+                UIAction(title: "Give Consent", image: UIImage(systemName: "plus"), handler: { action in
+                    UserDefaults.standard.set("BOXjEnFOXjEnFAKALBENB5-AAAAid7_______9______9uz_Gv_v_f__33e8__9v_l_7_-___u_-33d4-_1vf99yfm1-7ftr3tp_87ues2_Xur_959__3z3_EA", forKey: "IABTCF_TCString")
+                    UserDefaults.standard.set("1YNY", forKey: "IABUSPrivacy_String")
+                }),
+                UIAction(title: "Remove Consent", image: UIImage(systemName: "minus"), handler: { action in
+                    UserDefaults.standard.set("BOXjEnFOXjEnFAKALBENB5-AAAAid7_______9______9uz_Gv_v_f__33e8__9v_l_7_-___u_-33d4-_1vf99yfm1-7ftr3tp_87ues2_Xur_959__3z3_EA", forKey: "IABTCF_TCString")
+                    UserDefaults.standard.set("1YNY", forKey: "IABUSPrivacy_String")
+                })
+            ]
+        )
+        navigationItem.rightBarButtonItem = UIBarButtonItem()
+        navigationItem.rightBarButtonItem?.menu = privacyMenu
+        navigationItem.rightBarButtonItem?.image = UIImage(systemName: "hand.raised");
+    }
+    
     func setupView() {
         self.dateFormatter.dateStyle = .short
         self.dateFormatter.timeStyle = .short
@@ -149,33 +175,13 @@ extension ArticleListViewController {
         cell.previewTextLabel.text = data["excerpt"] as? String
         cell.dateLabel.text = DateFormatter.localizedString(from: Date.init(), dateStyle: .medium, timeStyle: .short)
         let imgUrl = data["assetUrl"] as! String
-        self.getAsyncImage(forUrl: URL.init(string: imgUrl)!) { (img) in
+        ImageDownloader.shared.downloadImage(with: imgUrl, completionHandler: { img, success in
             if let articleImg = img {
                 if cell.titleLabel.text == data["title"] as? String {
                     cell.adImageView.image = articleImg
                 }
             }
-        }
-    }
-    
-    func getAsyncImage(forUrl url: URL, completion: @escaping (UIImage?) -> Void) {
-        DispatchQueue.global(qos: .default).async {
-            if let image = self.feedImgCache[url]  {
-                DispatchQueue.main.async {
-                    completion(image)
-                }
-                return
-            }
-            if let imgData = try? Data.init(contentsOf: url) {
-                let image = UIImage.init(data: imgData)
-                DispatchQueue.main.async {
-                    if (image != nil) {
-                        self.feedImgCache[url] = image
-                    }
-                    completion(image)
-                }
-            }
-        }
+        }, placeholderImage: nil)
     }
 }
 

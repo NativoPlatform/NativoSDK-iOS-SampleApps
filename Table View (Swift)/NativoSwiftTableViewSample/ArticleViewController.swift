@@ -15,11 +15,12 @@ class ArticleViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     
     var articleURL : URL?
-    let spinner = UIActivityIndicatorView(style: .gray)
+    let spinner = UIActivityIndicatorView(style: .medium)
     let ArticleNativoSectionUrl = "www.publisher/bottom-of-article"
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Article"
         self.view.addSubview(spinner)
         self.spinner.center = self.view.center
         self.spinner.startAnimating()
@@ -82,10 +83,10 @@ extension ArticleViewController: NtvSectionDelegate {
     
     func section(_ sectionUrl: String, needsDisplayClickoutURL url: URL) {
         let clickoutAdVC = UIViewController()
-        let webView = UIWebView(frame: clickoutAdVC.view.frame)
-        clickoutAdVC.view.addSubview(webView)
+        let webView = WKWebView(frame: clickoutAdVC.view.frame)
         let clickoutReq = URLRequest(url: url)
-        webView.loadRequest(clickoutReq)
+        webView.load(clickoutReq)
         self.navigationController?.pushViewController(clickoutAdVC, animated: true)
+        clickoutAdVC.view.addSubview(webView)
     }
 }

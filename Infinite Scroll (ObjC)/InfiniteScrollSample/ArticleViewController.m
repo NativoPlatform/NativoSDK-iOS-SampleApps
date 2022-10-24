@@ -18,10 +18,11 @@ NSString * const SECTION_URL = @"nativo.net/bottomofarticle";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"Article";
     if (self.articleURL) {
         self.webView.navigationDelegate = self;
         [self.webView loadRequest:[NSURLRequest requestWithURL:self.articleURL]];
-        self.loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
         self.loadingView.center = self.webView.center;
         [self.view addSubview:self.loadingView];
         [self.loadingView startAnimating];

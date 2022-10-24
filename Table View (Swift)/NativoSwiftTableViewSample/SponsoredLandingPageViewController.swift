@@ -39,6 +39,7 @@ class SponsoredLandingPageViewController: UIViewController, NtvLandingPageInterf
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Sponsored Article"
         self.shareBtn = UIBarButtonItem.init(barButtonSystemItem: .action, target: self, action:#selector(socialShareButtonClick))
         self.navigationItem.rightBarButtonItem = self.shareBtn
     }

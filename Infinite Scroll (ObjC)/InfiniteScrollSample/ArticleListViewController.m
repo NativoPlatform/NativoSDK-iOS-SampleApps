@@ -34,6 +34,7 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
 {
     [super viewDidLoad];
     [self setupView];
+    [self setupNavBar];
     
     // Enable Test Nativo Test & Debug mode
     [NativoSDK enableDevLogs];
@@ -178,6 +179,26 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
     }];
 }
 
+- (void)setupNavBar {
+    UIImageView *ntvLogoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [ntvLogoView setContentMode:UIViewContentModeScaleAspectFit];
+    [ntvLogoView setImage:[UIImage imageNamed:@"AppIcon"]];
+    self.navigationItem.titleView = ntvLogoView;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)]];
+
+    UIMenu *privacyMenu = [UIMenu menuWithTitle:@"Privacy Consent" children:@[
+        [UIAction actionWithTitle:@"Give Consent" image:[UIImage systemImageNamed:@"plus"] identifier:@"give" handler:^(__kindof UIAction * _Nonnull action) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"BOXjEnFOXjEnFAKALBENB5-AAAAid7_______9______9uz_Gv_v_f__33e8__9v_l_7_-___u_-33d4-_1vf99yfm1-7ftr3tp_87ues2_Xur_959__3z3_EA" forKey:@"IABTCF_TCString"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"1YNY" forKey:@"IABUSPrivacy_String"];
+        }],
+        [UIAction actionWithTitle:@"Remove Consent" image:[UIImage systemImageNamed:@"minus"] identifier:@"remove" handler:^(__kindof UIAction * _Nonnull action) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"IABTCF_TCString"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"1NNN" forKey:@"IABUSPrivacy_String"];
+        }]
+    ]];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"hand.raised"] menu:privacyMenu];
+}
+
 - (void)getAsyncImageForUrl:(NSURL *)url completion:(void (^)(UIImage *img))block
 {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -205,7 +226,7 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
 - (void) setupView {
     self.articlesDataSource = [NSMutableArray array];
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 50.0f)];
-    UIActivityIndicatorView *loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    UIActivityIndicatorView *loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
     loadingIndicator.center = footerView.center;
     [footerView addSubview:loadingIndicator];
     [loadingIndicator startAnimating];
@@ -222,4 +243,5 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
     }
     return _dateFormatter;
 }
+
 @end
