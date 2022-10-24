@@ -34,7 +34,7 @@ class CollectionViewController: UICollectionViewController {
             articleDatasource.append("Article \(i)")
         }
         
-        // Initialize advertiser app tracking request
+        // Initialize advertiser app tracking authorization
         ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
           // Tracking authorization completed. Start loading ads here.
           print("idfa request complete")
@@ -163,7 +163,7 @@ extension CollectionViewController: NtvSectionDelegate {
         print("didAssignAdAtLocation \(String(describing: location))")
         if let index = location as? IndexPath {
             
-            // Add Nativo cell to our datasource, so that we offset correctly
+            // Add Nativo placeholder to our datasource, so that we offset correctly
             articleDatasource.insert("Nativo", at: index.row)
             
             if (index.row == 1) {

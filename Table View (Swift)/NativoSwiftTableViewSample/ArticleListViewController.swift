@@ -18,10 +18,9 @@ class ArticleListViewController: UIViewController {
     let VideoCellIdentifier = "videocell"
     let NativoReuseIdentifier = "nativoCell"
     let NativoSectionUrl = "http://www.publisher.com/test"
-    let NativoAdRow1 = 2
-    let NativoAdRow2 = 6
-    let NativoAdRow3 = 12
-    let NativoAdRow4 = 17
+    
+    var nextAdPos = 0
+    let nativoRows = [2, 6, 12, 17, 22]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,71 +43,31 @@ class ArticleListViewController: UIViewController {
     }
 }
 
-extension ArticleListViewController: NtvSectionDelegate {
-    
-    func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
-
-    }
-    
-    func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation location: Any, container: UIView) {
-        // Reload the first ad in this range once it is assigned
-        // Subsequent rows don't need reload since ad data will be ready to load from auto prefetch
-        if let index = location as? IndexPath {
-            if index.row < 8 {
-                tableView.insertRows(at: [index], with: .automatic)
-            }
-        }
-    }
-    
-    func section(_ sectionUrl: String, didFailAdAtLocation location: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
-        self.tableView.reloadData()
-    }
-    
-    func section(_ sectionUrl: String, needsDisplayLandingPage sponsoredLandingPageViewController: (UIViewController & NtvLandingPageInterface)?) {
-        if let landingPage = sponsoredLandingPageViewController {
-            self.navigationController?.pushViewController(landingPage, animated: true)
-        }
-    }
-
-    func section(_ sectionUrl: String, needsDisplayClickoutURL url: URL) {
-        let clickoutAdVC = UIViewController()
-        let webView = WKWebView(frame: clickoutAdVC.view.frame)
-        let clickoutReq = URLRequest(url: url)
-        webView.load(clickoutReq)
-        self.navigationController?.pushViewController(clickoutAdVC, animated: true)
-        clickoutAdVC.view.addSubview(webView)
-    }
-}
-
-
 extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let numAds = NativoSDK.getNumberOfAds(inSection: NativoSectionUrl, inTableOrCollectionSection: section, forNumberOfItemsInDatasource: self.articlesDataSource.count, inContainer: self.tableView)
-        let totalRows = self.articlesDataSource.count + numAds
-        return totalRows
+        return self.articlesDataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let isNativoAdPlacement: Bool = indexPath.row == NativoAdRow1
-                                        || indexPath.row == NativoAdRow2
-                                        || indexPath.row == NativoAdRow3
-                                        || indexPath.row == NativoAdRow4;
-        var didGetNativoAdFill: Bool = false
-        var cell: UITableViewCell! // Will always be initialized in this control flow so we can safely declare as implicitley unwrapped optional
-        if isNativoAdPlacement {
-            // Using NativoSDK View API to inject ad into cell. The response will let you know if ad placement was filled.
+        var didGetNativoAdFill = false
+        var cell : UITableViewCell!
+        let isNativoRow : Bool = nativoRows.contains(indexPath.row)
+        if isNativoRow {
+            // Using NativoSDK View API to inject ad into cell.
+            // The response will let you know if ad placement was filled.
             cell = tableView.dequeueReusableCell(withIdentifier: NativoReuseIdentifier, for: indexPath)
-            didGetNativoAdFill = NativoSDK.placeAd(in: cell, atLocationIdentifier: indexPath, inContainer: tableView, forSection: NativoSectionUrl)
+            didGetNativoAdFill = NativoSDK.placeAd(in: cell,
+                                                   atLocationIdentifier: indexPath,
+                                                   inContainer: tableView,
+                                                   forSection: NativoSectionUrl)
         }
         
         if !didGetNativoAdFill {
             let articleCell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: ArticleCellIdentifier, for: indexPath) as! ArticleCell
             articleCell.displaySponsoredIndicators(false)
-            // Get the adjusted index path so we account for possible ad displacement in datasource
-            let custom : IndexPath = NativoSDK.getAdjustedIndexPath(indexPath, forAdsInjectedInSection: NativoSectionUrl, inContainer: self.tableView)
-            let data = self.articlesDataSource[custom.row]
+            let data = self.articlesDataSource[indexPath.row]
             self.injectCell(articleCell, withData: data)
             cell = articleCell
         }
@@ -128,32 +87,60 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
     }
 }
 
-extension ArticleListViewController {
+
+extension ArticleListViewController: NtvSectionDelegate {
     
-    func setupNavBar() {
-        let ntvLogoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        ntvLogoView.contentMode = .scaleAspectFit
-        ntvLogoView.image = UIImage(named: "AppIcon")
-        navigationItem.titleView = ntvLogoView
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44)))
-        
-        let privacyMenu = UIMenu(
-            title: "Privacy Consent",
-            children: [
-                UIAction(title: "Give Consent", image: UIImage(systemName: "plus"), handler: { action in
-                    UserDefaults.standard.set("BOXjEnFOXjEnFAKALBENB5-AAAAid7_______9______9uz_Gv_v_f__33e8__9v_l_7_-___u_-33d4-_1vf99yfm1-7ftr3tp_87ues2_Xur_959__3z3_EA", forKey: "IABTCF_TCString")
-                    UserDefaults.standard.set("1YNY", forKey: "IABUSPrivacy_String")
-                }),
-                UIAction(title: "Remove Consent", image: UIImage(systemName: "minus"), handler: { action in
-                    UserDefaults.standard.set("BOXjEnFOXjEnFAKALBENB5-AAAAid7_______9______9uz_Gv_v_f__33e8__9v_l_7_-___u_-33d4-_1vf99yfm1-7ftr3tp_87ues2_Xur_959__3z3_EA", forKey: "IABTCF_TCString")
-                    UserDefaults.standard.set("1YNY", forKey: "IABUSPrivacy_String")
-                })
-            ]
-        )
-        navigationItem.rightBarButtonItem = UIBarButtonItem()
-        navigationItem.rightBarButtonItem?.menu = privacyMenu
-        navigationItem.rightBarButtonItem?.image = UIImage(systemName: "hand.raised");
+    func nextNativoIndex() -> IndexPath? {
+        if nextAdPos < nativoRows.count {
+            let index = IndexPath(row: nativoRows[nextAdPos], section: 0)
+            nextAdPos += 1
+            return index
+        }
+        return nil
     }
+    
+    func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
+        if didGetFill, let nativoIndex = nextNativoIndex() {
+            // Add Nativo placeholder to our datasource
+            articlesDataSource.insert(["Nativo" : ""], at: nativoIndex.row)
+            
+            // Insert row into table
+            tableView.insertRows(at: [nativoIndex], with: .automatic)
+        }
+    }
+    
+    func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation location: Any, container: UIView) {
+        
+    }
+    
+    func section(_ sectionUrl: String, didFailAdAtLocation location: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
+        if let index = location as? IndexPath {
+            // Remove the Nativo placeholder from our datasource
+            articlesDataSource.remove(at: index.row)
+            
+            // Update tableView
+            self.tableView.reloadData()
+        }
+    }
+    
+    func section(_ sectionUrl: String, needsDisplayLandingPage sponsoredLandingPageViewController: (UIViewController & NtvLandingPageInterface)?) {
+        if let landingPage = sponsoredLandingPageViewController {
+            self.navigationController?.pushViewController(landingPage, animated: true)
+        }
+    }
+
+    func section(_ sectionUrl: String, needsDisplayClickoutURL url: URL) {
+        let clickoutAdVC = UIViewController()
+        let webView = WKWebView(frame: clickoutAdVC.view.frame)
+        let clickoutReq = URLRequest(url: url)
+        webView.load(clickoutReq)
+        self.navigationController?.pushViewController(clickoutAdVC, animated: true)
+        clickoutAdVC.view.addSubview(webView)
+    }
+}
+
+
+extension ArticleListViewController {
     
     func setupView() {
         self.dateFormatter.dateStyle = .short
@@ -182,6 +169,31 @@ extension ArticleListViewController {
                 }
             }
         }, placeholderImage: nil)
+    }
+    
+    func setupNavBar() {
+        let ntvLogoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        ntvLogoView.contentMode = .scaleAspectFit
+        ntvLogoView.image = UIImage(named: "AppIcon")
+        navigationItem.titleView = ntvLogoView
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44)))
+        
+        let privacyMenu = UIMenu(
+            title: "Privacy Consent",
+            children: [
+                UIAction(title: "Give Consent", image: UIImage(systemName: "plus"), handler: { action in
+                    UserDefaults.standard.set("BOXjEnFOXjEnFAKALBENB5-AAAAid7_______9______9uz_Gv_v_f__33e8__9v_l_7_-___u_-33d4-_1vf99yfm1-7ftr3tp_87ues2_Xur_959__3z3_EA", forKey: "IABTCF_TCString")
+                    UserDefaults.standard.set("1YNY", forKey: "IABUSPrivacy_String")
+                }),
+                UIAction(title: "Remove Consent", image: UIImage(systemName: "minus"), handler: { action in
+                    UserDefaults.standard.set("BOXjEnFOXjEnFAKALBENB5-AAAAid7_______9______9uz_Gv_v_f__33e8__9v_l_7_-___u_-33d4-_1vf99yfm1-7ftr3tp_87ues2_Xur_959__3z3_EA", forKey: "IABTCF_TCString")
+                    UserDefaults.standard.set("1YNY", forKey: "IABUSPrivacy_String")
+                })
+            ]
+        )
+        navigationItem.rightBarButtonItem = UIBarButtonItem()
+        navigationItem.rightBarButtonItem?.menu = privacyMenu
+        navigationItem.rightBarButtonItem?.image = UIImage(systemName: "hand.raised");
     }
 }
 
