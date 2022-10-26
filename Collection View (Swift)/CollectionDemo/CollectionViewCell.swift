@@ -20,11 +20,9 @@ class CollectionViewCell: UICollectionViewCell, NtvAdInterface, NtvCollectionVie
 
     func displaySponsoredIndicators(_ isSponsored: Bool) {
         if isSponsored {
-            self.contentView.backgroundColor = UIColor.init(red: 0.9, green: 0.98, blue: 0.98, alpha: 1.0)
+            self.contentView.backgroundColor = UIColor(red: 0.906, green: 0.941, blue: 1.000, alpha: 1.000)
             self.sponsoredContentLabel.isHidden = false
-        } else {
-            self.contentView.backgroundColor = UIColor.white
-            self.sponsoredContentLabel.isHidden = true
+            setAlphaAll(view: contentView, val: 1.0)
         }
     }
     
@@ -34,15 +32,7 @@ class CollectionViewCell: UICollectionViewCell, NtvAdInterface, NtvCollectionVie
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        self.contentView.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            self.contentView.leftAnchor.constraint(equalTo: leftAnchor),
-            self.contentView.rightAnchor.constraint(equalTo: rightAnchor),
-            self.contentView.topAnchor.constraint(equalTo: topAnchor),
-            self.contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
-            ])
+        setAlphaAll(view: contentView, val: 0.88)
     }
     
     @IBOutlet private var maxWidthConstraint: NSLayoutConstraint!
@@ -53,5 +43,12 @@ class CollectionViewCell: UICollectionViewCell, NtvAdInterface, NtvCollectionVie
         }
         self.maxWidthConstraint.constant = maxWidth
         self.maxWidthConstraint.isActive = true
+    }
+    
+    func setAlphaAll(view : UIView, val : CGFloat) {
+        view.subviews.forEach { subView in
+            subView.alpha = val
+            setAlphaAll(view: subView, val: val)
+        }
     }
 }

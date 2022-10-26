@@ -18,22 +18,16 @@ class NativoVideoViewCell: UICollectionViewCell, NtvVideoAdInterface {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.contentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            self.contentView.leftAnchor.constraint(equalTo: leftAnchor),
-            self.contentView.rightAnchor.constraint(equalTo: rightAnchor),
-            self.contentView.topAnchor.constraint(equalTo: topAnchor),
-            self.contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
-            ])
     }
     
     func displaySponsoredIndicators(_ isSponsored: Bool) {
         if isSponsored {
-            self.contentView.backgroundColor = UIColor.init(red: 0.9, green: 0.98, blue: 0.98, alpha: 1.0)
-        } else {
-            self.contentView.backgroundColor = UIColor.white
+            self.contentView.backgroundColor = UIColor(red: 0.906, green: 0.941, blue: 1.000, alpha: 1.000)
         }
+    }
+    
+    func shouldPrependAuthorByline() -> Bool {
+        return false;
     }
 
 }

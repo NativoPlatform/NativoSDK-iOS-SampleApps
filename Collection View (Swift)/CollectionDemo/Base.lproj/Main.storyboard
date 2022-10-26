@@ -74,7 +74,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sponsored Content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHY-Bk-lHh">
-                                            <rect key="frame" x="237.5" y="4" width="85.5" height="11"/>
+                                            <rect key="frame" x="237.5" y="6" width="85.5" height="11"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="11" id="19f-B7-xZc"/>
                                             </constraints>
@@ -100,7 +100,7 @@
                                     <constraint firstAttribute="trailingMargin" secondItem="WRi-zD-GB1" secondAttribute="trailing" constant="12" id="c0A-IG-Vi1"/>
                                     <constraint firstItem="WRi-zD-GB1" firstAttribute="top" secondItem="QBl-rD-yuU" secondAttribute="topMargin" priority="999" constant="12" id="jtw-hd-mDO"/>
                                     <constraint firstItem="ihj-gJ-4FS" firstAttribute="leading" secondItem="QBl-rD-yuU" secondAttribute="leadingMargin" constant="12" id="lt1-vf-vt8"/>
-                                    <constraint firstItem="IHY-Bk-lHh" firstAttribute="top" secondItem="QBl-rD-yuU" secondAttribute="top" constant="4" id="mvg-CF-Ajj"/>
+                                    <constraint firstItem="IHY-Bk-lHh" firstAttribute="top" secondItem="QBl-rD-yuU" secondAttribute="top" constant="6" id="mvg-CF-Ajj"/>
                                     <constraint firstItem="cDa-oe-smE" firstAttribute="top" secondItem="WRi-zD-GB1" secondAttribute="bottom" constant="4" id="nA7-PA-PeL"/>
                                     <constraint firstItem="jSy-OW-5AF" firstAttribute="centerY" secondItem="ihj-gJ-4FS" secondAttribute="centerY" id="oAD-cF-HWW"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="drU-Y2-xzv" secondAttribute="bottom" priority="999" constant="12" id="p13-hi-lmx"/>
