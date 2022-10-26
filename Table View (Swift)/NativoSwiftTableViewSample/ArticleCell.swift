@@ -25,24 +25,22 @@ class ArticleCell: UITableViewCell, NtvAdInterface {
             self.titleLabel.alpha = 1.0;
             self.sponsoredLabel.isHidden = false
             self.contentView.backgroundColor = UIColor(red: 0.949, green: 0.949, blue: 0.949, alpha: 1.000)
-            setAlphaAll(val: 1.0)
+            setAlphaAll(view: contentView, val: 1.0)
         } else {
             self.titleLabel.alpha = 0.8;
             self.sponsoredLabel.isHidden = true
             self.contentView.backgroundColor = UIColor.white
-            setAlphaAll(val: 0.9)
+            setAlphaAll(view: contentView, val: 0.88)
         }
     }
     
-    func setAlphaAll(val : CGFloat) {
-        self.subviews.forEach { view in
-            view.alpha = val
-            view.subviews.forEach { subview in
-                subview.alpha = val
-            }
+    func setAlphaAll(view : UIView, val : CGFloat) {
+        view.subviews.forEach { subView in
+            subView.alpha = val
+            setAlphaAll(view: subView, val: val)
         }
     }
- 
+     
     func shouldPrependAuthorByline() -> Bool {
         return true
     }
