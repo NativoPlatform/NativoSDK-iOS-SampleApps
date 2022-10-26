@@ -9,12 +9,7 @@
 
 @import NativoSDK;
 
-/** 
- Cell used in Main.storyboard for displaying each article's healine, image and brief summary.
- Also used for Nativo native & display ads.
- 
- */
-@interface ArticleCell : UITableViewCell <NtvAdInterface>
+@interface ArticleCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *authorNameLabel;

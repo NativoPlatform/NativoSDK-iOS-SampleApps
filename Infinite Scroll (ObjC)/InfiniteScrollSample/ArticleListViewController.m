@@ -16,7 +16,7 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
 
 // Define the frequency of Ad cells for infinite scroll
 #define AD_ROW_START 2
-#define AD_ROW_INTERVAL 6
+#define AD_ROW_INTERVAL 3
 
 @interface ArticleListViewController () <UITableViewDataSource, UITableViewDelegate, NtvSectionDelegate>
 @property (nonatomic) NSCache *feedImgCache;
@@ -46,9 +46,8 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
     // Register Nativo template types using Nib files
     [NativoSDK registerNib:[UINib nibWithNibName:@"ArticleNativeAdView" bundle:nil] forAdTemplateType:NtvAdTemplateTypeNative];
     [NativoSDK registerNib:[UINib nibWithNibName:@"ArticleVideoAdView" bundle:nil] forAdTemplateType:NtvAdTemplateTypeVideo];
-    [NativoSDK registerClass:[NativoStandardDisplayView class] forAdTemplateType:NtvAdTemplateTypeStandardDisplay];
-    
     [NativoSDK registerNib:[UINib nibWithNibName:@"SponsoredLandingPageViewController" bundle:nil] forAdTemplateType:NtvAdTemplateTypeLandingPage];
+    [NativoSDK registerClass:[NativoStandardDisplayView class] forAdTemplateType:NtvAdTemplateTypeStandardDisplay];
     
     // Cell used as nativo ad container
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"nativocell"];
@@ -75,8 +74,13 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
     [self.navigationController pushViewController:clickoutAdVC animated:YES];
 }
 
-- (void)section:(nonnull NSString *)sectionUrl didAssignAd:(nonnull NtvAdData *)adData toLocation:(nonnull id)identifier container:(nonnull UIView *)container {
-    [self.tableView reloadData];
+- (void)section:(nonnull NSString *)sectionUrl didAssignAd:(nonnull NtvAdData *)adData toLocation:(nonnull id)location container:(nonnull UIView *)container {
+    NSIndexPath *index = (NSIndexPath *)location;
+    // Insert ad row for first set of rows,
+    // since the rows will have already loaded before we have an ad ready
+    if (index.row < 10) {
+        [self.tableView insertRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
 
@@ -108,11 +112,12 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
         didGetNativoAdFill = [NativoSDK placeAdInView:cell atLocationIdentifier:indexPath inContainer:tableView forSection:NativoSectionUrl options:nil];
     }
     
-    // If not a Nativo ad placement, or if the placement had no fill, we must populate the cell with article data
+    // If Nativo didn't get fill,
+    // populate the cell with article data
     if (!didGetNativoAdFill) {
         cell = [tableView dequeueReusableCellWithIdentifier:ArticleCellIdentifier];
         
-        // One last step. Here we ask the NativoSDK to adjust the indexpath to account for any ads we may have recieved.
+        // Here we ask the NativoSDK to offset the indexpath to account for any ads we may have recieved.
         NSIndexPath *adjustedIndexPathWithAds = [NativoSDK getAdjustedIndexPath:indexPath forAdsInjectedInSection:NativoSectionUrl inContainer:tableView];
         NSDictionary *feedItem = self.articlesDataSource[adjustedIndexPathWithAds.row];
         
