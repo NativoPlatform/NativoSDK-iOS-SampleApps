@@ -15,8 +15,8 @@ class ArticleCell: UITableViewCell, NtvAdInterface {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var previewTextLabel: UILabel!
     @IBOutlet weak var adImageView: UIImageView!
+    @IBOutlet weak var sponsoredBackground: UIView!
     @IBOutlet weak var sponsoredLabel: UILabel!
-    @IBOutlet weak var sponsoredIndicator: UIImageView!
     
     
     // Use this to switch UI between Nativo ad cell and Article cell
@@ -24,13 +24,22 @@ class ArticleCell: UITableViewCell, NtvAdInterface {
         if isSponsored {
             self.titleLabel.alpha = 1.0;
             self.sponsoredLabel.isHidden = false
-            self.sponsoredIndicator.isHidden = false
-            self.contentView.backgroundColor = UIColor.init(red: 230/255.0, green: 235/255.0, blue: 242/255.0, alpha: 1)
+            self.contentView.backgroundColor = UIColor(red: 0.949, green: 0.949, blue: 0.949, alpha: 1.000)
+            setAlphaAll(val: 1.0)
         } else {
-            self.titleLabel.alpha = 0.7;
+            self.titleLabel.alpha = 0.8;
             self.sponsoredLabel.isHidden = true
-            self.sponsoredIndicator.isHidden = true
             self.contentView.backgroundColor = UIColor.white
+            setAlphaAll(val: 0.9)
+        }
+    }
+    
+    func setAlphaAll(val : CGFloat) {
+        self.subviews.forEach { view in
+            view.alpha = val
+            view.subviews.forEach { subview in
+                subview.alpha = val
+            }
         }
     }
  

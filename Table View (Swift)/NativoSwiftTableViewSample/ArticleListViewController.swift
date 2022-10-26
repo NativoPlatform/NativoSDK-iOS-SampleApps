@@ -20,7 +20,7 @@ class ArticleListViewController: UIViewController {
     let NativoSectionUrl = "http://www.publisher.com/test"
     
     var nextAdPos = 0
-    let nativoRows = [2, 6, 12, 17, 22]
+    let nativoRows = [2, 6, 10, 14]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,9 +76,8 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let adAdjustedIndexPath : IndexPath = NativoSDK.getAdjustedIndexPath(indexPath, forAdsInjectedInSection: NativoSectionUrl, inContainer: self.tableView)
-        if adAdjustedIndexPath.row < self.articlesDataSource.count {
-            let articleItem = self.articlesDataSource[adAdjustedIndexPath.row]
+        if indexPath.row < self.articlesDataSource.count {
+            let articleItem = self.articlesDataSource[indexPath.row]
             let articleUrlStr = "https://www.nativo.com\(articleItem["fullUrl"]!)"
             let articleViewController = ArticleViewController(nibName: "ArticleViewController", bundle: nil)
             articleViewController.articleURL = URL(string: articleUrlStr)
@@ -152,7 +151,6 @@ extension ArticleListViewController {
         let feedData = try! Data.init(contentsOf: URL(fileURLWithPath: filePath!))
         let feed = try! JSONSerialization.jsonObject(with: feedData) as! Dictionary<String, Any>
         let feedItems = feed["items"] as! Array<Dictionary<String, Any>>
-        self.articlesDataSource.append(contentsOf: feedItems)
         self.articlesDataSource.append(contentsOf: feedItems)
     }
     
