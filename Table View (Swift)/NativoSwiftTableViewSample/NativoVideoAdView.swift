@@ -8,7 +8,7 @@
 import UIKit
 import NativoSDK
 
-class ArticleVideoAdCell: UITableViewCell, NtvVideoAdInterface {
+class NativoVideoAdView: UIView, NtvVideoAdInterface {
     
     // NtvVideoAdInterface protocol properties set from IBOutlets
     @IBOutlet weak var videoView: UIView!
@@ -19,10 +19,6 @@ class ArticleVideoAdCell: UITableViewCell, NtvVideoAdInterface {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
     }
     
     func shouldPrependAuthorByline() -> Bool {

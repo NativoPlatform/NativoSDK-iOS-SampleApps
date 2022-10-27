@@ -43,23 +43,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="always" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0FM-kt-DhE">
-                                <rect key="frame" x="0.0" y="0.0" width="415" height="895"/>
+                                <rect key="frame" x="-1" y="0.0" width="416" height="894"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="0.0" reuseIdentifier="articlecell" rowHeight="130" id="ky2-rh-ZCb" customClass="ArticleCell" customModule="NativoSwiftTableViewSample" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="415" height="130"/>
+                                        <rect key="frame" x="0.0" y="50" width="416" height="130"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ky2-rh-ZCb" id="p9o-4f-qaW">
-                                            <rect key="frame" x="0.0" y="0.0" width="415" height="130"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="416" height="130"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eyy-oy-Xj7" userLabel="SponsoredBackground">
-                                                    <rect key="frame" x="0.0" y="15" width="415" height="100"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eyy-oy-Xj7" userLabel="Inner View">
+                                                    <rect key="frame" x="0.0" y="15" width="416" height="100"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="XFV-1r-YEy">
-                                                            <rect key="frame" x="94" y="11" width="313" height="62"/>
+                                                            <rect key="frame" x="94" y="11" width="314" height="62"/>
                                                             <subviews>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="05-08-2013" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hjo-Ca-zHI">
                                                                     <rect key="frame" x="0.0" y="0.0" width="56.5" height="13"/>
@@ -75,7 +75,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="749" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDw-bs-7bC">
-                                                                    <rect key="frame" x="0.0" y="34.5" width="313" height="14"/>
+                                                                    <rect key="frame" x="0.0" y="34.5" width="314" height="14"/>
                                                                     <string key="text">This is the post description.  This is the post description. This is the post description. This is the post description. This is the post description.</string>
                                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                                                     <color key="textColor" red="0.55676333109999998" green="0.55676333109999998" blue="0.55676333109999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -118,23 +118,11 @@
                                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="XFV-1r-YEy" secondAttribute="bottom" constant="20" symbolic="YES" id="hge-mO-0Rk"/>
                                                     </constraints>
                                                 </view>
-                                                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sponsored Content" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLa-FG-Q5p" userLabel="Sponsored">
-                                                    <rect key="frame" x="312" y="8" width="95" height="13"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="95" id="oA5-fo-iii"/>
-                                                        <constraint firstAttribute="height" constant="13" id="oRP-Jc-Ycw"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="10"/>
-                                                    <color key="textColor" red="0.31026402120000002" green="0.31026402120000002" blue="0.31026402120000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="PLa-FG-Q5p" firstAttribute="top" secondItem="p9o-4f-qaW" secondAttribute="top" constant="8" id="IBb-yr-6y9"/>
                                                 <constraint firstItem="eyy-oy-Xj7" firstAttribute="leading" secondItem="p9o-4f-qaW" secondAttribute="leading" id="N1h-MQ-Rng"/>
                                                 <constraint firstAttribute="trailing" secondItem="eyy-oy-Xj7" secondAttribute="trailing" id="OeS-US-wFN"/>
                                                 <constraint firstItem="eyy-oy-Xj7" firstAttribute="top" secondItem="p9o-4f-qaW" secondAttribute="top" constant="15" id="hVu-UQ-RFG"/>
-                                                <constraint firstAttribute="trailing" secondItem="PLa-FG-Q5p" secondAttribute="trailing" constant="8" id="iHv-Cv-bHQ"/>
                                                 <constraint firstAttribute="bottom" secondItem="eyy-oy-Xj7" secondAttribute="bottom" constant="15" id="lhA-BI-9Yw"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -144,8 +132,6 @@
                                             <outlet property="authorNameLabel" destination="C83-dA-HiE" id="O9Q-zd-KAs"/>
                                             <outlet property="dateLabel" destination="Hjo-Ca-zHI" id="D04-GC-MAe"/>
                                             <outlet property="previewTextLabel" destination="aDw-bs-7bC" id="F8j-1e-dRG"/>
-                                            <outlet property="sponsoredBackground" destination="eyy-oy-Xj7" id="afP-iC-Mjk"/>
-                                            <outlet property="sponsoredLabel" destination="PLa-FG-Q5p" id="vuW-Mn-h0w"/>
                                             <outlet property="titleLabel" destination="Vza-pk-ahb" id="NvC-1y-MBl"/>
                                         </connections>
                                     </tableViewCell>

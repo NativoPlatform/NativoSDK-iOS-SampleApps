@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		4214FDAF290720EC00ED175D /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4214FDAE290720EC00ED175D /* ImageDownloader.swift */; };
+		42D4C322290AFE7800FB94D7 /* NativoAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42D4C321290AFE7800FB94D7 /* NativoAdView.xib */; };
+		42D4C324290B00CE00FB94D7 /* NativoAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D4C323290B00CE00FB94D7 /* NativoAdView.swift */; };
+		42D4C326290B3FC200FB94D7 /* NativoBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D4C325290B3FC200FB94D7 /* NativoBannerView.swift */; };
 		A7007E63230DEFC5009663D1 /* SponsoredLandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7007E62230DEFC5009663D1 /* SponsoredLandingPageViewController.swift */; };
-		A739EB17230C961900D5DE52 /* ArticleVideoAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A739EB15230C961900D5DE52 /* ArticleVideoAdCell.xib */; };
+		A739EB17230C961900D5DE52 /* NativoVideoAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A739EB15230C961900D5DE52 /* NativoVideoAdView.xib */; };
 		A76EB25C217A58BF00EFDBAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76EB25B217A58BF00EFDBAE /* AppDelegate.swift */; };
 		A76EB25E217A58BF00EFDBAE /* ArticleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76EB25D217A58BF00EFDBAE /* ArticleListViewController.swift */; };
 		A76EB261217A58BF00EFDBAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A76EB25F217A58BF00EFDBAE /* Main.storyboard */; };
@@ -19,7 +22,7 @@
 		A76EB27E217AA48500EFDBAE /* SponsoredLandingPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A76EB27D217AA48500EFDBAE /* SponsoredLandingPageViewController.xib */; };
 		A76EB280217AA49600EFDBAE /* ArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A76EB27F217AA49600EFDBAE /* ArticleViewController.xib */; };
 		A76EB282217AA4CB00EFDBAE /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76EB281217AA4CB00EFDBAE /* ArticleCell.swift */; };
-		A76EB284217AA4EF00EFDBAE /* ArticleVideoAdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76EB283217AA4EF00EFDBAE /* ArticleVideoAdCell.swift */; };
+		A76EB284217AA4EF00EFDBAE /* NativoVideoAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76EB283217AA4EF00EFDBAE /* NativoVideoAdView.swift */; };
 		A76EB289217E517700EFDBAE /* nativoblog.json in Resources */ = {isa = PBXBuildFile; fileRef = A76EB288217E517700EFDBAE /* nativoblog.json */; };
 		A76EB28B217E518100EFDBAE /* sponsoredindicator.png in Resources */ = {isa = PBXBuildFile; fileRef = A76EB28A217E518100EFDBAE /* sponsoredindicator.png */; };
 		C6DA63F6BAF2EF4640AE7126 /* Pods_NativoSwiftTableViewSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD10198CA310E3B4F17C4157 /* Pods_NativoSwiftTableViewSample.framework */; };
@@ -41,10 +44,13 @@
 /* Begin PBXFileReference section */
 		4214FDAE290720EC00ED175D /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageDownloader.swift; path = "../../Collection View (Swift)/CollectionDemo/ImageDownloader.swift"; sourceTree = "<group>"; };
 		422B2DDF240DAFFB001A519A /* NativoSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NativoSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42D4C321290AFE7800FB94D7 /* NativoAdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativoAdView.xib; sourceTree = "<group>"; };
+		42D4C323290B00CE00FB94D7 /* NativoAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativoAdView.swift; sourceTree = "<group>"; };
+		42D4C325290B3FC200FB94D7 /* NativoBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativoBannerView.swift; sourceTree = "<group>"; };
 		5AF07B29C48BDC025A84F7C4 /* Pods-NativoSwiftTableViewSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NativoSwiftTableViewSample.debug.xcconfig"; path = "Target Support Files/Pods-NativoSwiftTableViewSample/Pods-NativoSwiftTableViewSample.debug.xcconfig"; sourceTree = "<group>"; };
 		65DB2CA83A30FA0953B51E99 /* Pods-NativoSwiftTableViewSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NativoSwiftTableViewSample.release.xcconfig"; path = "Target Support Files/Pods-NativoSwiftTableViewSample/Pods-NativoSwiftTableViewSample.release.xcconfig"; sourceTree = "<group>"; };
 		A7007E62230DEFC5009663D1 /* SponsoredLandingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SponsoredLandingPageViewController.swift; sourceTree = "<group>"; };
-		A739EB15230C961900D5DE52 /* ArticleVideoAdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleVideoAdCell.xib; sourceTree = "<group>"; };
+		A739EB15230C961900D5DE52 /* NativoVideoAdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NativoVideoAdView.xib; sourceTree = "<group>"; };
 		A76EB258217A58BF00EFDBAE /* NativoSwiftTableViewSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NativoSwiftTableViewSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A76EB25B217A58BF00EFDBAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A76EB25D217A58BF00EFDBAE /* ArticleListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListViewController.swift; sourceTree = "<group>"; };
@@ -57,7 +63,7 @@
 		A76EB27D217AA48500EFDBAE /* SponsoredLandingPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SponsoredLandingPageViewController.xib; sourceTree = "<group>"; };
 		A76EB27F217AA49600EFDBAE /* ArticleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleViewController.xib; sourceTree = "<group>"; };
 		A76EB281217AA4CB00EFDBAE /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
-		A76EB283217AA4EF00EFDBAE /* ArticleVideoAdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleVideoAdCell.swift; sourceTree = "<group>"; };
+		A76EB283217AA4EF00EFDBAE /* NativoVideoAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativoVideoAdView.swift; sourceTree = "<group>"; };
 		A76EB288217E517700EFDBAE /* nativoblog.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nativoblog.json; sourceTree = "<group>"; };
 		A76EB28A217E518100EFDBAE /* sponsoredindicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sponsoredindicator.png; sourceTree = "<group>"; };
 		FD10198CA310E3B4F17C4157 /* Pods_NativoSwiftTableViewSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NativoSwiftTableViewSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,11 +114,14 @@
 				A76EB25B217A58BF00EFDBAE /* AppDelegate.swift */,
 				A76EB25D217A58BF00EFDBAE /* ArticleListViewController.swift */,
 				A76EB281217AA4CB00EFDBAE /* ArticleCell.swift */,
-				A76EB283217AA4EF00EFDBAE /* ArticleVideoAdCell.swift */,
 				A76EB27B217AA09000EFDBAE /* ArticleViewController.swift */,
 				A7007E62230DEFC5009663D1 /* SponsoredLandingPageViewController.swift */,
 				4214FDAE290720EC00ED175D /* ImageDownloader.swift */,
-				A739EB15230C961900D5DE52 /* ArticleVideoAdCell.xib */,
+				42D4C325290B3FC200FB94D7 /* NativoBannerView.swift */,
+				A76EB283217AA4EF00EFDBAE /* NativoVideoAdView.swift */,
+				42D4C323290B00CE00FB94D7 /* NativoAdView.swift */,
+				42D4C321290AFE7800FB94D7 /* NativoAdView.xib */,
+				A739EB15230C961900D5DE52 /* NativoVideoAdView.xib */,
 				A76EB27D217AA48500EFDBAE /* SponsoredLandingPageViewController.xib */,
 				A76EB27F217AA49600EFDBAE /* ArticleViewController.xib */,
 				A76EB25F217A58BF00EFDBAE /* Main.storyboard */,
@@ -210,9 +219,10 @@
 				A76EB266217A58C000EFDBAE /* LaunchScreen.storyboard in Resources */,
 				A76EB263217A58C000EFDBAE /* Assets.xcassets in Resources */,
 				A76EB280217AA49600EFDBAE /* ArticleViewController.xib in Resources */,
+				42D4C322290AFE7800FB94D7 /* NativoAdView.xib in Resources */,
 				A76EB27E217AA48500EFDBAE /* SponsoredLandingPageViewController.xib in Resources */,
 				A76EB261217A58BF00EFDBAE /* Main.storyboard in Resources */,
-				A739EB17230C961900D5DE52 /* ArticleVideoAdCell.xib in Resources */,
+				A739EB17230C961900D5DE52 /* NativoVideoAdView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,12 +275,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A76EB284217AA4EF00EFDBAE /* ArticleVideoAdCell.swift in Sources */,
+				A76EB284217AA4EF00EFDBAE /* NativoVideoAdView.swift in Sources */,
 				A7007E63230DEFC5009663D1 /* SponsoredLandingPageViewController.swift in Sources */,
+				42D4C326290B3FC200FB94D7 /* NativoBannerView.swift in Sources */,
 				4214FDAF290720EC00ED175D /* ImageDownloader.swift in Sources */,
 				A76EB282217AA4CB00EFDBAE /* ArticleCell.swift in Sources */,
 				A76EB25E217A58BF00EFDBAE /* ArticleListViewController.swift in Sources */,
 				A76EB27C217AA09000EFDBAE /* ArticleViewController.swift in Sources */,
+				42D4C324290B00CE00FB94D7 /* NativoAdView.swift in Sources */,
 				A76EB25C217A58BF00EFDBAE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,6 +435,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7Z5P9C9T95;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -449,6 +462,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7Z5P9C9T95;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

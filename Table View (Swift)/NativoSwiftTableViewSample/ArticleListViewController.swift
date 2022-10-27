@@ -20,7 +20,7 @@ class ArticleListViewController: UIViewController {
     let NativoSectionUrl = "http://www.publisher.com/test"
     
     var nextAdPos = 0
-    let nativoRows = [2, 6, 10, 14]
+    var nativoRows = [2, 5, 8, 11, 14]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,19 +28,20 @@ class ArticleListViewController: UIViewController {
         setupNavBar()
         
         NativoSDK.enableDevLogs()
-        NativoSDK.enableTestAdvertisements()
+        NativoSDK.enableTestAdvertisements(with: .native)
         
         NativoSDK.setSectionDelegate(self, forSection: NativoSectionUrl)
-        // This identifier correlates to the prototype cell set in Main.storyboard
-        NativoSDK.registerReuseId(ArticleCellIdentifier, for: .native)
-        NativoSDK.register(UINib(nibName: "ArticleVideoAdCell", bundle: nil), for: .video)
+        NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
+        NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
         NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
+        NativoSDK.registerClass(NativoBannerView.classForCoder(), for: .standardDisplay)
         
         // Register blank cell to be used as container for Nativo ads
         self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: NativoReuseIdentifier)
         
         startArticleFeed()
     }
+    
 }
 
 extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -55,9 +56,9 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
         var cell : UITableViewCell!
         let isNativoRow : Bool = nativoRows.contains(indexPath.row)
         if isNativoRow {
-            // Using NativoSDK View API to inject ad into cell.
-            // The response will let you know if ad placement was filled.
+            // Dequeue the UITableViewCell we registered for Nativo Ads
             cell = tableView.dequeueReusableCell(withIdentifier: NativoReuseIdentifier, for: indexPath)
+            // Use the NativoSDK to place an ad in the cell
             didGetNativoAdFill = NativoSDK.placeAd(in: cell,
                                                    atLocationIdentifier: indexPath,
                                                    inContainer: tableView,
@@ -66,7 +67,6 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
         
         if !didGetNativoAdFill {
             let articleCell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: ArticleCellIdentifier, for: indexPath) as! ArticleCell
-            articleCell.displaySponsoredIndicators(false)
             let data = self.articlesDataSource[indexPath.row]
             self.injectCell(articleCell, withData: data)
             cell = articleCell
@@ -89,19 +89,11 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
 
 extension ArticleListViewController: NtvSectionDelegate {
     
-    func nextNativoIndex() -> IndexPath? {
-        if nextAdPos < nativoRows.count {
-            let index = IndexPath(row: nativoRows[nextAdPos], section: 0)
-            nextAdPos += 1
-            return index
-        }
-        return nil
-    }
-    
     func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
+        //
         if didGetFill, let nativoIndex = nextNativoIndex() {
             // Add Nativo placeholder to our datasource
-            articlesDataSource.insert(["Nativo" : ""], at: nativoIndex.row)
+            articlesDataSource.insert(["Nativo" : nativoIndex], at: nativoIndex.row)
             
             // Insert row into table
             tableView.insertRows(at: [nativoIndex], with: .automatic)
@@ -116,6 +108,9 @@ extension ArticleListViewController: NtvSectionDelegate {
         if let index = location as? IndexPath {
             // Remove the Nativo placeholder from our datasource
             articlesDataSource.remove(at: index.row)
+            nativoRows.removeAll { val in
+                val == index.row
+            }
             
             // Update tableView
             self.tableView.reloadData()
@@ -135,6 +130,35 @@ extension ArticleListViewController: NtvSectionDelegate {
         webView.load(clickoutReq)
         self.navigationController?.pushViewController(clickoutAdVC, animated: true)
         clickoutAdVC.view.addSubview(webView)
+    }
+    
+    func nextNativoIndex() -> IndexPath? {
+        if nextAdPos < nativoRows.count {
+            let index = IndexPath(row: nativoRows[nextAdPos], section: 0)
+            nextAdPos += 1
+            //forceAdTypeAt(pos: nextAdPos)
+            return index
+        }
+        return nil
+    }
+    
+    func forceAdTypeAt(pos : Int) {
+        switch pos {
+            case 1:
+                NativoSDK.enableTestAdvertisements(with: .scrollToPlayVideo)
+                break
+            case 2:
+                NativoSDK.enableTestAdvertisements(with: .story)
+                break
+            case 3:
+                NativoSDK.enableTestAdvertisements(with: .display)
+                break
+            case 4:
+                NativoSDK.enableTestAdvertisements(with: .standardDisplay)
+                break
+            default:
+                NativoSDK.enableTestAdvertisements(with: .native)
+        }
     }
 }
 

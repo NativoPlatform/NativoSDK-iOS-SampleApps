@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Helvetica.ttc">
+            <string>Helvetica</string>
+            <string>Helvetica-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="jet-a4-c9L" customClass="NativoAdView" customModule="NativoSwiftTableViewSample" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="sWi-35-NJ2">
+                    <rect key="frame" x="272" y="4" width="99" height="20"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sponsored Content" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCL-2L-Q0r" userLabel="Sponsored">
+                            <rect key="frame" x="0.0" y="0.0" width="75" height="20"/>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DSt-7N-REG" userLabel="AdChoices">
+                            <rect key="frame" x="79" y="0.0" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" placeholder="YES" id="5vS-ln-U4r"/>
+                                <constraint firstAttribute="height" constant="20" id="MO5-V6-e6w"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="SdI-Om-tb0">
+                    <rect key="frame" x="100" y="25.999999999999996" width="263" height="61.666666666666657"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="05-08-2013" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NaZ-Hn-1LU">
+                            <rect key="frame" x="0.0" y="0.0" width="56.333333333333336" height="12.666666666666666"/>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
+                            <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" verticalHuggingPriority="300" restorationIdentifier="Title-restore" text="Article Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0U-P3-mgf">
+                            <rect key="frame" x="0.0" y="14.666666666666663" width="81.666666666666671" height="17.333333333333329"/>
+                            <accessibility key="accessibilityConfiguration" hint="Title-hint" identifier="Title-identifier" label="Title-label"/>
+                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="749" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EgI-cX-33q">
+                            <rect key="frame" x="0.0" y="34" width="263" height="14"/>
+                            <string key="text">This is the post description.  This is the post description. This is the post description. This is the post description. This is the post description.</string>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                            <color key="textColor" red="0.55676333109999998" green="0.55676333109999998" blue="0.55676333109999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Author" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUO-Ez-8ut">
+                            <rect key="frame" x="0.0" y="50" width="29.666666666666668" height="11.666666666666664"/>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="10"/>
+                            <color key="textColor" red="0.31026402120000002" green="0.31026402120000002" blue="0.31026402120000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <view contentMode="scaleToFill" restorationIdentifier="Image-restore" translatesAutoresizingMaskIntoConstraints="NO" id="gK7-6J-6yd" userLabel="ImageContainer">
+                    <rect key="frame" x="12" y="26" width="78" height="78"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9F1-Fa-ifo">
+                            <rect key="frame" x="3" y="3" width="72" height="72"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <color key="backgroundColor" red="0.87923544649999996" green="0.87934327130000001" blue="0.8791617155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <accessibility key="accessibilityConfiguration" hint="Image-hint" identifier="Image-identifier" label="Image-label">
+                        <bool key="isElement" value="YES"/>
+                    </accessibility>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="78" id="HRo-y5-lKo"/>
+                        <constraint firstAttribute="height" constant="78" id="Ly6-1P-SuN"/>
+                        <constraint firstAttribute="width" constant="78" id="uDI-yv-TLt"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="78" id="vnZ-r0-kLN"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="SdI-Om-tb0" firstAttribute="top" secondItem="gK7-6J-6yd" secondAttribute="top" id="ABi-MO-7ij"/>
+                <constraint firstItem="sWi-35-NJ2" firstAttribute="top" secondItem="jet-a4-c9L" secondAttribute="top" constant="4" id="AfQ-X0-XJx"/>
+                <constraint firstItem="SdI-Om-tb0" firstAttribute="leading" secondItem="gK7-6J-6yd" secondAttribute="trailing" constant="10" id="AsH-6p-4lG"/>
+                <constraint firstAttribute="trailing" secondItem="SdI-Om-tb0" secondAttribute="trailing" constant="12" id="F8X-i8-9VF"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gK7-6J-6yd" secondAttribute="bottom" constant="26" id="LeU-GX-nRw"/>
+                <constraint firstItem="sWi-35-NJ2" firstAttribute="leading" secondItem="jet-a4-c9L" secondAttribute="leading" constant="272" id="b2I-6F-lO6"/>
+                <constraint firstAttribute="trailing" secondItem="sWi-35-NJ2" secondAttribute="trailing" constant="4" id="b5X-bL-Dcf"/>
+                <constraint firstItem="gK7-6J-6yd" firstAttribute="top" secondItem="jet-a4-c9L" secondAttribute="top" constant="26" id="eze-SD-1BC"/>
+                <constraint firstItem="gK7-6J-6yd" firstAttribute="leading" secondItem="jet-a4-c9L" secondAttribute="leading" constant="12" id="jZR-2P-9uv"/>
+                <constraint firstItem="gK7-6J-6yd" firstAttribute="centerY" secondItem="jet-a4-c9L" secondAttribute="centerY" id="mMv-E0-KcB"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="adImageView" destination="9F1-Fa-ifo" id="Hf1-gG-Fxq"/>
+                <outlet property="authorNameLabel" destination="OUO-Ez-8ut" id="OZ9-70-F5J"/>
+                <outlet property="dateLabel" destination="NaZ-Hn-1LU" id="rj7-tU-BFt"/>
+                <outlet property="previewTextLabel" destination="EgI-cX-33q" id="VBD-B7-3E1"/>
+                <outlet property="titleLabel" destination="k0U-P3-mgf" id="dvc-5j-5W7"/>
+            </connections>
+            <point key="canvasLocation" x="-313" y="-1042"/>
+        </view>
+    </objects>
+</document>
