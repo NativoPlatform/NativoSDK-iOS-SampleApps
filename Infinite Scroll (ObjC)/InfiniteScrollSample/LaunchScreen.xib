@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,33 +13,33 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright (c) 2020 Nativo. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Copyright (c) 2020 Nativo. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
                     <rect key="frame" x="20" y="439" width="441" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="21" id="tPO-Nl-SzO"/>
+                        <constraint firstAttribute="height" constant="21" id="ix7-mF-ggH"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" systemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                     <variation key="widthClass=compact">
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     </variation>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nativologo" translatesAutoresizingMaskIntoConstraints="NO" id="ddQ-O6-gdX">
-                    <rect key="frame" x="185" y="211" width="110" height="58"/>
+                    <rect key="frame" x="165" y="165" width="150" height="150"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="110" id="83T-w6-cOw"/>
-                        <constraint firstAttribute="height" constant="58" id="KZw-xJ-BV8"/>
+                        <constraint firstAttribute="width" constant="150" id="cQm-sj-3d9"/>
+                        <constraint firstAttribute="height" constant="150" id="l3o-Sq-Rm3"/>
                     </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="ddQ-O6-gdX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="YCV-HS-FWr"/>
-                <constraint firstItem="ddQ-O6-gdX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="hFE-Hb-E54"/>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="oar-Cz-nf1"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="pxX-vp-GDl"/>
-                <constraint firstAttribute="trailing" secondItem="8ie-xW-0ye" secondAttribute="trailing" constant="19" id="rF5-jw-593"/>
+                <constraint firstItem="ddQ-O6-gdX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4CI-9D-M61"/>
+                <constraint firstItem="ddQ-O6-gdX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="5MW-fc-BCf"/>
+                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" symbolic="YES" id="9qu-Pr-2Yn"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="MM5-gT-s5b"/>
+                <constraint firstItem="ddQ-O6-gdX" firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="Tgu-px-3sK"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -47,6 +47,9 @@
         </view>
     </objects>
     <resources>
-        <image name="nativologo" width="512" height="512"/>
+        <image name="nativologo" width="341.33334350585938" height="341.33334350585938"/>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
