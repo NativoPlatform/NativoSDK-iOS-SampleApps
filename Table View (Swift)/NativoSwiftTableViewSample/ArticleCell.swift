@@ -23,6 +23,11 @@ class ArticleCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        if (selected) {
+            DispatchQueue.main.asyncAfter(deadline: .now() +  .milliseconds(200)) {
+                self.setSelected(false, animated: true)
+            }
+        }
     }
     
     func setAlphaAll(view : UIView, val : CGFloat) {

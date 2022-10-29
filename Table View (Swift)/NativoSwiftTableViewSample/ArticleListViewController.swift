@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AppTrackingTransparency
+import AdSupport
 import NativoSDK
 
 class ArticleListViewController: UIViewController {
@@ -20,21 +22,27 @@ class ArticleListViewController: UIViewController {
     let NativoSectionUrl = "http://www.publisher.com/test"
     
     var nextAdPos = 0
-    var nativoRows = [2, 5, 8, 11, 14]
+    var nativoRows = [1, 4, 7, 10, 13, 16]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupNavBar()
         
-        NativoSDK.enableDevLogs()
-        NativoSDK.enableTestAdvertisements(with: .native)
-        
-        NativoSDK.setSectionDelegate(self, forSection: NativoSectionUrl)
-        NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
-        NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
-        NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
-        NativoSDK.registerClass(NativoBannerView.classForCoder(), for: .standardDisplay)
+        // Initialize advertiser app tracking authorization
+        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+            // Tracking authorization completed. Start loading ads here.
+            let status = ATTrackingManager.trackingAuthorizationStatus
+            print("IDFA authorized: \(status == .authorized)")
+            
+            NativoSDK.enableDevLogs()
+            NativoSDK.enableTestAdvertisements(with: .native)
+            NativoSDK.setSectionDelegate(self, forSection: self.NativoSectionUrl)
+            NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
+            NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
+            NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
+            NativoSDK.registerClass(NativoBannerView.classForCoder(), for: .standardDisplay)
+        })
         
         // Register blank cell to be used as container for Nativo ads
         self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: NativoReuseIdentifier)
@@ -84,6 +92,7 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
             self.navigationController?.pushViewController(articleViewController, animated: true)
         }
     }
+    
 }
 
 
@@ -136,7 +145,7 @@ extension ArticleListViewController: NtvSectionDelegate {
         if nextAdPos < nativoRows.count {
             let index = IndexPath(row: nativoRows[nextAdPos], section: 0)
             nextAdPos += 1
-            //forceAdTypeAt(pos: nextAdPos)
+            forceAdTypeAt(pos: nextAdPos)
             return index
         }
         return nil
