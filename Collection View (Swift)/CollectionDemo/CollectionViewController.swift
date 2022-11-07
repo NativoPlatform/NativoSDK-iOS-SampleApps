@@ -35,25 +35,26 @@ class CollectionViewController: UICollectionViewController {
         }
         
         // Initialize advertiser app tracking authorization
-        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-          // Tracking authorization completed. Start loading ads here.
-          print("idfa request complete")
-            
-            let status = ATTrackingManager.trackingAuthorizationStatus
-            print("IDFA status: \(status)")
-            if status == .authorized {
-                let idfaVal = ASIdentifierManager.shared().advertisingIdentifier
-                print("Idfa val: \(idfaVal)")
-            }
-            
-            NativoSDK.enableDevLogs()
-            NativoSDK.enableTestAdvertisements()
-            NativoSDK.setSectionDelegate(self, forSection: self.SectionUrl)
-            NativoSDK.registerReuseId(self.ReuseIdentifier, for: .native) // reuseIdentifier "Cell" comes from Main.storyboard dynamic prototype cell
-            NativoSDK.register(UINib(nibName: "NativoVideoViewCell", bundle: nil), for: .video)
-            NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
-        })
-
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { notification in
+            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+              // Tracking authorization completed. Start loading ads here.
+              print("idfa request complete")
+                
+                let status = ATTrackingManager.trackingAuthorizationStatus
+                print("IDFA status: \(status)")
+                if status == .authorized {
+                    let idfaVal = ASIdentifierManager.shared().advertisingIdentifier
+                    print("Idfa val: \(idfaVal)")
+                }
+                
+                NativoSDK.enableDevLogs()
+                NativoSDK.enableTestAdvertisements()
+                NativoSDK.setSectionDelegate(self, forSection: self.SectionUrl)
+                NativoSDK.registerReuseId(self.ReuseIdentifier, for: .native) // reuseIdentifier "Cell" comes from Main.storyboard dynamic prototype cell
+                NativoSDK.register(UINib(nibName: "NativoVideoViewCell", bundle: nil), for: .video)
+                NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
+            })
+        }
         
         // Register specialized collectionViewCell for Nativo
         self.collectionView.register(NtvCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: NativoReuseIdentifier)
@@ -143,8 +144,8 @@ class CollectionViewController: UICollectionViewController {
                     UserDefaults.standard.set("1YNY", forKey: "IABUSPrivacy_String")
                 }),
                 UIAction(title: "Remove Consent", image: UIImage(systemName: "minus"), handler: { action in
-                    UserDefaults.standard.set("BOXjEnFOXjEnFAKALBENB5-AAAAid7_______9______9uz_Gv_v_f__33e8__9v_l_7_-___u_-33d4-_1vf99yfm1-7ftr3tp_87ues2_Xur_959__3z3_EA", forKey: "IABTCF_TCString")
-                    UserDefaults.standard.set("1YNY", forKey: "IABUSPrivacy_String")
+                    UserDefaults.standard.set(nil, forKey: "IABTCF_TCString")
+                    UserDefaults.standard.set("1NNN", forKey: "IABUSPrivacy_String")
                 })
             ]
         )

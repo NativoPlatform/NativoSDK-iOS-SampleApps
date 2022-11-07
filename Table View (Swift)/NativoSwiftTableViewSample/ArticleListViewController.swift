@@ -30,19 +30,21 @@ class ArticleListViewController: UIViewController {
         setupNavBar()
         
         // Initialize advertiser app tracking authorization
-        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-            // Tracking authorization completed. Start loading ads here.
-            let status = ATTrackingManager.trackingAuthorizationStatus
-            print("IDFA authorized: \(status == .authorized)")
-            
-            NativoSDK.enableDevLogs()
-            NativoSDK.enableTestAdvertisements(with: .native)
-            NativoSDK.setSectionDelegate(self, forSection: self.NativoSectionUrl)
-            NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
-            NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
-            NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
-            NativoSDK.registerClass(NativoBannerView.classForCoder(), for: .standardDisplay)
-        })
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { notification in
+            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                // Tracking authorization completed. Start loading ads here.
+                //let status = ATTrackingManager.trackingAuthorizationStatus
+                print("IDFA authorization: \(status)")
+                
+                NativoSDK.enableDevLogs()
+                NativoSDK.enableTestAdvertisements(with: .native)
+                NativoSDK.setSectionDelegate(self, forSection: self.NativoSectionUrl)
+                NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
+                NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
+                NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
+                NativoSDK.registerClass(NativoBannerView.classForCoder(), for: .standardDisplay)
+            })
+        }
         
         // Register blank cell to be used as container for Nativo ads
         self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: NativoReuseIdentifier)
@@ -192,14 +194,16 @@ extension ArticleListViewController {
         cell.authorNameLabel.text = data["author"] as? String
         cell.previewTextLabel.text = data["excerpt"] as? String
         cell.dateLabel.text = DateFormatter.localizedString(from: Date.init(), dateStyle: .medium, timeStyle: .short)
-        let imgUrl = data["assetUrl"] as! String
-        ImageDownloader.shared.downloadImage(with: imgUrl, completionHandler: { img, success in
-            if let articleImg = img {
-                if cell.titleLabel.text == data["title"] as? String {
-                    cell.adImageView.image = articleImg
+        let imgUrl = data["assetUrl"] as? String
+        if imgUrl != nil {
+            ImageDownloader.shared.downloadImage(with: imgUrl, completionHandler: { img, success in
+                if let articleImg = img {
+                    if cell.titleLabel.text == data["title"] as? String {
+                        cell.adImageView.image = articleImg
+                    }
                 }
-            }
-        }, placeholderImage: nil)
+            }, placeholderImage: nil)
+        }
     }
     
     func setupNavBar() {
@@ -217,8 +221,8 @@ extension ArticleListViewController {
                     UserDefaults.standard.set("1YNY", forKey: "IABUSPrivacy_String")
                 }),
                 UIAction(title: "Remove Consent", image: UIImage(systemName: "minus"), handler: { action in
-                    UserDefaults.standard.set("BOXjEnFOXjEnFAKALBENB5-AAAAid7_______9______9uz_Gv_v_f__33e8__9v_l_7_-___u_-33d4-_1vf99yfm1-7ftr3tp_87ues2_Xur_959__3z3_EA", forKey: "IABTCF_TCString")
-                    UserDefaults.standard.set("1YNY", forKey: "IABUSPrivacy_String")
+                    UserDefaults.standard.set(nil, forKey: "IABTCF_TCString")
+                    UserDefaults.standard.set("1NNN", forKey: "IABUSPrivacy_String")
                 })
             ]
         )
