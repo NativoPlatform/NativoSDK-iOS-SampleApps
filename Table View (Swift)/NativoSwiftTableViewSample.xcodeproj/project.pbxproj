@@ -441,11 +441,13 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = NativoSwiftTableViewSample/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Nativo Demo";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nativo.sampleapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -468,11 +470,13 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = NativoSwiftTableViewSample/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Nativo Demo";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nativo.sampleapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
