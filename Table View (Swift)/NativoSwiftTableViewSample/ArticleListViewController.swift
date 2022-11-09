@@ -34,7 +34,7 @@ class ArticleListViewController: UIViewController {
             ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
                 // Tracking authorization completed. Start loading ads here.
                 //let status = ATTrackingManager.trackingAuthorizationStatus
-                print("IDFA authorization: \(status)")
+                print("IDFA authorization: \(status.rawValue)")
                 
                 NativoSDK.enableDevLogs()
                 NativoSDK.enableTestAdvertisements(with: .native)
@@ -209,7 +209,7 @@ extension ArticleListViewController {
     func setupNavBar() {
         let ntvLogoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         ntvLogoView.contentMode = .scaleAspectFit
-        ntvLogoView.image = UIImage(named: "AppIcon")
+        ntvLogoView.image = UIImage(named: "AppLogo")
         navigationItem.titleView = ntvLogoView
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44)))
         
