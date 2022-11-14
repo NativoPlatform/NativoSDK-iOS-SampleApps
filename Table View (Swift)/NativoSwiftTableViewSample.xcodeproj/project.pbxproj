@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		420A55D92919A96D0002E4E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A76EB264217A58C000EFDBAE /* LaunchScreen.storyboard */; };
+		420A55FB2922DF650002E4E4 /* Albra Grotesk Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 420A55FA2922DF650002E4E4 /* Albra Grotesk Bold.otf */; };
+		420A55FD2922E0390002E4E4 /* Albra Grotesk Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 420A55FC2922E0390002E4E4 /* Albra Grotesk Light.otf */; };
 		4214FDAF290720EC00ED175D /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4214FDAE290720EC00ED175D /* ImageDownloader.swift */; };
 		42D4C322290AFE7800FB94D7 /* NativoAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42D4C321290AFE7800FB94D7 /* NativoAdView.xib */; };
 		42D4C324290B00CE00FB94D7 /* NativoAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D4C323290B00CE00FB94D7 /* NativoAdView.swift */; };
@@ -42,6 +44,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		420A55FA2922DF650002E4E4 /* Albra Grotesk Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Albra Grotesk Bold.otf"; sourceTree = "<group>"; };
+		420A55FC2922E0390002E4E4 /* Albra Grotesk Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Albra Grotesk Light.otf"; sourceTree = "<group>"; };
 		4214FDAE290720EC00ED175D /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageDownloader.swift; path = "../../Collection View (Swift)/CollectionDemo/ImageDownloader.swift"; sourceTree = "<group>"; };
 		422B2DDF240DAFFB001A519A /* NativoSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NativoSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D4C321290AFE7800FB94D7 /* NativoAdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativoAdView.xib; sourceTree = "<group>"; };
@@ -143,6 +147,8 @@
 		A76EB287217E516500EFDBAE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				420A55FC2922E0390002E4E4 /* Albra Grotesk Light.otf */,
+				420A55FA2922DF650002E4E4 /* Albra Grotesk Bold.otf */,
 				A76EB267217A58C000EFDBAE /* Info.plist */,
 				A76EB288217E517700EFDBAE /* nativoblog.json */,
 				A76EB28A217E518100EFDBAE /* sponsoredindicator.png */,
@@ -219,10 +225,12 @@
 				A76EB28B217E518100EFDBAE /* sponsoredindicator.png in Resources */,
 				A76EB263217A58C000EFDBAE /* Assets.xcassets in Resources */,
 				A76EB280217AA49600EFDBAE /* ArticleViewController.xib in Resources */,
+				420A55FD2922E0390002E4E4 /* Albra Grotesk Light.otf in Resources */,
 				42D4C322290AFE7800FB94D7 /* NativoAdView.xib in Resources */,
 				A76EB27E217AA48500EFDBAE /* SponsoredLandingPageViewController.xib in Resources */,
 				A76EB261217A58BF00EFDBAE /* Main.storyboard in Resources */,
 				A739EB17230C961900D5DE52 /* NativoVideoAdView.xib in Resources */,
+				420A55FB2922DF650002E4E4 /* Albra Grotesk Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,7 +442,7 @@
 			baseConfigurationReference = 5AF07B29C48BDC025A84F7C4 /* Pods-NativoSwiftTableViewSample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7Z5P9C9T95;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -464,7 +472,7 @@
 			baseConfigurationReference = 65DB2CA83A30FA0953B51E99 /* Pods-NativoSwiftTableViewSample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7Z5P9C9T95;
 				FRAMEWORK_SEARCH_PATHS = (

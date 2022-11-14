@@ -35,6 +35,7 @@ class SponsoredLandingPageViewController: UIViewController, NtvLandingPageInterf
     
     func didLoadContent(withAd adData: NtvAdData) {
         self.adData = adData
+        previewTextLabel.text = previewTextLabel.text?.uppercased()
     }
 
     override func viewDidLoad() {
