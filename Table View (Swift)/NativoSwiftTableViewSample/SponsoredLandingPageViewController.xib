@@ -27,7 +27,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="603"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TFf-w7-vhm">
-                                <rect key="frame" x="16" y="16" width="288" height="385"/>
+                                <rect key="frame" x="12" y="16" width="296" height="385"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="4jY-ZA-cPr" userLabel="Sponsored Indicator View">
                                         <rect key="frame" x="0.0" y="0.0" width="137" height="20"/>
@@ -90,7 +90,7 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qyG-Zs-TuW">
-                                        <rect key="frame" x="0.0" y="335" width="288" height="50"/>
+                                        <rect key="frame" x="0.0" y="335" width="296" height="50"/>
                                         <subviews>
                                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J0h-QT-6Xj">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -100,7 +100,7 @@
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WhT-ju-gaV">
-                                                <rect key="frame" x="58" y="0.0" width="230" height="50"/>
+                                                <rect key="frame" x="58" y="0.0" width="238" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" placeholderIntrinsicWidth="317" placeholderIntrinsicHeight="21" text="By" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="319" translatesAutoresizingMaskIntoConstraints="NO" id="kuh-8a-bAB">
                                                         <rect key="frame" x="0.0" y="0.0" width="18" height="50"/>
@@ -112,7 +112,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" placeholderIntrinsicWidth="317" placeholderIntrinsicHeight="21" text="Post Author" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="319" translatesAutoresizingMaskIntoConstraints="NO" id="hrO-uM-sO0">
-                                                        <rect key="frame" x="18" y="0.0" width="212" height="50"/>
+                                                        <rect key="frame" x="18" y="0.0" width="220" height="50"/>
                                                         <fontDescription key="fontDescription" name="AlbraGrotesk-Bold" family="Albra Grotesk" pointSize="12"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -157,7 +157,7 @@
                     <constraint firstItem="TFf-w7-vhm" firstAttribute="centerX" secondItem="tWh-Kf-bC4" secondAttribute="centerX" id="HC0-9J-YDe"/>
                     <constraint firstItem="a1B-FE-KQc" firstAttribute="top" secondItem="kjD-zW-Mnc" secondAttribute="bottom" id="bHc-Rr-29Q"/>
                     <constraint firstItem="a1B-FE-KQc" firstAttribute="centerX" secondItem="tWh-Kf-bC4" secondAttribute="centerX" id="uou-5E-eJh"/>
-                    <constraint firstItem="TFf-w7-vhm" firstAttribute="width" secondItem="tWh-Kf-bC4" secondAttribute="width" constant="-32" id="xh9-Nf-Akz"/>
+                    <constraint firstItem="TFf-w7-vhm" firstAttribute="width" secondItem="tWh-Kf-bC4" secondAttribute="width" constant="-24" id="xh9-Nf-Akz"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">

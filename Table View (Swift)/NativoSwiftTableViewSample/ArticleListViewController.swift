@@ -88,10 +88,12 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row < self.articlesDataSource.count {
             let articleItem = self.articlesDataSource[indexPath.row]
-            let articleUrlStr = "https://www.nativo.com\(articleItem["fullUrl"]!)"
-            let articleViewController = ArticleViewController(nibName: "ArticleViewController", bundle: nil)
-            articleViewController.articleURL = URL(string: articleUrlStr)
-            self.navigationController?.pushViewController(articleViewController, animated: true)
+            if let newsroomUrl = articleItem["fullUrl"] {
+                let articleUrlStr = "https://www.nativo.com\(newsroomUrl)"
+                let articleViewController = ArticleViewController(nibName: "ArticleViewController", bundle: nil)
+                articleViewController.articleURL = URL(string: articleUrlStr)
+                self.navigationController?.pushViewController(articleViewController, animated: true)
+            }
         }
     }
     
