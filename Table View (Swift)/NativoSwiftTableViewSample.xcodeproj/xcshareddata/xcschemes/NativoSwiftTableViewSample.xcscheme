@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A76EB257217A58BF00EFDBAE"
                BuildableName = "Nativo Ads.app"
-               BlueprintName = "NativoSwiftTableViewSample"
+               BlueprintName = "Nativo Ads"
                ReferencedContainer = "container:NativoSwiftTableViewSample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,7 +46,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A76EB257217A58BF00EFDBAE"
             BuildableName = "Nativo Ads.app"
-            BlueprintName = "NativoSwiftTableViewSample"
+            BlueprintName = "Nativo Ads"
             ReferencedContainer = "container:NativoSwiftTableViewSample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -63,7 +63,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A76EB257217A58BF00EFDBAE"
             BuildableName = "Nativo Ads.app"
-            BlueprintName = "NativoSwiftTableViewSample"
+            BlueprintName = "Nativo Ads"
             ReferencedContainer = "container:NativoSwiftTableViewSample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

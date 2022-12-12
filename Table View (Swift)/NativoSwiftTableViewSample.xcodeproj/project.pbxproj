@@ -161,9 +161,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A76EB257217A58BF00EFDBAE /* NativoSwiftTableViewSample */ = {
+		A76EB257217A58BF00EFDBAE /* Nativo Ads */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A76EB26A217A58C000EFDBAE /* Build configuration list for PBXNativeTarget "NativoSwiftTableViewSample" */;
+			buildConfigurationList = A76EB26A217A58C000EFDBAE /* Build configuration list for PBXNativeTarget "Nativo Ads" */;
 			buildPhases = (
 				EA375348A858D7B2B40F8E9A /* [CP] Check Pods Manifest.lock */,
 				A76EB254217A58BF00EFDBAE /* Sources */,
@@ -176,7 +176,7 @@
 			);
 			dependencies = (
 			);
-			name = NativoSwiftTableViewSample;
+			name = "Nativo Ads";
 			productName = NativoSwiftTableViewSample;
 			productReference = A76EB258217A58BF00EFDBAE /* Nativo Ads.app */;
 			productType = "com.apple.product-type.application";
@@ -210,7 +210,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A76EB257217A58BF00EFDBAE /* NativoSwiftTableViewSample */,
+				A76EB257217A58BF00EFDBAE /* Nativo Ads */,
 			);
 		};
 /* End PBXProject section */
@@ -456,7 +456,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.01;
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nativo.sampleapp;
 				PRODUCT_NAME = "Nativo Ads";
@@ -486,7 +486,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.01;
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nativo.sampleapp;
 				PRODUCT_NAME = "Nativo Ads";
@@ -509,7 +509,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A76EB26A217A58C000EFDBAE /* Build configuration list for PBXNativeTarget "NativoSwiftTableViewSample" */ = {
+		A76EB26A217A58C000EFDBAE /* Build configuration list for PBXNativeTarget "Nativo Ads" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A76EB26B217A58C000EFDBAE /* Debug */,
