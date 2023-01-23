@@ -21,8 +21,10 @@ class ArticleListViewController: UIViewController {
     let NativoReuseIdentifier = "nativoCell"
     let NativoSectionUrl = "http://www.publisher.com/test"
     
-    var nextAdPos = 0
+    // The rows indexes where we want Nativo ads to load
     var nativoRows = [1, 4, 7, 10, 13, 16]
+    var nextAdPos = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
