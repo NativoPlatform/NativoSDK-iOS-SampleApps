@@ -7,7 +7,7 @@ target 'NativoGAMIntegrationSample' do
   use_frameworks!
 
   # Pods for NativoSwiftTableViewSample
-  pod 'NativoSDK', '~> 7.0.0-alpha.22'
+  pod 'NativoSDK', '~> 7.0.0'
   pod 'Google-Mobile-Ads-SDK', '~> 8.8.0'
   pod 'GoogleAds-IMA-iOS-SDK', '~> 3.13.0'
 

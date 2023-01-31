@@ -1,6 +1,5 @@
 platform :ios, '11.0'
 source 'https://cdn.cocoapods.org/'
-source 'git@github.com:NativoPlatform/CocoaPods-Private-Specs.git'
 
 
 target 'CollectionDemo' do
@@ -8,7 +7,7 @@ target 'CollectionDemo' do
   use_frameworks!
 
   # Pods for CollectionDemo
-  pod 'NativoSDK', '7.0.0-alpha.22'
+  pod 'NativoSDK', '7.0.0'
   pod 'GoogleAds-IMA-iOS-SDK', '3.13.0'
 
 end

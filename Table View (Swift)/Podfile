@@ -1,5 +1,4 @@
 platform :ios, '11.0'
-source 'git@github.com:NativoPlatform/CocoaPods-Private-Specs.git'
 source 'https://cdn.cocoapods.org/'
 
 target 'Nativo Ads' do
@@ -7,6 +6,6 @@ target 'Nativo Ads' do
   use_frameworks!
 
   # Pods for NativoSwiftTableViewSample
-  pod 'NativoSDK', '~> 7.0.0-alpha.27'
+  pod 'NativoSDK', '~> 7.0.0'
 
 end
