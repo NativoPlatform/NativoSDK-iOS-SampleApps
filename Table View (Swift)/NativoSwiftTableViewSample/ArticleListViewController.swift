@@ -39,7 +39,7 @@ class ArticleListViewController: UIViewController {
                 print("IDFA authorization: \(status.rawValue)")
                 
                 NativoSDK.enableDevLogs()
-                NativoSDK.enableTestAdvertisements(with: .native)
+                NativoSDK.enableTestAdvertisements()
                 NativoSDK.setSectionDelegate(self, forSection: self.NativoSectionUrl)
                 NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
                 NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
@@ -104,8 +104,17 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
 
 extension ArticleListViewController: NtvSectionDelegate {
     
+    // Helper function to find next IndexPath where Nativo ad should be
+    func nextNativoIndex() -> IndexPath? {
+        if nextAdPos < nativoRows.count {
+            let index = IndexPath(row: nativoRows[nextAdPos], section: 0)
+            nextAdPos += 1
+            return index
+        }
+        return nil
+    }
+    
     func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
-        //
         if didGetFill, let nativoIndex = nextNativoIndex() {
             // Add Nativo placeholder to our datasource
             articlesDataSource.insert(["Nativo" : nativoIndex], at: nativoIndex.row)
@@ -145,35 +154,6 @@ extension ArticleListViewController: NtvSectionDelegate {
         webView.load(clickoutReq)
         self.navigationController?.pushViewController(clickoutAdVC, animated: true)
         clickoutAdVC.view.addSubview(webView)
-    }
-    
-    func nextNativoIndex() -> IndexPath? {
-        if nextAdPos < nativoRows.count {
-            let index = IndexPath(row: nativoRows[nextAdPos], section: 0)
-            nextAdPos += 1
-            forceAdTypeAt(pos: nextAdPos)
-            return index
-        }
-        return nil
-    }
-    
-    func forceAdTypeAt(pos : Int) {
-        switch pos {
-            case 1:
-                NativoSDK.enableTestAdvertisements(with: .scrollToPlayVideo)
-                break
-            case 2:
-                NativoSDK.enableTestAdvertisements(with: .story)
-                break
-            case 3:
-                NativoSDK.enableTestAdvertisements(with: .display)
-                break
-            case 4:
-                NativoSDK.enableTestAdvertisements(with: .standardDisplay)
-                break
-            default:
-                NativoSDK.enableTestAdvertisements(with: .native)
-        }
     }
 }
 
