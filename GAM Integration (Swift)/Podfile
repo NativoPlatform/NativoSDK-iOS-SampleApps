@@ -1,6 +1,5 @@
 platform :ios, '11.0'
 source 'https://cdn.cocoapods.org/'
-source 'git@github.com:NativoPlatform/CocoaPods-Private-Specs.git'
 
 target 'NativoGAMIntegrationSample' do
   # Comment the next line if you don't want to use dynamic frameworks
