@@ -30,30 +30,39 @@ class ArticleListViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupNavBar()
+        // Register blank UITableViewCell to be used as container for Nativo ads
+        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: NativoReuseIdentifier)
         
         // Initialize advertiser app tracking authorization
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { notification in
             ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
                 // Tracking authorization completed. Start loading ads here.
-                //let status = ATTrackingManager.trackingAuthorizationStatus
                 print("IDFA authorization: \(status.rawValue)")
-                
-                NativoSDK.enableDevLogs()
-                NativoSDK.enableTestAdvertisements(with: .native)
-                NativoSDK.setSectionDelegate(self, forSection: self.NativoSectionUrl)
-                NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
-                NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
-                NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
-                NativoSDK.registerClass(NativoBannerView.classForCoder(), for: .standardDisplay)
+                self.setupNativo()
             })
         }
         
-        // Register blank cell to be used as container for Nativo ads
-        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: NativoReuseIdentifier)
-        
-        startArticleFeed()
+        self.startArticleFeed()
     }
     
+    func setupNativo() {
+        NativoSDK.enableDevLogs()
+        NativoSDK.enableTestAdvertisements(with: .native)
+        NativoSDK.setSectionDelegate(self, forSection: self.NativoSectionUrl)
+        NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
+        NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
+        NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
+        NativoSDK.registerClass(NativoBannerView.classForCoder(), for: .standardDisplay)
+    }
+    
+    func startArticleFeed() {
+        self.articlesDataSource.removeAll()
+        let filePath = Bundle.main.path(forResource: "nativoblog", ofType: "json")
+        let feedData = try! Data.init(contentsOf: URL(fileURLWithPath: filePath!))
+        let feed = try! JSONSerialization.jsonObject(with: feedData) as! Dictionary<String, Any>
+        let feedItems = feed["items"] as! Array<Dictionary<String, Any>>
+        self.articlesDataSource.append(contentsOf: feedItems)
+    }
 }
 
 extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -185,14 +194,6 @@ extension ArticleListViewController {
         self.dateFormatter.timeStyle = .short
     }
     
-    func startArticleFeed() {
-        let filePath = Bundle.main.path(forResource: "nativoblog", ofType: "json")
-        let feedData = try! Data.init(contentsOf: URL(fileURLWithPath: filePath!))
-        let feed = try! JSONSerialization.jsonObject(with: feedData) as! Dictionary<String, Any>
-        let feedItems = feed["items"] as! Array<Dictionary<String, Any>>
-        self.articlesDataSource.append(contentsOf: feedItems)
-    }
-    
     func injectCell(_ cell: ArticleCell, withData data: Dictionary<String, Any> ) {
         cell.titleLabel.text = data["title"] as? String
         cell.authorNameLabel.text = data["author"] as? String
@@ -217,22 +218,19 @@ extension ArticleListViewController {
         navigationItem.titleView = ntvLogoView
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44)))
         
-        let privacyMenu = UIMenu(
-            title: "Privacy Consent",
+        let actionMenu = UIMenu(
+            title: "Actions",
             children: [
-                UIAction(title: "Give Consent", image: UIImage(systemName: "plus"), handler: { action in
-                    UserDefaults.standard.set("BOXjEnFOXjEnFAKALBENB5-AAAAid7_______9______9uz_Gv_v_f__33e8__9v_l_7_-___u_-33d4-_1vf99yfm1-7ftr3tp_87ues2_Xur_959__3z3_EA", forKey: "IABTCF_TCString")
-                    UserDefaults.standard.set("1YNY", forKey: "IABUSPrivacy_String")
-                }),
-                UIAction(title: "Remove Consent", image: UIImage(systemName: "minus"), handler: { action in
-                    UserDefaults.standard.set(nil, forKey: "IABTCF_TCString")
-                    UserDefaults.standard.set("1NNN", forKey: "IABUSPrivacy_String")
+                UIAction(title: "Reload", image: UIImage(systemName: "gobackward"), handler: { action in
+                    NativoSDK.clearAds(inSection: self.NativoSectionUrl, inContainer: nil)
+                    self.startArticleFeed()
+                    self.tableView.reloadData()
                 })
             ]
         )
         navigationItem.rightBarButtonItem = UIBarButtonItem()
-        navigationItem.rightBarButtonItem?.menu = privacyMenu
-        navigationItem.rightBarButtonItem?.image = UIImage(systemName: "hand.raised");
+        navigationItem.rightBarButtonItem?.menu = actionMenu
+        navigationItem.rightBarButtonItem?.image = UIImage(systemName: "ellipsis");
     }
 }
 
