@@ -13,15 +13,16 @@ import NativoSDK
 class ArticleListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    var articlesDataSource  = Array<Dictionary<String, Any>>()
+    var articlesDataSource  = Array<String>()
     var feedImgCache = Dictionary<URL, UIImage>()
     let dateFormatter = DateFormatter()
-    let ArticleCellIdentifier = "articlecell"
+    let placeholderCellIdentifier = "placeholdercell"
     let VideoCellIdentifier = "videocell"
     let NativoReuseIdentifier = "nativoCell"
-    let NativoSectionUrl = "http://www.publisher.com/test"
+    let NativoSectionUrl = "http://www.nativo.com/demoapp"
     
     // The rows indexes where we want Nativo ads to load
+    let placeholderRows = 20
     var nativoRows = [1, 4, 7, 10, 13, 16]
     var nextAdPos = 0
     
@@ -47,7 +48,6 @@ class ArticleListViewController: UIViewController {
     
     func setupNativo() {
         NativoSDK.enableDevLogs()
-        NativoSDK.enableTestAdvertisements(with: .native)
         NativoSDK.setSectionDelegate(self, forSection: self.NativoSectionUrl)
         NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
         NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
@@ -56,12 +56,10 @@ class ArticleListViewController: UIViewController {
     }
     
     func startArticleFeed() {
-        self.articlesDataSource.removeAll()
-        let filePath = Bundle.main.path(forResource: "nativoblog", ofType: "json")
-        let feedData = try! Data.init(contentsOf: URL(fileURLWithPath: filePath!))
-        let feed = try! JSONSerialization.jsonObject(with: feedData) as! Dictionary<String, Any>
-        let feedItems = feed["items"] as! Array<Dictionary<String, Any>>
-        self.articlesDataSource.append(contentsOf: feedItems)
+        articlesDataSource.removeAll()
+        for _ in 0...placeholderRows {
+            articlesDataSource.append("placeholder")
+        }
     }
 }
 
@@ -87,10 +85,7 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
         }
         
         if !didGetNativoAdFill {
-            let articleCell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: ArticleCellIdentifier, for: indexPath) as! ArticleCell
-            let data = self.articlesDataSource[indexPath.row]
-            self.injectCell(articleCell, withData: data)
-            cell = articleCell
+            cell = tableView.dequeueReusableCell(withIdentifier: placeholderCellIdentifier, for: indexPath)
         }
         
         return cell
@@ -98,13 +93,13 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row < self.articlesDataSource.count {
-            let articleItem = self.articlesDataSource[indexPath.row]
-            if let newsroomUrl = articleItem["fullUrl"] {
-                let articleUrlStr = "https://www.nativo.com\(newsroomUrl)"
-                let articleViewController = ArticleViewController(nibName: "ArticleViewController", bundle: nil)
-                articleViewController.articleURL = URL(string: articleUrlStr)
-                self.navigationController?.pushViewController(articleViewController, animated: true)
-            }
+//            let articleItem = self.articlesDataSource[indexPath.row]
+//            if let newsroomUrl = articleItem["fullUrl"] {
+//                let articleUrlStr = "https://www.nativo.com\(newsroomUrl)"
+//                let articleViewController = ArticleViewController(nibName: "ArticleViewController", bundle: nil)
+//                articleViewController.articleURL = URL(string: articleUrlStr)
+//                self.navigationController?.pushViewController(articleViewController, animated: true)
+//            }
         }
     }
     
@@ -114,10 +109,9 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
 extension ArticleListViewController: NtvSectionDelegate {
     
     func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
-        //
         if didGetFill, let nativoIndex = nextNativoIndex() {
-            // Add Nativo placeholder to our datasource
-            articlesDataSource.insert(["Nativo" : nativoIndex], at: nativoIndex.row)
+            // Add Nativo ad to our datasource
+            articlesDataSource.insert("nativo", at: nativoIndex.row)
             
             // Insert row into table
             tableView.insertRows(at: [nativoIndex], with: .automatic)
@@ -160,29 +154,16 @@ extension ArticleListViewController: NtvSectionDelegate {
         if nextAdPos < nativoRows.count {
             let index = IndexPath(row: nativoRows[nextAdPos], section: 0)
             nextAdPos += 1
-            forceAdTypeAt(pos: nextAdPos)
             return index
         }
         return nil
     }
     
-    func forceAdTypeAt(pos : Int) {
-        switch pos {
-            case 1:
-                NativoSDK.enableTestAdvertisements(with: .scrollToPlayVideo)
-                break
-            case 2:
-                NativoSDK.enableTestAdvertisements(with: .story)
-                break
-            case 3:
-                NativoSDK.enableTestAdvertisements(with: .display)
-                break
-            case 4:
-                NativoSDK.enableTestAdvertisements(with: .standardDisplay)
-                break
-            default:
-                NativoSDK.enableTestAdvertisements(with: .native)
-        }
+    func reloadAds() {
+        NativoSDK.clearAds(inSection: self.NativoSectionUrl, inContainer: nil)
+        self.nextAdPos = 0
+        self.startArticleFeed()
+        self.tableView.reloadData()
     }
 }
 
@@ -222,9 +203,7 @@ extension ArticleListViewController {
             title: "Actions",
             children: [
                 UIAction(title: "Reload", image: UIImage(systemName: "gobackward"), handler: { action in
-                    NativoSDK.clearAds(inSection: self.NativoSectionUrl, inContainer: nil)
-                    self.startArticleFeed()
-                    self.tableView.reloadData()
+                    self.reloadAds()
                 })
             ]
         )

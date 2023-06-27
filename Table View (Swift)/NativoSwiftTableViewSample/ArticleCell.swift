@@ -18,7 +18,6 @@ class ArticleCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        setAlphaAll(view: contentView, val: 0.88)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -27,13 +26,6 @@ class ArticleCell: UITableViewCell {
             DispatchQueue.main.asyncAfter(deadline: .now() +  .milliseconds(200)) {
                 self.setSelected(false, animated: true)
             }
-        }
-    }
-    
-    func setAlphaAll(view : UIView, val : CGFloat) {
-        view.subviews.forEach { subView in
-            subView.alpha = val
-            setAlphaAll(view: subView, val: val)
         }
     }
 
