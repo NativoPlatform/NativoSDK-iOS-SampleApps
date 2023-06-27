@@ -7,6 +7,7 @@
 
 import UIKit
 import NativoSDK
+import OSLog
 
 class NativoVideoViewCell: UICollectionViewCell, NtvVideoAdInterface {
     
@@ -27,7 +28,46 @@ class NativoVideoViewCell: UICollectionViewCell, NtvVideoAdInterface {
     }
     
     func shouldPrependAuthorByline() -> Bool {
-        return false;
+        return false
     }
-
+    
+    var videoEventListener: NtvVideoEventListener {
+        get { self }
+    }
 }
+
+extension NativoVideoViewCell : NtvVideoEventListener {
+    
+    func videoPlayer(_ player: NtvVideoPlayer, stateChanged state: NtvVideoState) {
+        print("Video state: \(state)")
+    }
+    
+    func videoPlayer(_ player: NtvVideoPlayer, progressChanged progress: Int, withAd adData: NtvAdData) {
+        
+    }
+    
+    func videoPlayer(_ player: NtvVideoPlayer, didGoFullScreenWithAd adData: NtvAdData) {
+        
+    }
+    
+    func videoPlayer(_ player: NtvVideoPlayer, didExitFullScreenWithAd adData: NtvAdData) {
+        
+    }
+    
+    func videoPlayer(_ player: NtvVideoPlayer, learnMoreClicked adData: NtvAdData) {
+        
+    }
+    
+    func videoPlayer(_ player: NtvVideoPlayer, didFailWithError error: Error?, withAd adData: NtvAdData) {
+        
+    }
+    
+    func videoPlayer(_ player: NtvVideoPlayer, shouldDeactiveAudioSessionWithReason reason: String) -> Bool {
+        return true
+    }
+    
+    func videoPlayer(_ player: NtvVideoPlayer, shouldModifyAudioSessionCategory category: String, withReason reason: String) -> Bool {
+        return true
+    }
+}
+

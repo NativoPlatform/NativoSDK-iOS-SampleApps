@@ -9,7 +9,7 @@
 
 @import NativoSDK;
 
-@interface ArticleVideoAdView : UIView <NtvVideoAdInterface>
+@interface ArticleVideoAdView : UIView <NtvVideoAdInterface, NtvVideoEventListener>
 
 @property (nonatomic, weak) IBOutlet UIView *videoView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;

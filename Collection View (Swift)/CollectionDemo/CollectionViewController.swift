@@ -53,6 +53,7 @@ class CollectionViewController: UICollectionViewController {
                 NativoSDK.registerReuseId(self.ReuseIdentifier, for: .native) // reuseIdentifier "Cell" comes from Main.storyboard dynamic prototype cell
                 NativoSDK.register(UINib(nibName: "NativoVideoViewCell", bundle: nil), for: .video)
                 NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
+                self.collectionView.reloadData()
             })
         }
         
@@ -157,7 +158,7 @@ class CollectionViewController: UICollectionViewController {
 
 extension CollectionViewController: NtvSectionDelegate {
     func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
-        
+        print("didReceiveAd \(String(describing: didGetFill))")
     }
     
     func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation location: Any, container: UIView) {

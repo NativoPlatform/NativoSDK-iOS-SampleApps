@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ArticleVideoTableViewCell : UITableViewCell <NtvVideoAdInterface>
+@interface ArticleVideoTableViewCell : UITableViewCell <NtvVideoAdInterface, NtvVideoEventListener>
 
 @property (nonatomic, weak) IBOutlet UIView *videoView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;

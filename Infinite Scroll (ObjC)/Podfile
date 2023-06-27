@@ -1,11 +1,13 @@
 platform :ios, '11.0'
 source 'https://cdn.cocoapods.org/'
+source 'git@github.com:NativoPlatform/CocoaPods-Private-Specs.git'
+
 
 target 'NativoInfiniteScrollSample' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
   # Pods for NativoInfiniteScrollSample
-  pod 'NativoSDK', '~> 7.0.0'
+  pod 'NativoSDK', '~> 7.1.0-alpha.5'
 
 end

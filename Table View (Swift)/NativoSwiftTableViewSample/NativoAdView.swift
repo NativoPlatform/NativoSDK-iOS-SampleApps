@@ -10,6 +10,7 @@ import NativoSDK
 
 class NativoAdView: UIView, NtvAdInterface {
     
+    @IBOutlet weak var authorImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
