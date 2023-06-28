@@ -22,7 +22,7 @@ class ArticleListViewController: UIViewController {
     let NativoSectionUrl = "http://www.nativo.com/demoapp"
     
     // The rows indexes where we want Nativo ads to load
-    let placeholderRows = 20
+    let placeholderRows = 16
     var nativoRows = [1, 4, 7, 10, 13, 16]
     var nextAdPos = 0
     
@@ -49,7 +49,7 @@ class ArticleListViewController: UIViewController {
     func setupNativo() {
         NativoSDK.enableDevLogs()
         NativoSDK.setSectionDelegate(self, forSection: self.NativoSectionUrl)
-        NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
+        NativoSDK.register(UINib(nibName: "NativoAdViewAlt", bundle: nil), for: .native)
         NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
         NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
         NativoSDK.registerClass(NativoBannerView.classForCoder(), for: .standardDisplay)
@@ -91,18 +91,6 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row < self.articlesDataSource.count {
-//            let articleItem = self.articlesDataSource[indexPath.row]
-//            if let newsroomUrl = articleItem["fullUrl"] {
-//                let articleUrlStr = "https://www.nativo.com\(newsroomUrl)"
-//                let articleViewController = ArticleViewController(nibName: "ArticleViewController", bundle: nil)
-//                articleViewController.articleURL = URL(string: articleUrlStr)
-//                self.navigationController?.pushViewController(articleViewController, animated: true)
-//            }
-        }
-    }
-    
 }
 
 
@@ -142,12 +130,7 @@ extension ArticleListViewController: NtvSectionDelegate {
     }
 
     func section(_ sectionUrl: String, needsDisplayClickoutURL url: URL) {
-        let clickoutAdVC = UIViewController()
-        let webView = WKWebView(frame: clickoutAdVC.view.frame)
-        let clickoutReq = URLRequest(url: url)
-        webView.load(clickoutReq)
-        self.navigationController?.pushViewController(clickoutAdVC, animated: true)
-        clickoutAdVC.view.addSubview(webView)
+        UIApplication.shared.open(url)
     }
     
     func nextNativoIndex() -> IndexPath? {
@@ -173,23 +156,6 @@ extension ArticleListViewController {
     func setupView() {
         self.dateFormatter.dateStyle = .short
         self.dateFormatter.timeStyle = .short
-    }
-    
-    func injectCell(_ cell: ArticleCell, withData data: Dictionary<String, Any> ) {
-        cell.titleLabel.text = data["title"] as? String
-        cell.authorNameLabel.text = data["author"] as? String
-        cell.previewTextLabel.text = data["excerpt"] as? String
-        cell.dateLabel.text = DateFormatter.localizedString(from: Date.init(), dateStyle: .medium, timeStyle: .short)
-        let imgUrl = data["assetUrl"] as? String
-        if imgUrl != nil {
-            ImageDownloader.shared.downloadImage(with: imgUrl, completionHandler: { img, success in
-                if let articleImg = img {
-                    if cell.titleLabel.text == data["title"] as? String {
-                        cell.adImageView.image = articleImg
-                    }
-                }
-            }, placeholderImage: nil)
-        }
     }
     
     func setupNavBar() {

@@ -20,16 +20,16 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="sWi-35-NJ2">
-                    <rect key="frame" x="272" y="4" width="99" height="20"/>
+                    <rect key="frame" x="244" y="4" width="119" height="20"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sponsored Content" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCL-2L-Q0r" userLabel="Sponsored">
-                            <rect key="frame" x="0.0" y="0.0" width="75" height="20"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sponsored Content" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCL-2L-Q0r" userLabel="Sponsored">
+                            <rect key="frame" x="0.0" y="0.0" width="95" height="20"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
-                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" red="0.12156862745098039" green="0.45882352941176469" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DSt-7N-REG" userLabel="AdChoices">
-                            <rect key="frame" x="79" y="0.0" width="20" height="20"/>
+                            <rect key="frame" x="99" y="0.0" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="20" placeholder="YES" id="5vS-ln-U4r"/>
                                 <constraint firstAttribute="height" constant="20" id="MO5-V6-e6w"/>
@@ -109,8 +109,7 @@
                 <constraint firstItem="SdI-Om-tb0" firstAttribute="leading" secondItem="gK7-6J-6yd" secondAttribute="trailing" constant="10" id="AsH-6p-4lG"/>
                 <constraint firstAttribute="trailing" secondItem="SdI-Om-tb0" secondAttribute="trailing" constant="12" id="F8X-i8-9VF"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gK7-6J-6yd" secondAttribute="bottom" constant="26" id="LeU-GX-nRw"/>
-                <constraint firstItem="sWi-35-NJ2" firstAttribute="leading" secondItem="jet-a4-c9L" secondAttribute="leading" constant="272" id="b2I-6F-lO6"/>
-                <constraint firstAttribute="trailing" secondItem="sWi-35-NJ2" secondAttribute="trailing" constant="4" id="b5X-bL-Dcf"/>
+                <constraint firstAttribute="trailing" secondItem="sWi-35-NJ2" secondAttribute="trailing" constant="12" id="b5X-bL-Dcf"/>
                 <constraint firstItem="gK7-6J-6yd" firstAttribute="top" secondItem="jet-a4-c9L" secondAttribute="top" constant="26" id="eze-SD-1BC"/>
                 <constraint firstItem="gK7-6J-6yd" firstAttribute="leading" secondItem="jet-a4-c9L" secondAttribute="leading" constant="12" id="jZR-2P-9uv"/>
                 <constraint firstItem="gK7-6J-6yd" firstAttribute="centerY" secondItem="jet-a4-c9L" secondAttribute="centerY" id="mMv-E0-KcB"/>

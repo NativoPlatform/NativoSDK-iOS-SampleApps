@@ -14,11 +14,10 @@ class NativoAdView: UIView, NtvAdInterface {
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var authorImageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var previewTextLabel: UILabel!
     @IBOutlet weak var adImageView: UIImageView!
      
     func shouldPrependAuthorByline() -> Bool {
-        return true
+        return false
     }
     
     override func awakeFromNib() {

@@ -15,6 +15,7 @@ class NativoVideoAdView: UIView, NtvVideoAdInterface {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var authorImageView: UIImageView!
+    @IBOutlet weak var previewTextLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
     override func awakeFromNib() {
@@ -24,5 +25,5 @@ class NativoVideoAdView: UIView, NtvVideoAdInterface {
     func shouldPrependAuthorByline() -> Bool {
         false
     }
-
+        
 }

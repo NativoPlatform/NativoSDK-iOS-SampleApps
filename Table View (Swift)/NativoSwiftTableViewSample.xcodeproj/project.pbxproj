@@ -13,6 +13,7 @@
 		4214FDAF290720EC00ED175D /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4214FDAE290720EC00ED175D /* ImageDownloader.swift */; };
 		42B052E22A4BA65500D555FB /* placeholder_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 42B052E12A4BA65400D555FB /* placeholder_image.png */; };
 		42B052E42A4BA87A00D555FB /* sample_author_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 42B052E32A4BA87A00D555FB /* sample_author_image.png */; };
+		42B052E62A4CD1BE00D555FB /* NativoAdViewAlt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42B052E52A4CD1BE00D555FB /* NativoAdViewAlt.xib */; };
 		42D4C322290AFE7800FB94D7 /* NativoAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42D4C321290AFE7800FB94D7 /* NativoAdView.xib */; };
 		42D4C324290B00CE00FB94D7 /* NativoAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D4C323290B00CE00FB94D7 /* NativoAdView.swift */; };
 		42D4C326290B3FC200FB94D7 /* NativoBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D4C325290B3FC200FB94D7 /* NativoBannerView.swift */; };
@@ -22,10 +23,9 @@
 		A76EB25E217A58BF00EFDBAE /* ArticleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76EB25D217A58BF00EFDBAE /* ArticleListViewController.swift */; };
 		A76EB261217A58BF00EFDBAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A76EB25F217A58BF00EFDBAE /* Main.storyboard */; };
 		A76EB263217A58C000EFDBAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A76EB262217A58C000EFDBAE /* Assets.xcassets */; };
-		A76EB27C217AA09000EFDBAE /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76EB27B217AA09000EFDBAE /* ArticleViewController.swift */; };
+		A76EB27C217AA09000EFDBAE /* PlaceholderArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76EB27B217AA09000EFDBAE /* PlaceholderArticleViewController.swift */; };
 		A76EB27E217AA48500EFDBAE /* SponsoredLandingPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A76EB27D217AA48500EFDBAE /* SponsoredLandingPageViewController.xib */; };
-		A76EB280217AA49600EFDBAE /* ArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A76EB27F217AA49600EFDBAE /* ArticleViewController.xib */; };
-		A76EB282217AA4CB00EFDBAE /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76EB281217AA4CB00EFDBAE /* ArticleCell.swift */; };
+		A76EB282217AA4CB00EFDBAE /* PlaceholderArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76EB281217AA4CB00EFDBAE /* PlaceholderArticleCell.swift */; };
 		A76EB284217AA4EF00EFDBAE /* NativoVideoAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76EB283217AA4EF00EFDBAE /* NativoVideoAdView.swift */; };
 		A76EB289217E517700EFDBAE /* nativoblog.json in Resources */ = {isa = PBXBuildFile; fileRef = A76EB288217E517700EFDBAE /* nativoblog.json */; };
 		A76EB28B217E518100EFDBAE /* sponsoredindicator.png in Resources */ = {isa = PBXBuildFile; fileRef = A76EB28A217E518100EFDBAE /* sponsoredindicator.png */; };
@@ -54,6 +54,7 @@
 		422B2DDF240DAFFB001A519A /* NativoSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NativoSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42B052E12A4BA65400D555FB /* placeholder_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder_image.png; sourceTree = "<group>"; };
 		42B052E32A4BA87A00D555FB /* sample_author_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample_author_image.png; sourceTree = "<group>"; };
+		42B052E52A4CD1BE00D555FB /* NativoAdViewAlt.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativoAdViewAlt.xib; sourceTree = "<group>"; };
 		42D4C321290AFE7800FB94D7 /* NativoAdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativoAdView.xib; sourceTree = "<group>"; };
 		42D4C323290B00CE00FB94D7 /* NativoAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativoAdView.swift; sourceTree = "<group>"; };
 		42D4C325290B3FC200FB94D7 /* NativoBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativoBannerView.swift; sourceTree = "<group>"; };
@@ -69,10 +70,9 @@
 		A76EB265217A58C000EFDBAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A76EB267217A58C000EFDBAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A76EB276217A96ED00EFDBAE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		A76EB27B217AA09000EFDBAE /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
+		A76EB27B217AA09000EFDBAE /* PlaceholderArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderArticleViewController.swift; sourceTree = "<group>"; };
 		A76EB27D217AA48500EFDBAE /* SponsoredLandingPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SponsoredLandingPageViewController.xib; sourceTree = "<group>"; };
-		A76EB27F217AA49600EFDBAE /* ArticleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleViewController.xib; sourceTree = "<group>"; };
-		A76EB281217AA4CB00EFDBAE /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
+		A76EB281217AA4CB00EFDBAE /* PlaceholderArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderArticleCell.swift; sourceTree = "<group>"; };
 		A76EB283217AA4EF00EFDBAE /* NativoVideoAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativoVideoAdView.swift; sourceTree = "<group>"; };
 		A76EB288217E517700EFDBAE /* nativoblog.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nativoblog.json; sourceTree = "<group>"; };
 		A76EB28A217E518100EFDBAE /* sponsoredindicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sponsoredindicator.png; sourceTree = "<group>"; };
@@ -125,17 +125,17 @@
 			children = (
 				A76EB25B217A58BF00EFDBAE /* AppDelegate.swift */,
 				A76EB25D217A58BF00EFDBAE /* ArticleListViewController.swift */,
-				A76EB281217AA4CB00EFDBAE /* ArticleCell.swift */,
-				A76EB27B217AA09000EFDBAE /* ArticleViewController.swift */,
+				A76EB281217AA4CB00EFDBAE /* PlaceholderArticleCell.swift */,
+				A76EB27B217AA09000EFDBAE /* PlaceholderArticleViewController.swift */,
 				A7007E62230DEFC5009663D1 /* SponsoredLandingPageViewController.swift */,
 				4214FDAE290720EC00ED175D /* ImageDownloader.swift */,
 				42D4C325290B3FC200FB94D7 /* NativoBannerView.swift */,
 				A76EB283217AA4EF00EFDBAE /* NativoVideoAdView.swift */,
 				42D4C323290B00CE00FB94D7 /* NativoAdView.swift */,
 				42D4C321290AFE7800FB94D7 /* NativoAdView.xib */,
+				42B052E52A4CD1BE00D555FB /* NativoAdViewAlt.xib */,
 				A739EB15230C961900D5DE52 /* NativoVideoAdView.xib */,
 				A76EB27D217AA48500EFDBAE /* SponsoredLandingPageViewController.xib */,
-				A76EB27F217AA49600EFDBAE /* ArticleViewController.xib */,
 				A76EB25F217A58BF00EFDBAE /* Main.storyboard */,
 				A76EB287217E516500EFDBAE /* Supporting Files */,
 			);
@@ -234,12 +234,12 @@
 				A76EB289217E517700EFDBAE /* nativoblog.json in Resources */,
 				A76EB28B217E518100EFDBAE /* sponsoredindicator.png in Resources */,
 				A76EB263217A58C000EFDBAE /* Assets.xcassets in Resources */,
-				A76EB280217AA49600EFDBAE /* ArticleViewController.xib in Resources */,
 				420A55FD2922E0390002E4E4 /* Albra Grotesk Light.otf in Resources */,
 				42D4C322290AFE7800FB94D7 /* NativoAdView.xib in Resources */,
 				A76EB27E217AA48500EFDBAE /* SponsoredLandingPageViewController.xib in Resources */,
 				A76EB261217A58BF00EFDBAE /* Main.storyboard in Resources */,
 				42B052E22A4BA65500D555FB /* placeholder_image.png in Resources */,
+				42B052E62A4CD1BE00D555FB /* NativoAdViewAlt.xib in Resources */,
 				A739EB17230C961900D5DE52 /* NativoVideoAdView.xib in Resources */,
 				420A55FB2922DF650002E4E4 /* Albra Grotesk Bold.otf in Resources */,
 				42B052E42A4BA87A00D555FB /* sample_author_image.png in Resources */,
@@ -299,9 +299,9 @@
 				A7007E63230DEFC5009663D1 /* SponsoredLandingPageViewController.swift in Sources */,
 				42D4C326290B3FC200FB94D7 /* NativoBannerView.swift in Sources */,
 				4214FDAF290720EC00ED175D /* ImageDownloader.swift in Sources */,
-				A76EB282217AA4CB00EFDBAE /* ArticleCell.swift in Sources */,
+				A76EB282217AA4CB00EFDBAE /* PlaceholderArticleCell.swift in Sources */,
 				A76EB25E217A58BF00EFDBAE /* ArticleListViewController.swift in Sources */,
-				A76EB27C217AA09000EFDBAE /* ArticleViewController.swift in Sources */,
+				A76EB27C217AA09000EFDBAE /* PlaceholderArticleViewController.swift in Sources */,
 				42D4C324290B00CE00FB94D7 /* NativoAdView.swift in Sources */,
 				A76EB25C217A58BF00EFDBAE /* AppDelegate.swift in Sources */,
 			);
