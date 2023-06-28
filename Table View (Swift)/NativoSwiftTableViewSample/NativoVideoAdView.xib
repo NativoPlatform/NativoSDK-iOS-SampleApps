@@ -31,7 +31,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="0Xl-Ly-vfd">
-                    <rect key="frame" x="12" y="31" width="390" height="61"/>
+                    <rect key="frame" x="12" y="31" width="390" height="66"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="754" text="Article Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vY-hP-f7l">
                             <rect key="frame" x="0.0" y="0.0" width="81.5" height="17.5"/>
@@ -46,24 +46,24 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="eOi-57-aTY">
-                            <rect key="frame" x="0.0" y="41" width="102" height="20"/>
+                            <rect key="frame" x="0.0" y="41" width="114.5" height="25"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="by1-yp-dug">
-                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="20" id="Nrd-uA-EqY"/>
-                                        <constraint firstAttribute="width" constant="20" id="pdu-Ba-9Vw"/>
+                                        <constraint firstAttribute="height" constant="25" id="Nrd-uA-EqY"/>
+                                        <constraint firstAttribute="width" constant="25" id="pdu-Ba-9Vw"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="By" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5MN-Ig-mak">
-                                    <rect key="frame" x="24" y="0.0" width="12" height="20"/>
-                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="10"/>
+                                    <rect key="frame" x="29" y="0.0" width="13" height="25"/>
+                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                     <color key="textColor" red="0.31026402120000002" green="0.31026402120000002" blue="0.31026402120000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Author Name " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2d-Qh-Dl9">
-                                    <rect key="frame" x="40" y="0.0" width="62" height="20"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                                    <rect key="frame" x="46" y="0.0" width="68.5" height="25"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                                     <color key="textColor" red="0.31026402120000002" green="0.31026402120000002" blue="0.31026402120000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -72,7 +72,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUq-5t-CWN" userLabel="Video View">
-                    <rect key="frame" x="12" y="100" width="390" height="210"/>
+                    <rect key="frame" x="12" y="105" width="390" height="210"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="210" id="3F3-1f-v7o"/>
