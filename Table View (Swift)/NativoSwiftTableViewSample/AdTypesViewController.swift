@@ -11,20 +11,20 @@ import NativoSDK
 class AdTypesViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var articleContainer1: UIView!
-    @IBOutlet weak var articleContainer2: UIView!
-    @IBOutlet weak var articleContainer3: UIView!
-    @IBOutlet weak var displayContainer1: UIView!
-    @IBOutlet weak var displayContainer2: UIView!
-    @IBOutlet weak var displayContainer3: UIView!
-    @IBOutlet weak var videoContainer1: UIView!
-    @IBOutlet weak var videoContainer2: UIView!
-    @IBOutlet weak var videoContainer3: UIView!
-    @IBOutlet weak var storyContainer1: UIView!
-    @IBOutlet weak var storyContainer2: UIView!
-    @IBOutlet weak var storyContainer3: UIView!
-    @IBOutlet weak var stdContainer1: UIView!
-    @IBOutlet weak var stdContainer2: UIView!
+    @IBOutlet weak var articleAdView1: UIView!
+    @IBOutlet weak var articleAdView2: UIView!
+    @IBOutlet weak var articleAdView3: UIView!
+    @IBOutlet weak var displayAdView1: UIView!
+    @IBOutlet weak var displayAdView2: UIView!
+    @IBOutlet weak var displayAdView3: UIView!
+    @IBOutlet weak var videoAdView1: UIView!
+    @IBOutlet weak var videoAdView2: UIView!
+    @IBOutlet weak var videoAdView3: UIView!
+    @IBOutlet weak var storyAdView1: UIView!
+    @IBOutlet weak var storyAdView2: UIView!
+    @IBOutlet weak var storyAdView3: UIView!
+    @IBOutlet weak var stdAdView1: UIView!
+    @IBOutlet weak var stdAdView2: UIView!
     
     let articleSectionUrl = "http://www.nativo.com/article"
     let displaySectionUrl = "http://www.nativo.com/display"
@@ -34,6 +34,7 @@ class AdTypesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavBar()
         NativoSDK.disableAutoPrefetch(true)
         NativoSDK.enablePlaceholderMode(true)
         NativoSDK.setSectionDelegate(self, forSection: articleSectionUrl)
@@ -47,7 +48,7 @@ class AdTypesViewController: UIViewController {
     func prefetchAds() {
         NativoSDK.prefetchAd(forSection: articleSectionUrl, atLocationIdentifier: 1, inContainer: scrollView)
         NativoSDK.prefetchAd(forSection: articleSectionUrl, atLocationIdentifier: 2, inContainer: scrollView, options: ["ntv_a" : "525631", "ntv_pl" : "1211528"])
-        NativoSDK.prefetchAd(forSection: articleSectionUrl, atLocationIdentifier: 3, inContainer: scrollView, options: ["ntv_a" : "530424", "ntv_pl" : "1211528"])
+        NativoSDK.prefetchAd(forSection: articleSectionUrl, atLocationIdentifier: 3, inContainer: scrollView)
         
         NativoSDK.prefetchAd(forSection: displaySectionUrl, atLocationIdentifier: 1, inContainer: scrollView, options: ["ntv_a" : "534894", "ntv_pl" : "1211528"])
         NativoSDK.prefetchAd(forSection: displaySectionUrl, atLocationIdentifier: 2, inContainer: scrollView)
@@ -64,6 +65,26 @@ class AdTypesViewController: UIViewController {
         NativoSDK.prefetchAd(forSection: stdDisplaySectionUrl, atLocationIdentifier: 1, inContainer: scrollView, options: ["ntv_a" : "553749", "ntv_pl" : "1211528"])
         NativoSDK.prefetchAd(forSection: stdDisplaySectionUrl, atLocationIdentifier: 1, inContainer: scrollView)
     }
+    
+    func setupNavBar() {
+        let ntvLogoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        ntvLogoView.contentMode = .scaleAspectFit
+        ntvLogoView.image = UIImage(named: "AppLogo")
+        navigationItem.titleView = ntvLogoView
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44)))
+        
+        let actionMenu = UIMenu(
+            title: "Actions",
+            children: [
+                UIAction(title: "Reload", image: UIImage(systemName: "gobackward"), handler: { action in
+                })
+            ]
+        )
+        navigationItem.rightBarButtonItem = UIBarButtonItem()
+        navigationItem.rightBarButtonItem?.menu = actionMenu
+        navigationItem.rightBarButtonItem?.image = UIImage(systemName: "ellipsis");
+    }
+
 }
 
 extension AdTypesViewController: NtvSectionDelegate {
@@ -72,69 +93,71 @@ extension AdTypesViewController: NtvSectionDelegate {
     }
     
     func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation identifier: Any, container: UIView) {
+        
         print("didAssignAd in \(sectionUrl) at \(String(describing: identifier))")
-        var adContainer : UIView?
+        var adView : UIView?
+        
         switch sectionUrl {
         case articleSectionUrl:
             switch identifier as? Int {
             case 1:
-                adContainer = articleContainer1
+                adView = articleAdView1
             case 2:
-                adContainer = articleContainer2
+                adView = articleAdView2
             case 3:
-                adContainer = articleContainer3
+                adView = articleAdView3
             default:
-                adContainer = nil
+                adView = nil
             }
         case displaySectionUrl:
             switch identifier as? Int {
             case 1:
-                adContainer = displayContainer1
+                adView = displayAdView1
             case 2:
-                adContainer = displayContainer2
+                adView = displayAdView2
             case 3:
-                adContainer = displayContainer3
+                adView = displayAdView3
             default:
-                adContainer = nil
+                adView = nil
             }
         case videoSectionUrl:
             switch identifier as? Int {
             case 1:
-                adContainer = videoContainer1
+                adView = videoAdView1
             case 2:
-                adContainer = videoContainer2
+                adView = videoAdView2
             case 3:
-                adContainer = videoContainer3
+                adView = videoAdView3
             default:
-                adContainer = nil
+                adView = nil
             }
         case storySectionUrl:
             switch identifier as? Int {
             case 1:
-                adContainer = storyContainer1
+                adView = storyAdView1
             case 2:
-                adContainer = storyContainer2
+                adView = storyAdView2
             case 3:
-                adContainer = storyContainer3
+                adView = storyAdView3
             default:
-                adContainer = nil
+                adView = nil
             }
         case stdDisplaySectionUrl:
             switch identifier as? Int {
             case 1:
-                adContainer = stdContainer1
+                adView = stdAdView1
             case 2:
-                adContainer = stdContainer2
+                adView = stdAdView2
             default:
-                adContainer = nil
+                adView = nil
             }
         default:
-            adContainer = nil
+            adView = nil
         }
         
-        // Place ad in the container
-        if adContainer != nil {
-            NativoSDK.placeAd(in: adContainer!,
+        // Place ad in view
+        if adView != nil {
+            NativoSDK.placeAd(in: adView!,
                               atLocationIdentifier: identifier,
                               inContainer: self.scrollView,
                               forSection: sectionUrl)
@@ -149,7 +172,7 @@ extension AdTypesViewController: NtvSectionDelegate {
 
     func section(_ sectionUrl: String, needsDisplayLandingPage sponsoredLandingPageViewController: (UIViewController & NtvLandingPageInterface)?) {
         if let landingPage = sponsoredLandingPageViewController {
-            self.present(landingPage, animated: true)
+            self.navigationController?.pushViewController(landingPage, animated: true)
         }
     }
     

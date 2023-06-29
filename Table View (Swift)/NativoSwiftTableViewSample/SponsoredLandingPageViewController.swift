@@ -24,13 +24,7 @@ class SponsoredLandingPageViewController: UIViewController, NtvLandingPageInterf
     var adData : NtvAdData?
     
     func handleExternalLink(_ link: URL) {
-        // Load click-out url in WKWebView
-        let clickoutAdViewController = UIViewController.init()
-        let webView = WKWebView.init(frame: clickoutAdViewController.view.frame)
-        clickoutAdViewController.view.addSubview(webView)
-        let clickoutReq = URLRequest.init(url: link)
-        webView.load(clickoutReq)
-        self.navigationController?.pushViewController(clickoutAdViewController, animated: true)
+        UIApplication.shared.open(link)
     }
     
     func didLoadContent(withAd adData: NtvAdData) {
@@ -43,6 +37,17 @@ class SponsoredLandingPageViewController: UIViewController, NtvLandingPageInterf
         navigationItem.title = "Sponsored Article"
         self.shareBtn = UIBarButtonItem.init(barButtonSystemItem: .action, target: self, action:#selector(socialShareButtonClick))
         self.navigationItem.rightBarButtonItem = self.shareBtn
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("viewDidDisappear")
+        // clear webview
+        contentWKWebView.loadHTMLString("<html></html>", baseURL: nil)
     }
     
     @objc
