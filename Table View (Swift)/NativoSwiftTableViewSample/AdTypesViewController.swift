@@ -25,6 +25,7 @@ class AdTypesViewController: UIViewController {
     @IBOutlet weak var storyAdView3: UIView!
     @IBOutlet weak var stdAdView1: UIView!
     @IBOutlet weak var stdAdView2: UIView!
+    @IBOutlet weak var stdDisplayLabel: UILabel!
     
     let articleSectionUrl = "http://www.nativo.com/article"
     let displaySectionUrl = "http://www.nativo.com/display"
@@ -165,9 +166,9 @@ extension AdTypesViewController: NtvSectionDelegate {
     }
     
     func section(_ sectionUrl: String, didFailAdAtLocation identifier: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
-        // Set height to 0 instead of remove (If removed from parent view you will need to reapply autolayout constraints)
-        //self.nativoAdView.heightAnchor.constraint(equalToConstant: 0).isActive = true
-        print("Removed Nativo ad view in \(sectionUrl) at \(String(describing: identifier))")
+        if (sectionUrl == stdDisplaySectionUrl) {
+            stdDisplayLabel.isHidden = true
+        }
     }
 
     func section(_ sectionUrl: String, needsDisplayLandingPage sponsoredLandingPageViewController: (UIViewController & NtvLandingPageInterface)?) {
