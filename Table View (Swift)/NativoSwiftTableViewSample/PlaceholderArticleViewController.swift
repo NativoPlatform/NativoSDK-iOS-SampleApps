@@ -13,7 +13,7 @@ class PlaceholderArticleViewController: UIViewController {
     @IBOutlet weak var nativoAdView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    let ArticleNativoSectionUrl = "www.nativo.com/demoapp"
+    let ArticleNativoSectionUrl = "www.nativo.com/demoapp?page=article"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,11 +53,6 @@ extension PlaceholderArticleViewController: NtvSectionDelegate {
     }
     
     func section(_ sectionUrl: String, needsDisplayClickoutURL url: URL) {
-        let clickoutAdVC = UIViewController()
-        let webView = WKWebView(frame: clickoutAdVC.view.frame)
-        let clickoutReq = URLRequest(url: url)
-        webView.load(clickoutReq)
-        self.navigationController?.pushViewController(clickoutAdVC, animated: true)
-        clickoutAdVC.view.addSubview(webView)
+        UIApplication.shared.open(url)
     }
 }

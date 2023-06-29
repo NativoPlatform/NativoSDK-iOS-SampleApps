@@ -14,6 +14,7 @@
 		42B052E22A4BA65500D555FB /* placeholder_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 42B052E12A4BA65400D555FB /* placeholder_image.png */; };
 		42B052E42A4BA87A00D555FB /* sample_author_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 42B052E32A4BA87A00D555FB /* sample_author_image.png */; };
 		42B052E62A4CD1BE00D555FB /* NativoAdViewAlt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42B052E52A4CD1BE00D555FB /* NativoAdViewAlt.xib */; };
+		42B052E82A4CFFE100D555FB /* AdTypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B052E72A4CFFE100D555FB /* AdTypesViewController.swift */; };
 		42D4C322290AFE7800FB94D7 /* NativoAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42D4C321290AFE7800FB94D7 /* NativoAdView.xib */; };
 		42D4C324290B00CE00FB94D7 /* NativoAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D4C323290B00CE00FB94D7 /* NativoAdView.swift */; };
 		42D4C326290B3FC200FB94D7 /* NativoBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D4C325290B3FC200FB94D7 /* NativoBannerView.swift */; };
@@ -55,6 +56,7 @@
 		42B052E12A4BA65400D555FB /* placeholder_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder_image.png; sourceTree = "<group>"; };
 		42B052E32A4BA87A00D555FB /* sample_author_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample_author_image.png; sourceTree = "<group>"; };
 		42B052E52A4CD1BE00D555FB /* NativoAdViewAlt.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativoAdViewAlt.xib; sourceTree = "<group>"; };
+		42B052E72A4CFFE100D555FB /* AdTypesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdTypesViewController.swift; sourceTree = "<group>"; };
 		42D4C321290AFE7800FB94D7 /* NativoAdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativoAdView.xib; sourceTree = "<group>"; };
 		42D4C323290B00CE00FB94D7 /* NativoAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativoAdView.swift; sourceTree = "<group>"; };
 		42D4C325290B3FC200FB94D7 /* NativoBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativoBannerView.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			children = (
 				A76EB25B217A58BF00EFDBAE /* AppDelegate.swift */,
 				A76EB25D217A58BF00EFDBAE /* ArticleListViewController.swift */,
+				42B052E72A4CFFE100D555FB /* AdTypesViewController.swift */,
 				A76EB281217AA4CB00EFDBAE /* PlaceholderArticleCell.swift */,
 				A76EB27B217AA09000EFDBAE /* PlaceholderArticleViewController.swift */,
 				A7007E62230DEFC5009663D1 /* SponsoredLandingPageViewController.swift */,
@@ -304,6 +307,7 @@
 				A76EB27C217AA09000EFDBAE /* PlaceholderArticleViewController.swift in Sources */,
 				42D4C324290B00CE00FB94D7 /* NativoAdView.swift in Sources */,
 				A76EB25C217A58BF00EFDBAE /* AppDelegate.swift in Sources */,
+				42B052E82A4CFFE100D555FB /* AdTypesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

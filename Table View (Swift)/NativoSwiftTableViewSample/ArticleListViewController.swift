@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import AppTrackingTransparency
-import AdSupport
 import NativoSDK
+import AppTrackingTransparency
 
 class ArticleListViewController: UIViewController {
 
