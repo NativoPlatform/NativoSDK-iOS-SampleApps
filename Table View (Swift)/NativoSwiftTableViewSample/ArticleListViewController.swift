@@ -21,7 +21,7 @@ class ArticleListViewController: UIViewController {
     let NativoSectionUrl = "http://www.nativo.com/demoapp"
     
     // The rows indexes where we want Nativo ads to load
-    let placeholderRows = 16
+    let placeholderRows = 12
     var nativoRows = [1, 4, 7, 10, 13, 16]
     var nextAdPos = 0
     
@@ -47,11 +47,13 @@ class ArticleListViewController: UIViewController {
     
     func setupNativo() {
         NativoSDK.enableDevLogs()
-        NativoSDK.setSectionDelegate(self, forSection: self.NativoSectionUrl)
+        NativoSDK.disableAutoPrefetch(true)
+        NativoSDK.setSectionDelegate(self, forSection: NativoSectionUrl)
         NativoSDK.register(UINib(nibName: "NativoAdViewAlt", bundle: nil), for: .native)
         NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
         NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
         NativoSDK.registerClass(NativoBannerView.classForCoder(), for: .standardDisplay)
+        NativoSDK.prefetchAd(forSection: NativoSectionUrl)
     }
     
     func startArticleFeed() {
@@ -89,7 +91,6 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
         
         return cell
     }
-    
 }
 
 
@@ -102,6 +103,9 @@ extension ArticleListViewController: NtvSectionDelegate {
             
             // Insert row into table
             tableView.insertRows(at: [nativoIndex], with: .automatic)
+            
+            // Prefetch next ad
+            NativoSDK.prefetchAd(forSection: NativoSectionUrl)
         }
     }
     

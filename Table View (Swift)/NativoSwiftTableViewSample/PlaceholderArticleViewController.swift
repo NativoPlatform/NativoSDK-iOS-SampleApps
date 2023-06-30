@@ -21,6 +21,7 @@ class PlaceholderArticleViewController: UIViewController {
         
         // Render Nativo Article Ad Unit
         NativoSDK.setSectionDelegate(self, forSection: ArticleNativoSectionUrl)
+        NativoSDK.prefetchAd(forSection: ArticleNativoSectionUrl)
     }
 }
 
