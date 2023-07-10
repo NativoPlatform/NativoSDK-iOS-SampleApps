@@ -147,6 +147,7 @@ extension ArticleListViewController: NtvSectionDelegate {
     
     func reloadAds() {
         NativoSDK.clearAds(inSection: self.NativoSectionUrl, inContainer: nil)
+        self.nativoRows = [1, 4, 7, 10, 13, 16]
         self.nextAdPos = 0
         self.startArticleFeed()
         self.tableView.reloadData()
