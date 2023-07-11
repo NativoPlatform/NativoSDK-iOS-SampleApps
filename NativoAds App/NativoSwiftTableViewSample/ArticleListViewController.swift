@@ -19,6 +19,7 @@ class ArticleListViewController: UIViewController {
     let VideoCellIdentifier = "videocell"
     let NativoReuseIdentifier = "nativoCell"
     let NativoSectionUrl = "http://www.nativo.com/demoapp"
+
     
     // The rows indexes where we want Nativo ads to load
     let placeholderRows = 12

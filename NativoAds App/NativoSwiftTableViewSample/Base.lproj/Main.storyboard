@@ -25,7 +25,6 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oTT-SF-O4M">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="fKc-K1-CLl" kind="relationship" relationship="viewControllers" id="t2f-3T-rAh"/>
@@ -237,6 +236,7 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="eyy-oy-Xj7" firstAttribute="leading" secondItem="p9o-4f-qaW" secondAttribute="leading" id="N1h-MQ-Rng"/>
                                                 <constraint firstAttribute="trailing" secondItem="eyy-oy-Xj7" secondAttribute="trailing" id="OeS-US-wFN"/>
@@ -311,7 +311,7 @@
                                                     <constraint firstAttribute="height" constant="35" id="ZDR-57-UiC"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="110" translatesAutoresizingMaskIntoConstraints="NO" id="HOX-3d-TaI">
@@ -338,7 +338,7 @@
                                                     <constraint firstAttribute="height" constant="35" id="fQs-1c-q1J"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="110" translatesAutoresizingMaskIntoConstraints="NO" id="amU-S7-Q3P">
@@ -365,7 +365,7 @@
                                                     <constraint firstAttribute="height" constant="35" id="6yN-sD-bKH"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="110" translatesAutoresizingMaskIntoConstraints="NO" id="AEV-YH-a8C">
@@ -392,7 +392,7 @@
                                                     <constraint firstAttribute="height" constant="35" id="s2V-HG-G3g"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="110" translatesAutoresizingMaskIntoConstraints="NO" id="qW6-OF-xdu">
@@ -419,7 +419,7 @@
                                                     <constraint firstAttribute="height" constant="35" id="QsY-lo-aEp"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="110" translatesAutoresizingMaskIntoConstraints="NO" id="o0a-kn-Zfc">
@@ -445,7 +445,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kTB-Sc-nzm"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="o6z-U8-zO5" firstAttribute="leading" secondItem="kTB-Sc-nzm" secondAttribute="leading" id="J6u-9D-NGX"/>
                             <constraint firstItem="kTB-Sc-nzm" firstAttribute="trailing" secondItem="o6z-U8-zO5" secondAttribute="trailing" id="Q1l-Py-dkf"/>
