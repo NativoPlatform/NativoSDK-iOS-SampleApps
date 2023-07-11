@@ -78,6 +78,7 @@ class AdTypesViewController: UIViewController {
             title: "Actions",
             children: [
                 UIAction(title: "Reload", image: UIImage(systemName: "gobackward"), handler: { action in
+                    self.reloadAds()
                 })
             ]
         )
@@ -85,7 +86,15 @@ class AdTypesViewController: UIViewController {
         navigationItem.rightBarButtonItem?.menu = actionMenu
         navigationItem.rightBarButtonItem?.image = UIImage(systemName: "ellipsis");
     }
-
+    
+    func reloadAds() {
+        NativoSDK.clearAds(inSection: articleSectionUrl, inContainer: nil)
+        NativoSDK.clearAds(inSection: displaySectionUrl, inContainer: nil)
+        NativoSDK.clearAds(inSection: videoSectionUrl, inContainer: nil)
+        NativoSDK.clearAds(inSection: storySectionUrl, inContainer: nil)
+        NativoSDK.clearAds(inSection: stdDisplaySectionUrl, inContainer: nil)
+        prefetchAds()
+    }
 }
 
 extension AdTypesViewController: NtvSectionDelegate {
