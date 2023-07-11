@@ -107,7 +107,7 @@
 		A76EB24F217A58BF00EFDBAE = {
 			isa = PBXGroup;
 			children = (
-				A76EB25A217A58BF00EFDBAE /* NativoSwiftTableViewSample */,
+				A76EB25A217A58BF00EFDBAE /* Nativo Ads */,
 				A76EB259217A58BF00EFDBAE /* Products */,
 				A76EB275217A96ED00EFDBAE /* Frameworks */,
 				96A087788EB9C721066337B3 /* Pods */,
@@ -122,7 +122,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A76EB25A217A58BF00EFDBAE /* NativoSwiftTableViewSample */ = {
+		A76EB25A217A58BF00EFDBAE /* Nativo Ads */ = {
 			isa = PBXGroup;
 			children = (
 				A76EB25B217A58BF00EFDBAE /* AppDelegate.swift */,
@@ -142,7 +142,7 @@
 				A76EB25F217A58BF00EFDBAE /* Main.storyboard */,
 				A76EB287217E516500EFDBAE /* Supporting Files */,
 			);
-			path = NativoSwiftTableViewSample;
+			path = "Nativo Ads";
 			sourceTree = "<group>";
 		};
 		A76EB275217A96ED00EFDBAE /* Frameworks */ = {
@@ -210,7 +210,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A76EB253217A58BF00EFDBAE /* Build configuration list for PBXProject "NativoSwiftTableViewSample" */;
+			buildConfigurationList = A76EB253217A58BF00EFDBAE /* Build configuration list for PBXProject "Nativo Ads" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -465,7 +465,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = NativoSwiftTableViewSample/Info.plist;
+				INFOPLIST_FILE = "${PROJECT_DIR}/Nativo Ads/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Nativo Ads";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -495,7 +495,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = NativoSwiftTableViewSample/Info.plist;
+				INFOPLIST_FILE = "${PROJECT_DIR}/Nativo Ads/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Nativo Ads";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -516,7 +516,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A76EB253217A58BF00EFDBAE /* Build configuration list for PBXProject "NativoSwiftTableViewSample" */ = {
+		A76EB253217A58BF00EFDBAE /* Build configuration list for PBXProject "Nativo Ads" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A76EB268217A58C000EFDBAE /* Debug */,
