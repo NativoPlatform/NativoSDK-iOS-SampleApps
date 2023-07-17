@@ -117,9 +117,12 @@ extension ArticleListViewController: NtvSectionDelegate {
     func section(_ sectionUrl: String, didFailAdAtLocation location: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
         if let index = location as? IndexPath {
             // Remove the Nativo placeholder from our datasource
-            articlesDataSource.remove(at: index.row)
             nativoRows.removeAll { val in
-                val == index.row
+                if val == index.row {
+                    articlesDataSource.remove(at: index.row)
+                    return true;
+                }
+                return false;
             }
             
             // Update tableView
