@@ -40,6 +40,7 @@ class ArticleListViewController: UIViewController {
                 
                 NativoSDK.enableDevLogs()
                 NativoSDK.enableTestAdvertisements()
+                NativoSDK.enablePlaceholderMode(true);
                 NativoSDK.setSectionDelegate(self, forSection: self.NativoSectionUrl)
                 NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
                 NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)

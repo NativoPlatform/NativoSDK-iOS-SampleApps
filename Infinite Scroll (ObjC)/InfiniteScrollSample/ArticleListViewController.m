@@ -16,13 +16,14 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
 
 // Define the frequency of Ad cells for infinite scroll
 #define AD_ROW_START 2
-#define AD_ROW_INTERVAL 3
+#define AD_ROW_INTERVAL 4
 
 @interface ArticleListViewController () <UITableViewDataSource, UITableViewDelegate, NtvSectionDelegate>
 @property (nonatomic) NSCache *feedImgCache;
 @property (nonatomic) NSDateFormatter *dateFormatter;
 @property (nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSMutableArray *articlesDataSource;
+@property (nonatomic) int numAdsReceived;
 @end
 
 @implementation ArticleListViewController
@@ -49,50 +50,14 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
     [NativoSDK registerNib:[UINib nibWithNibName:@"SponsoredLandingPageViewController" bundle:nil] forAdTemplateType:NtvAdTemplateTypeLandingPage];
     [NativoSDK registerClass:[NativoStandardDisplayView class] forAdTemplateType:NtvAdTemplateTypeStandardDisplay];
     
+    // Prefetch first couple ads. Auto-prefetch will request the following for infinite scrolling ads.
+    [NativoSDK prefetchAdForSection:NativoSectionUrl options:nil];
+    [NativoSDK prefetchAdForSection:NativoSectionUrl options:nil];
+    
     // Cell used as nativo ad container
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"nativocell"];
-                
-    [self startArticleFeed];
-}
-
-
-#pragma mark - NtvSectionDelegate Methods
-
-- (void)section:(NSString *)sectionUrl needsDisplayLandingPage:(nullable UIViewController *)sponsoredLandingPageViewController {
-    //Push the sponsored landing page to the navigationController
-    [self.navigationController pushViewController:sponsoredLandingPageViewController animated:YES];
-}
-
-- (void)section:(NSString *)sectionUrl needsDisplayClickoutURL:(NSURL *)url {
     
-    // Load click-out url in WKWebView
-    UIViewController *clickoutAdVC = [[UIViewController alloc] init];
-    WKWebView *webView = [[WKWebView alloc] initWithFrame:clickoutAdVC.view.frame];
-    [clickoutAdVC.view addSubview:webView];
-    NSURLRequest *clickoutReq = [NSURLRequest requestWithURL:url];
-    [webView loadRequest: clickoutReq];
-    [self.navigationController pushViewController:clickoutAdVC animated:YES];
-}
 
-- (void)section:(nonnull NSString *)sectionUrl didAssignAd:(nonnull NtvAdData *)adData toLocation:(nonnull id)location container:(nonnull UIView *)container {
-    NSIndexPath *index = (NSIndexPath *)location;
-    // Insert ad row for first set of rows,
-    // since the rows will have already loaded before we have an ad ready
-    if (index.row < 10) {
-        [self.tableView insertRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-}
-
-
-- (void)section:(nonnull NSString *)sectionUrl didFailAdAtLocation:(nullable id)identifier inView:(nullable UIView *)view withError:(nullable NSString *)errMsg container:(nullable UIView *)container {
-    [self.tableView reloadData];
-}
-
-
-- (void)section:(nonnull NSString *)sectionUrl didReceiveAd:(BOOL)didGetFill {
-    if (didGetFill) {
-        NSLog(@"Did get Nativo ad");
-    }
 }
 
 
@@ -104,17 +69,23 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
         [self getNextFeedItems];
     }
     
+    // Check if we should load Nativo ad at this index
     UITableViewCell *cell = nil;
     BOOL isNativoAdPlacement = indexPath.row % AD_ROW_INTERVAL == AD_ROW_START;
     BOOL didGetNativoAdFill = NO;
     if (isNativoAdPlacement) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"nativocell"];
-        didGetNativoAdFill = [NativoSDK placeAdInView:cell atLocationIdentifier:indexPath inContainer:tableView forSection:NativoSectionUrl options:nil];
-    }
-    
-    // If Nativo didn't get fill,
-    // populate the cell with article data
-    if (!didGetNativoAdFill) {
+        didGetNativoAdFill = [NativoSDK placeAdInView:cell
+                                 atLocationIdentifier:indexPath
+                                          inContainer:tableView
+                                           forSection:NativoSectionUrl
+                                              options:nil];
+        if (didGetNativoAdFill) {
+            [self unCollapseCell:cell];
+        } else {
+            [self collapseCell:cell];
+        }
+    } else {
         cell = [tableView dequeueReusableCellWithIdentifier:ArticleCellIdentifier];
         
         // Here we ask the NativoSDK to offset the indexpath to account for any ads we may have recieved.
@@ -122,7 +93,7 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
         NSDictionary *feedItem = self.articlesDataSource[adjustedIndexPathWithAds.row];
         
         // Populate cell with data
-        [self populateCell:(ArticleCell *)cell WithData:feedItem];
+        [self populateCell:(ArticleCell *)cell withData:feedItem];
     }
     
     return cell;
@@ -133,6 +104,21 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
     return self.articlesDataSource.count + numAds;
 }
 
+- (void)collapseCell:(UITableViewCell *)cell {
+    cell.hidden = YES;
+    NSLayoutConstraint *height = [cell.contentView.heightAnchor constraintEqualToConstant:0];
+    height.identifier = @"height";
+    height.active = YES;
+}
+
+- (void)unCollapseCell:(UITableViewCell *)cell {
+    cell.hidden = NO;
+    for (NSLayoutConstraint *constraint in cell.contentView.constraints) {
+        if ([constraint.identifier isEqualToString:@"height"]) {
+            constraint.active = NO;
+        }
+    }
+}
 
 
 #pragma mark - UITableViewDelegate methods
@@ -151,6 +137,46 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
 }
 
 
+#pragma mark - NtvSectionDelegate Methods
+
+- (void)section:(nonnull NSString *)sectionUrl didReceiveAd:(BOOL)didGetFill {
+    self.numAdsReceived += 1;
+    // Wait until we get first two ads back before starting the feed
+    if (self.numAdsReceived == 2) {
+        [self startArticleFeed];
+    }
+}
+
+- (void)section:(nonnull NSString *)sectionUrl didAssignAd:(nonnull NtvAdData *)adData toLocation:(nonnull id)location container:(nonnull UIView *)container {
+    
+    // Insert new row in our table view. This will call cellForRow: where NativoSDK placeAdInView: will be called.
+//    NSIndexPath *index = (NSIndexPath *)location;
+//    [self.tableView insertRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+
+- (void)section:(nonnull NSString *)sectionUrl didFailAdAtLocation:(nullable id)identifier inView:(nullable UIView *)view withError:(nullable NSString *)errMsg container:(nullable UIView *)container {
+    [self.tableView reloadData];
+}
+
+
+- (void)section:(NSString *)sectionUrl needsDisplayLandingPage:(nullable UIViewController *)sponsoredLandingPageViewController {
+    //Push the sponsored landing page to the navigationController
+    [self.navigationController pushViewController:sponsoredLandingPageViewController animated:YES];
+}
+
+- (void)section:(NSString *)sectionUrl needsDisplayClickoutURL:(NSURL *)url {
+    
+    // Load click-out url in WKWebView
+    UIViewController *clickoutAdVC = [[UIViewController alloc] init];
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:clickoutAdVC.view.frame];
+    [clickoutAdVC.view addSubview:webView];
+    NSURLRequest *clickoutReq = [NSURLRequest requestWithURL:url];
+    [webView loadRequest: clickoutReq];
+    [self.navigationController pushViewController:clickoutAdVC animated:YES];
+}
+
+
 #pragma mark - Feed Request
 
 - (void)startArticleFeed {
@@ -159,6 +185,7 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
     NSDictionary *feed = [NSJSONSerialization JSONObjectWithData:feedData options:0 error:nil];
     NSArray *feedItems = feed[@"items"];
     [self.articlesDataSource addObjectsFromArray:feedItems];
+    [self.tableView reloadData];
 }
 
 - (void)getNextFeedItems {
@@ -169,7 +196,7 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
 
 #pragma mark - Misc
 
-- (void)populateCell:(ArticleCell *)cell WithData:(NSDictionary *)feedItem {
+- (void)populateCell:(ArticleCell *)cell withData:(NSDictionary *)feedItem {
     cell.titleLabel.text = feedItem[@"title"];
     cell.dateLabel.text = [self.dateFormatter stringFromDate:[NSDate date]];
     cell.authorNameLabel.text = feedItem[@"author"];

@@ -29,11 +29,6 @@ class CollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         setupNavBar()
         
-        // Initialize datasource
-        for i in 1...20 {
-            articleDatasource.append("Article \(i)")
-        }
-        
         // Initialize advertiser app tracking authorization
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { notification in
             ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
@@ -53,7 +48,6 @@ class CollectionViewController: UICollectionViewController {
                 NativoSDK.registerReuseId(self.ReuseIdentifier, for: .native) // reuseIdentifier "Cell" comes from Main.storyboard dynamic prototype cell
                 NativoSDK.register(UINib(nibName: "NativoVideoViewCell", bundle: nil), for: .video)
                 NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
-                self.collectionView.reloadData()
             })
         }
         
@@ -154,26 +148,28 @@ class CollectionViewController: UICollectionViewController {
         navigationItem.rightBarButtonItem?.menu = privacyMenu
         navigationItem.rightBarButtonItem?.image = UIImage(systemName: "hand.raised");
     }
+    
+    func initDatasource() {
+        for i in 1...20 {
+            self.articleDatasource.append("Article \(i)")
+        }
+        self.collectionView.reloadData()
+    }
 }
 
 extension CollectionViewController: NtvSectionDelegate {
+    
     func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
-        print("didReceiveAd \(String(describing: didGetFill))")
+        if (didGetFill && articleDatasource.isEmpty) {
+            self.initDatasource()
+        }
     }
     
     func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation location: Any, container: UIView) {
         print("didAssignAdAtLocation \(String(describing: location))")
         if let index = location as? IndexPath {
-            
             // Add Nativo placeholder to our datasource, so that we offset correctly
             articleDatasource.insert("Nativo", at: index.row)
-            
-            if (index.row == 1) {
-                // Since we loaded this row before before we received an ad,
-                // we need to update the collectionView by inserting new item here.
-                // We don't need to do this for subsequent rows since we'll already have the ad loaded.
-                self.collectionView.insertItems(at: [index])
-            }
         }
         
     }
