@@ -19,7 +19,7 @@ class ArticleListViewController: UIViewController {
     let ArticleCellIdentifier = "articlecell"
     let VideoCellIdentifier = "videocell"
     let NativoReuseIdentifier = "nativoCell"
-    let NativoSectionUrl = "http://www.publisher.com/test"
+    let NativoSectionUrl = "http://www.apmobileapp.com/business" //"http://www.publisher.com/test"
     
     // The rows indexes where we want Nativo ads to load
     var nativoRows = [1, 4, 7, 10, 13, 16]
@@ -39,13 +39,21 @@ class ArticleListViewController: UIViewController {
                 print("IDFA authorization: \(status.rawValue)")
                 
                 NativoSDK.enableDevLogs()
-                NativoSDK.enableTestAdvertisements()
-                NativoSDK.enablePlaceholderMode(true);
+//                NativoSDK.enableTestAdvertisements()
+                NativoSDK.enablePlaceholderMode(true)
+                NativoSDK.disableAutoPrefetch(true)
                 NativoSDK.setSectionDelegate(self, forSection: self.NativoSectionUrl)
                 NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
                 NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
                 NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
                 NativoSDK.registerClass(NativoBannerView.classForCoder(), for: .standardDisplay)
+                
+                NativoSDK.prefetchAd(forSection: "http://www.apmobileapp.com/business",
+                                     options: ["ntv_ca" : "780420",
+                                               "ntv_ga" : "1",
+                                               "ntv_vid" : "22",
+                                               "ntv_dm" : "",
+                                               "ntv_filb": "WeightedRandomSelectionFilter"])
             })
         }
         
