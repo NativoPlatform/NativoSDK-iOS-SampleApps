@@ -6,7 +6,7 @@ target 'Nativo Ads' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for NativoSwiftTableViewSample
-  pod 'NativoSDK', '~> 7.1.0-alpha.11'
+  # Pods for NativoAds
+  pod 'NativoSDK', '~> 7.1.0-alpha.13'
 
 end
