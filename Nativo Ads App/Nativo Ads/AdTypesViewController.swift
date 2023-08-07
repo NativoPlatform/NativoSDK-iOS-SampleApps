@@ -175,9 +175,7 @@ extension AdTypesViewController: NtvSectionDelegate {
     }
     
     func section(_ sectionUrl: String, didFailAdAtLocation identifier: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
-        if (sectionUrl == stdDisplaySectionUrl) {
-            stdDisplayLabel.isHidden = true
-        }
+
     }
 
     func section(_ sectionUrl: String, needsDisplayLandingPage sponsoredLandingPageViewController: (UIViewController & NtvLandingPageInterface)?) {
