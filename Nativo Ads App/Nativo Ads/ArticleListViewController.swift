@@ -19,10 +19,11 @@ class ArticleListViewController: UIViewController {
     let VideoCellIdentifier = "videocell"
     let NativoReuseIdentifier = "nativoCell"
     let NativoSectionUrl = "http://www.nativo.com/demoapp"
+    var firstLaunch = true
 
     
     // The rows indexes where we want Nativo ads to load
-    let placeholderRows = 12
+    let articleRows = 12
     var nativoRows = [1, 4, 7, 10, 13, 16]
     var nextAdPos = 0
     
@@ -31,22 +32,26 @@ class ArticleListViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupNavBar()
+        
         // Register blank UITableViewCell to be used as container for Nativo ads
         self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: NativoReuseIdentifier)
         
-        // Initialize advertiser app tracking authorization
+        // Wait for app to become active before requesting ATT tracking authorization
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { notification in
-            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-                // Tracking authorization completed. Start loading ads here.
-                print("IDFA authorization: \(status.rawValue)")
-                self.setupNativo()
-            })
+            if self.firstLaunch {
+                ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                    // Tracking authorization completed. Start loading ads here.
+                    self.setupNativo()
+                })
+                self.firstLaunch = false
+            }
         }
         
         self.startArticleFeed()
     }
     
     func setupNativo() {
+        NSLog("Starting Nativo")
         NativoSDK.enableDevLogs()
         NativoSDK.disableAutoPrefetch(true)
         NativoSDK.setSectionDelegate(self, forSection: NativoSectionUrl)
@@ -58,8 +63,9 @@ class ArticleListViewController: UIViewController {
     }
     
     func startArticleFeed() {
+        NSLog("Starting feed")
         articlesDataSource.removeAll()
-        for _ in 0...placeholderRows {
+        for _ in 0...articleRows {
             articlesDataSource.append("placeholder")
         }
     }
@@ -98,20 +104,22 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
 extension ArticleListViewController: NtvSectionDelegate {
     
     func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
+        
         if didGetFill, let nativoIndex = nextNativoIndex() {
             // Add Nativo ad to our datasource
             articlesDataSource.insert("nativo", at: nativoIndex.row)
             
             // Insert row into table
             tableView.insertRows(at: [nativoIndex], with: .automatic)
-            
-            // Prefetch next ad
-            NativoSDK.prefetchAd(forSection: NativoSectionUrl)
         }
     }
     
     func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation location: Any, container: UIView) {
-        
+        // Prefetch next ad once it has been assigned
+        if nextAdPos < nativoRows.count {
+            NSLog("Prefetching next ad")
+            NativoSDK.prefetchAd(forSection: NativoSectionUrl)
+        }
     }
     
     func section(_ sectionUrl: String, didFailAdAtLocation location: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
