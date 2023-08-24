@@ -7,6 +7,6 @@ target 'Nativo Ads' do
   use_frameworks!
 
   # Pods for NativoAds
-  pod 'NativoSDK', '~> 7.1.0-alpha.13'
+  pod 'NativoSDK', '7.1.0-alpha.15'
 
 end

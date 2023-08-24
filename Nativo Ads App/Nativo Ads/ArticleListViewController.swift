@@ -21,12 +21,9 @@ class ArticleListViewController: UIViewController {
     let NativoSectionUrl = "http://www.nativo.com/demoapp"
     var firstLaunch = true
 
-    
     // The rows indexes where we want Nativo ads to load
     let articleRows = 12
     var nativoRows = [1, 4, 7, 10, 13, 16]
-    var nextAdPos = 0
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,32 +39,30 @@ class ArticleListViewController: UIViewController {
                 ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
                     // Tracking authorization completed. Start loading ads here.
                     self.setupNativo()
+                    self.startArticleFeed()
                 })
                 self.firstLaunch = false
             }
         }
-        
-        self.startArticleFeed()
     }
     
     func setupNativo() {
-        NSLog("Starting Nativo")
+        //NSLog("Starting Nativo")
         NativoSDK.enableDevLogs()
-        NativoSDK.disableAutoPrefetch(true)
         NativoSDK.setSectionDelegate(self, forSection: NativoSectionUrl)
         NativoSDK.register(UINib(nibName: "NativoAdViewAlt", bundle: nil), for: .native)
         NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
         NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
         NativoSDK.registerClass(NativoBannerView.classForCoder(), for: .standardDisplay)
-        NativoSDK.prefetchAd(forSection: NativoSectionUrl)
     }
     
     func startArticleFeed() {
-        NSLog("Starting feed")
+        //NSLog("Starting feed")
         articlesDataSource.removeAll()
-        for _ in 0...articleRows {
-            articlesDataSource.append("placeholder")
+        for i in 0...articleRows {
+            articlesDataSource.append("article \(i)")
         }
+        tableView.reloadData()
     }
 }
 
@@ -78,7 +73,6 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         var didGetNativoAdFill = false
         var cell : UITableViewCell!
         let isNativoRow : Bool = nativoRows.contains(indexPath.row)
@@ -104,22 +98,16 @@ extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate 
 extension ArticleListViewController: NtvSectionDelegate {
     
     func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
-        
-        if didGetFill, let nativoIndex = nextNativoIndex() {
-            // Add Nativo ad to our datasource
-            articlesDataSource.insert("nativo", at: nativoIndex.row)
-            
-            // Insert row into table
-            tableView.insertRows(at: [nativoIndex], with: .automatic)
-        }
+
     }
     
     func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation location: Any, container: UIView) {
-        // Prefetch next ad once it has been assigned
-        if nextAdPos < nativoRows.count {
-            NSLog("Prefetching next ad")
-            NativoSDK.prefetchAd(forSection: NativoSectionUrl)
-        }
+        // Add Nativo ad to our datasource
+        let indexPath = (location as! IndexPath)
+        articlesDataSource.insert("nativo", at: indexPath.row)
+
+        // Insert row into table
+        tableView.insertRows(at: [indexPath], with: .automatic)
     }
     
     func section(_ sectionUrl: String, didFailAdAtLocation location: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
@@ -148,21 +136,10 @@ extension ArticleListViewController: NtvSectionDelegate {
         UIApplication.shared.open(url)
     }
     
-    func nextNativoIndex() -> IndexPath? {
-        if nextAdPos < nativoRows.count {
-            let index = IndexPath(row: nativoRows[nextAdPos], section: 0)
-            nextAdPos += 1
-            return index
-        }
-        return nil
-    }
-    
     func reloadAds() {
         NativoSDK.clearAds(inSection: self.NativoSectionUrl, inContainer: nil)
         self.nativoRows = [1, 4, 7, 10, 13, 16]
-        self.nextAdPos = 0
         self.startArticleFeed()
-        self.tableView.reloadData()
     }
 }
 

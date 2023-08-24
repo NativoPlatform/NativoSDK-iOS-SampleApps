@@ -30,6 +30,11 @@ class SponsoredLandingPageViewController: UIViewController, NtvLandingPageInterf
     func didLoadContent(withAd adData: NtvAdData) {
         self.adData = adData
         previewTextLabel.text = previewTextLabel.text?.uppercased()
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.hyphenationFactor = 0.3;
+        let attributedString = NSMutableAttributedString(string: adData.title!, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        self.titleLabel.attributedText = attributedString;
     }
 
     override func viewDidLoad() {
