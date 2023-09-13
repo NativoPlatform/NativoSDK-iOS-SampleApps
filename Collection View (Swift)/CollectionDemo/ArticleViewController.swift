@@ -25,7 +25,7 @@ class ArticleViewController: UIViewController {
         self.view.addSubview(webView)
         self.navigationItem.title = "Article"
         
-        if let webUrl = URL(string: "http://dsp.test-sites.internal.nativo.net/external/moblie_web.html") {
+        if let webUrl = URL(string: "http://dsp.test-sites.internal.nativo.net/external/mobile_web.html") {
             webView.load(URLRequest(url: webUrl))
         }
     }
