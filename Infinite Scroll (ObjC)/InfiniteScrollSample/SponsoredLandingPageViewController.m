@@ -23,6 +23,10 @@
     self.navigationItem.rightBarButtonItem = self.shareButton;
 }
 
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.nativoWebView stopLoadingNativo];
+}
 
 -(void)shareButtonTouched {
     NSString *socialUrl = self.shareUrl;

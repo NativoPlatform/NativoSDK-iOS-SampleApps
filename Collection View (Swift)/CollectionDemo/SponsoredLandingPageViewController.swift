@@ -43,6 +43,11 @@ class SponsoredLandingPageViewController: UIViewController, NtvLandingPageInterf
         self.navigationItem.rightBarButtonItem = self.shareBtn
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.contentWKWebView.stopLoadingNativo()
+    }
+    
     @objc
     func socialShareButtonClick() {
         if let socialURL = self.shareUrl {
