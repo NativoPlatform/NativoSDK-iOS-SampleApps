@@ -32,16 +32,16 @@ class CollectionViewController: UICollectionViewController {
         // Initialize advertiser app tracking authorization
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { notification in
             ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-              // Tracking authorization completed. Start loading ads here.
-              print("idfa request complete")
-                
+                // Tracking authorization completed. Start loading ads here.
+                print("idfa request complete")
+
                 let status = ATTrackingManager.trackingAuthorizationStatus
                 print("IDFA status: \(status)")
                 if status == .authorized {
                     let idfaVal = ASIdentifierManager.shared().advertisingIdentifier
                     print("Idfa val: \(idfaVal)")
                 }
-                
+
                 NativoSDK.enableDevLogs()
                 NativoSDK.enableTestAdvertisements()
                 NativoSDK.setSectionDelegate(self, forSection: self.SectionUrl)
@@ -160,7 +160,8 @@ class CollectionViewController: UICollectionViewController {
 extension CollectionViewController: NtvSectionDelegate {
     
     func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
-        if (didGetFill && articleDatasource.isEmpty) {
+        // Wait for Nativo to load before initializing
+        if (articleDatasource.isEmpty) {
             self.initDatasource()
         }
     }
@@ -183,7 +184,9 @@ extension CollectionViewController: NtvSectionDelegate {
                 self.collectionView.deleteItems(at: [index])
             }
         } else {
-            self.collectionView.reloadData()
+            if (articleDatasource.isEmpty) {
+                self.initDatasource()
+            }
         }
     }
     
