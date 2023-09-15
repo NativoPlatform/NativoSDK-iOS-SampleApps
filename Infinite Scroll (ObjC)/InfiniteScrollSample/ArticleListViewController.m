@@ -149,14 +149,16 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
 
 - (void)section:(nonnull NSString *)sectionUrl didAssignAd:(nonnull NtvAdData *)adData toLocation:(nonnull id)location container:(nonnull UIView *)container {
     
-    // Insert new row in our table view. This will call cellForRow: where NativoSDK placeAdInView: will be called.
-//    NSIndexPath *index = (NSIndexPath *)location;
-//    [self.tableView insertRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 
 - (void)section:(nonnull NSString *)sectionUrl didFailAdAtLocation:(nullable id)identifier inView:(nullable UIView *)view withError:(nullable NSString *)errMsg container:(nullable UIView *)container {
     [self.tableView reloadData];
+    
+    // Initialize article feed if Nativo fails
+    if (self.articlesDataSource.count == 0) {
+        [self startArticleFeed];
+    }
 }
 
 
