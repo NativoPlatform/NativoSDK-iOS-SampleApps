@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import AppTrackingTransparency
+import AdSupport
+import NativoSDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -24,37 +24,47 @@ class CollectionViewController: UICollectionViewController {
             collectionLayout.estimatedItemSize = CGSize(width: 342.0, height: 300.0)
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
         
         // Initialize advertiser app tracking authorization
-        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { notification in
-            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-                // Tracking authorization completed. Start loading ads here.
-                print("idfa request complete")
-
-                let status = ATTrackingManager.trackingAuthorizationStatus
-                print("IDFA status: \(status)")
-                if status == .authorized {
-                    let idfaVal = ASIdentifierManager.shared().advertisingIdentifier
-                    print("Idfa val: \(idfaVal)")
-                }
-
-                NativoSDK.enableDevLogs()
-                NativoSDK.enableTestAdvertisements()
-                NativoSDK.setSectionDelegate(self, forSection: self.SectionUrl)
-                NativoSDK.registerReuseId(self.ReuseIdentifier, for: .native) // reuseIdentifier "Cell" comes from Main.storyboard dynamic prototype cell
-                NativoSDK.register(UINib(nibName: "NativoVideoViewCell", bundle: nil), for: .video)
-                NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
-            })
+        if (UIApplication.shared.applicationState == .active) {
+            print("active")
+            self.requestTracking()
+        } else {
+            print("background?")
+            NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { notification in
+                self.requestTracking()
+            }
         }
+
         
         // Register specialized collectionViewCell for Nativo
         self.collectionView.register(NtvCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: NativoReuseIdentifier)
     }
 
+    func requestTracking() {
+        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+            // Tracking authorization completed. Start loading ads here.
+            print("idfa request complete")
+
+            let status = ATTrackingManager.trackingAuthorizationStatus
+            print("IDFA status: \(status)")
+            if status == .authorized {
+                let idfaVal = ASIdentifierManager.shared().advertisingIdentifier
+                print("Idfa val: \(idfaVal)")
+            }
+
+            NativoSDK.enableDevLogs()
+            NativoSDK.enableTestAdvertisements()
+            NativoSDK.setSectionDelegate(self, forSection: self.SectionUrl)
+            NativoSDK.registerReuseId(self.ReuseIdentifier, for: .native) // reuseIdentifier "Cell" comes from Main.storyboard dynamic prototype cell
+            NativoSDK.register(UINib(nibName: "NativoVideoViewCell", bundle: nil), for: .video)
+            NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
+        })
+    }
     
     
     // MARK: UICollectionViewDataSource
