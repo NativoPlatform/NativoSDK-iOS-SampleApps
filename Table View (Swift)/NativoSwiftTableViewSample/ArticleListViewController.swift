@@ -22,7 +22,7 @@ class ArticleListViewController: UIViewController {
     let NativoSectionUrl = "http://www.publisher.com/test"
     
     // The rows indexes where we want Nativo ads to load
-    var nativoRows = [1, 4, 7, 10, 13, 16]
+    var nativoRows = [1, 4, 7, 11, 15]
     var nextAdPos = 0
     
     
@@ -32,21 +32,12 @@ class ArticleListViewController: UIViewController {
         setupNavBar()
         
         // Initialize advertiser app tracking authorization
-        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { notification in
-            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-                // Tracking authorization completed. Start loading ads here.
-                //let status = ATTrackingManager.trackingAuthorizationStatus
-                print("IDFA authorization: \(status.rawValue)")
-                
-                NativoSDK.enableDevLogs()
-                NativoSDK.enableTestAdvertisements()
-                NativoSDK.enablePlaceholderMode(true);
-                NativoSDK.setSectionDelegate(self, forSection: self.NativoSectionUrl)
-                NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
-                NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
-                NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
-                NativoSDK.registerClass(NativoBannerView.classForCoder(), for: .standardDisplay)
-            })
+        if (UIApplication.shared.applicationState == .active) {
+            self.requestTracking()
+        } else {
+            NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { notification in
+                self.requestTracking()
+            }
         }
         
         // Register blank cell to be used as container for Nativo ads
@@ -55,11 +46,26 @@ class ArticleListViewController: UIViewController {
         startArticleFeed()
     }
     
+    func requestTracking() {
+        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+            // Tracking authorization completed. Start loading ads here.
+            NativoSDK.enableDevLogs()
+            NativoSDK.enableTestAdvertisements()
+            NativoSDK.enablePlaceholderMode(true);
+            NativoSDK.setSectionDelegate(self, forSection: self.NativoSectionUrl)
+            NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
+            NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
+            NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
+            NativoSDK.registerClass(NativoBannerView.classForCoder(), for: .standardDisplay)
+        })
+    }
+    
 }
 
 extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("numberOfRowsInSection: \(self.articlesDataSource.count)")
         return self.articlesDataSource.count
     }
     
@@ -118,7 +124,7 @@ extension ArticleListViewController: NtvSectionDelegate {
     func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
         if didGetFill, let nativoIndex = nextNativoIndex() {
             // Add Nativo placeholder to our datasource
-            articlesDataSource.insert(["Nativo" : nativoIndex], at: nativoIndex.row)
+            articlesDataSource.insert(["Nativo" : nativoIndex.row], at: nativoIndex.row)
             
             // Insert row into table
             tableView.insertRows(at: [nativoIndex], with: .automatic)
@@ -131,14 +137,16 @@ extension ArticleListViewController: NtvSectionDelegate {
     
     func section(_ sectionUrl: String, didFailAdAtLocation location: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
         if let index = location as? IndexPath {
-            // Remove the Nativo placeholder from our datasource
-            articlesDataSource.remove(at: index.row)
-            nativoRows.removeAll { val in
-                val == index.row
+            // Find the matching Nativo ad row
+            if let matchingIndex = self.articlesDataSource.firstIndex(where: {
+                let nativoIndex = ($0["Nativo"] as? Int)
+                return nativoIndex == index.row
+            }) {
+                self.articlesDataSource.remove(at: matchingIndex)
+                nativoRows.removeAll { $0 == index.row }
+                // Delete matchingIndex from tableView
+                self.tableView.deleteRows(at: [IndexPath(row: matchingIndex, section: 0)], with: .automatic)
             }
-            
-            // Update tableView
-            self.tableView.reloadData()
         }
     }
     
@@ -171,6 +179,7 @@ extension ArticleListViewController {
         let feedData = try! Data.init(contentsOf: URL(fileURLWithPath: filePath!))
         let feed = try! JSONSerialization.jsonObject(with: feedData) as! Dictionary<String, Any>
         let feedItems = feed["items"] as! Array<Dictionary<String, Any>>
+        self.articlesDataSource.append(contentsOf: feedItems)
         self.articlesDataSource.append(contentsOf: feedItems)
     }
     

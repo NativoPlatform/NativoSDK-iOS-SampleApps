@@ -186,7 +186,7 @@ extension CollectionViewController: NtvSectionDelegate {
     }
     
     func section(_ sectionUrl: String, didFailAdAtLocation location: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
-        print("didFailAdAtLocation \(String(describing: location))")
+        print("didFailAdAtLocation \(String(describing: errMsg))")
         if let index = location as? IndexPath {
             // Remove Nativo cell from our datasource, so that we offset correctly
             if articleDatasource[index.row].contains("Nativo") {
