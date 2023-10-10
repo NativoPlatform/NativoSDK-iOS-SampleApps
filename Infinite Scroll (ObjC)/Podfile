@@ -8,6 +8,6 @@ target 'NativoInfiniteScrollSample' do
   use_frameworks!
 
   # Pods for NativoInfiniteScrollSample
-  pod 'NativoSDK', '~> 7.1.0-alpha.23'
+  pod 'NativoSDK', '7.2.0-alpha.2'
 
 end
