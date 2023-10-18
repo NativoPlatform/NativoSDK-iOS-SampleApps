@@ -2,7 +2,7 @@
 //  CollectionViewController.swift
 //  CollectionDemo
 //
-//  Copyright © 2022 Nativo. All rights reserved.
+//  Copyright © 2023 Nativo. All rights reserved.
 //
 
 import UIKit
@@ -17,6 +17,7 @@ class CollectionViewController: UICollectionViewController {
     let ReuseIdentifier = "Cell"
     let NativoReuseIdentifier = "nativoCell"
     let SectionUrl = "www.nativo.net/test"
+    var adInjectRow = 3
     var articleDatasource = Array<String>()
     
     @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout! {
@@ -29,68 +30,68 @@ class CollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         setupNavBar()
         
-        // Initialize advertiser app tracking authorization
+        // Wait for Active application state before requesting advertiser app tracking authorization (IDFA)
         if (UIApplication.shared.applicationState == .active) {
-            print("active")
             self.requestTracking()
         } else {
-            print("background?")
             NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { notification in
                 self.requestTracking()
             }
         }
-
-        
-        // Register specialized collectionViewCell for Nativo
-        self.collectionView.register(NtvCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: NativoReuseIdentifier)
     }
 
     func requestTracking() {
         ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
             // Tracking authorization completed. Start loading ads here.
-            print("idfa request complete")
-
-            let status = ATTrackingManager.trackingAuthorizationStatus
-            print("IDFA status: \(status)")
-            if status == .authorized {
-                let idfaVal = ASIdentifierManager.shared().advertisingIdentifier
-                print("Idfa val: \(idfaVal)")
-            }
-
-            NativoSDK.enableDevLogs()
-            NativoSDK.enableTestAdvertisements()
-            NativoSDK.setSectionDelegate(self, forSection: self.SectionUrl)
-            NativoSDK.registerReuseId(self.ReuseIdentifier, for: .native) // reuseIdentifier "Cell" comes from Main.storyboard dynamic prototype cell
-            NativoSDK.register(UINib(nibName: "NativoVideoViewCell", bundle: nil), for: .video)
-            NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
+            self.startNativo()
         })
+    }
+    
+    func startNativo() {
+        NativoSDK.enableDevLogs()
+        NativoSDK.enableTestAdvertisements()
+        NativoSDK.enablePlaceholderMode(true) // Enable placeholder mode since Nativo ad units are already in the original datasource
+        NativoSDK.setSectionDelegate(self, forSection: self.SectionUrl)
+        NativoSDK.registerReuseId(self.ReuseIdentifier, for: .native) // reuseIdentifier "Cell" comes from Main.storyboard dynamic prototype cell
+        NativoSDK.register(UINib(nibName: "NativoVideoViewCell", bundle: nil), for: .video)
+        NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
+        
+        // Register specialized collectionViewCell for Nativo
+        self.collectionView.register(NtvCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: NativoReuseIdentifier)
+    }
+    
+    // Create Datasource with Nativo placeholders
+    func initDatasource() {
+        for i in 0...20 {
+            if (i % 3 == 1) {
+                self.articleDatasource.append("Nativo placeholder")
+            } else {
+                self.articleDatasource.append("Article \(i)")
+            }
+        }
+        self.collectionView.reloadData()
     }
     
     
     // MARK: UICollectionViewDataSource
-    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("Datasource Count: \(articleDatasource.count)")
         return articleDatasource.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell: UICollectionViewCell! // Will always be initialized in this control flow so we can safely declare as implicitley unwrapped optional
         
-        var didGetNativoAdFill: Bool = false
-        if isNativoIndexPath(indexPath) {
-            // Call Nativo placeAdInView and check returned boolean to see ad placement was successful
+        var cell: UICollectionViewCell!
+        let itemForIndex = articleDatasource[indexPath.row]
+        if (itemForIndex.contains("Nativo")) {
+            // Inject Nativo ad
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: NativoReuseIdentifier, for: indexPath)
-            didGetNativoAdFill = NativoSDK.placeAd(in: cell, atLocationIdentifier: indexPath, inContainer: collectionView, forSection: SectionUrl)
-        }
-        
-        // Create an article cell if no Nativo ad fill
-        if !didGetNativoAdFill {
+            NativoSDK.placeAd(in: cell, atLocationIdentifier: indexPath, inContainer: collectionView, forSection: SectionUrl)
+        } else {
+            // Inject regular article
             let articleCell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier, for: indexPath) as! CollectionViewCell
             let title = articleDatasource[indexPath.row]
             injectGenericArticle(inCell: articleCell, withTitle: title)
@@ -112,14 +113,9 @@ class CollectionViewController: UICollectionViewController {
         let articleViewController = ArticleViewController()
         self.navigationController?.pushViewController(articleViewController, animated: true)
     }
+
     
-    func isNativoIndexPath(_ indexPath: IndexPath) -> Bool {
-        // Determine where Nativo ad unit should go
-        let adStartRow = 1
-        let adIntervalRow = 3
-        return indexPath.row % adIntervalRow == adStartRow
-    }
-    
+    // MARK: Setup
     func injectGenericArticle(inCell cell: CollectionViewCell, withTitle title: String) {
         cell.titleLabel.text = title
         cell.authorNameLabel.text = "John"
@@ -158,13 +154,6 @@ class CollectionViewController: UICollectionViewController {
         navigationItem.rightBarButtonItem?.menu = privacyMenu
         navigationItem.rightBarButtonItem?.image = UIImage(systemName: "hand.raised");
     }
-    
-    func initDatasource() {
-        for i in 1...20 {
-            self.articleDatasource.append("Article \(i)")
-        }
-        self.collectionView.reloadData()
-    }
 }
 
 extension CollectionViewController: NtvSectionDelegate {
@@ -179,27 +168,24 @@ extension CollectionViewController: NtvSectionDelegate {
     func section(_ sectionUrl: String, didAssignAd adData: NtvAdData, toLocation location: Any, container: UIView) {
         print("didAssignAdAtLocation \(String(describing: location))")
         if let index = location as? IndexPath {
-            // Add Nativo placeholder to our datasource, so that we offset correctly
-            articleDatasource.insert("Nativo", at: index.row)
+            // Add Nativo item to datasource if not already there
+            if (!articleDatasource[index.row].contains("Nativo")) {
+                articleDatasource.insert("Nativo", at: index.row)
+                collectionView.insertItems(at: [index])
+            }
         }
-        
     }
     
     func section(_ sectionUrl: String, didFailAdAtLocation location: Any?, in view: UIView?, withError errMsg: String?, container: UIView?) {
         print("didFailAdAtLocation \(String(describing: errMsg))")
         if let index = location as? IndexPath {
-            // Remove Nativo cell from our datasource, so that we offset correctly
+            // Remove Nativo item from our datasource
             if articleDatasource[index.row].contains("Nativo") {
                 articleDatasource.remove(at: index.row)
                 self.collectionView.deleteItems(at: [index])
             }
-        } else {
-            if (articleDatasource.isEmpty) {
-                self.initDatasource()
-            }
         }
     }
-    
     
     func section(_ sectionUrl: String, needsDisplayLandingPage sponsoredLandingPageViewController: (UIViewController & NtvLandingPageInterface)?) {
         if let landingPage = sponsoredLandingPageViewController {

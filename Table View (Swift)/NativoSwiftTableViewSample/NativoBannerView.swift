@@ -3,7 +3,7 @@
 //  NativoSwiftTableViewSample
 //
 //  Created by Matthew Murray on 10/27/22.
-//  Copyright © 2022 Nativo. All rights reserved.
+//  Copyright © 2023 Nativo. All rights reserved.
 //
 
 import Foundation

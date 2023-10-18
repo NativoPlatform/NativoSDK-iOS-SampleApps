@@ -7,6 +7,7 @@
 #import "NativoStandardDisplayView.h"
 #import <WebKit/WebKit.h>
 #import <UIKit/UIKit.h>
+@import AppTrackingTransparency;
 
 
 // Nativo Settings
@@ -24,6 +25,7 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
 @property (nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSMutableArray *articlesDataSource;
 @property (nonatomic) int numAdsReceived;
+@property (nonatomic) int adInjectRow;
 @end
 
 @implementation ArticleListViewController
@@ -36,6 +38,29 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
     [super viewDidLoad];
     [self setupView];
     [self setupNavBar];
+    [self startArticleFeed];
+    
+    // Make sure app is active before requestion advertiser tracking (IDFA)
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+        [self requestTracking];
+    } else {
+        [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+            [self requestTracking];
+        }];
+    }
+}
+
+- (void)requestTracking {
+    [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+        // Tracking authorization completed. Start loading ads here.
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self startNativo];
+        });
+    }];
+}
+
+- (void)startNativo {
+    self.adInjectRow = 1;
     
     // Enable Test Nativo Test & Debug mode
     [NativoSDK enableDevLogs];
@@ -50,58 +75,43 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
     [NativoSDK registerNib:[UINib nibWithNibName:@"SponsoredLandingPageViewController" bundle:nil] forAdTemplateType:NtvAdTemplateTypeLandingPage];
     [NativoSDK registerClass:[NativoStandardDisplayView class] forAdTemplateType:NtvAdTemplateTypeStandardDisplay];
     
-    // Prefetch first couple ads. Auto-prefetch will request the following for infinite scrolling ads.
-    [NativoSDK prefetchAdForSection:NativoSectionUrl options:nil];
-    [NativoSDK prefetchAdForSection:NativoSectionUrl options:nil];
-    
     // Cell used as nativo ad container
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"nativocell"];
-    
-
 }
-
 
 #pragma mark - UITableViewDataSource methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == self.articlesDataSource.count-1) {
-        [self getNextFeedItems];
-    }
-    
-    // Check if we should load Nativo ad at this index
+    // Check if this item should be a Nativo ad placement
     UITableViewCell *cell = nil;
-    BOOL isNativoAdPlacement = indexPath.row % AD_ROW_INTERVAL == AD_ROW_START;
-    BOOL didGetNativoAdFill = NO;
-    if (isNativoAdPlacement) {
+    NSDictionary *itemForIndex = self.articlesDataSource[indexPath.row];
+    if ([itemForIndex[@"title"] isEqual:@"Nativo"]) {
+        // Use NativoSDK to create ad unit
         cell = [tableView dequeueReusableCellWithIdentifier:@"nativocell"];
-        didGetNativoAdFill = [NativoSDK placeAdInView:cell
-                                 atLocationIdentifier:indexPath
-                                          inContainer:tableView
-                                           forSection:NativoSectionUrl
-                                              options:nil];
-        if (didGetNativoAdFill) {
+        BOOL didPlaceAd = [NativoSDK placeAdInView:cell atLocationIdentifier:indexPath inContainer:tableView forSection:NativoSectionUrl options:nil];
+        if (didPlaceAd) {
             [self unCollapseCell:cell];
         } else {
             [self collapseCell:cell];
         }
     } else {
+        // Create article cell as normal
         cell = [tableView dequeueReusableCellWithIdentifier:ArticleCellIdentifier];
-        
-        // Here we ask the NativoSDK to offset the indexpath to account for any ads we may have recieved.
-        NSIndexPath *adjustedIndexPathWithAds = [NativoSDK getAdjustedIndexPath:indexPath forAdsInjectedInSection:NativoSectionUrl inContainer:tableView];
-        NSDictionary *feedItem = self.articlesDataSource[adjustedIndexPathWithAds.row];
-        
-        // Populate cell with data
+        NSDictionary *feedItem = self.articlesDataSource[indexPath.row];
         [self populateCell:(ArticleCell *)cell withData:feedItem];
+    }
+    
+    // Load next set of rows if needed
+    if (indexPath.row == self.articlesDataSource.count-1) {
+        [self getNextFeedItems];
     }
     
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger numAds = [NativoSDK getNumberOfAdsInSection:NativoSectionUrl inTableOrCollectionSection:section forNumberOfItemsInDatasource:self.articlesDataSource.count inContainer:tableView];
-    return self.articlesDataSource.count + numAds;
+    return self.articlesDataSource.count;
 }
 
 - (void)collapseCell:(UITableViewCell *)cell {
@@ -119,7 +129,6 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
         }
     }
 }
-
 
 #pragma mark - UITableViewDelegate methods
 
@@ -140,10 +149,11 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
 #pragma mark - NtvSectionDelegate Methods
 
 - (void)section:(nonnull NSString *)sectionUrl didReceiveAd:(BOOL)didGetFill {
-    self.numAdsReceived += 1;
-    // Wait until we get first two ads back before starting the feed
-    if (self.numAdsReceived == 2) {
-        [self startArticleFeed];
+    if (didGetFill && self.articlesDataSource.count > self.adInjectRow) {
+        [self.articlesDataSource insertObject:@{@"title": @"Nativo"} atIndex:self.adInjectRow];
+        NSIndexPath *idx = [NSIndexPath indexPathForRow:self.adInjectRow inSection:0];
+        [self.tableView insertRowsAtIndexPaths:@[idx] withRowAnimation:UITableViewRowAnimationAutomatic];
+        self.adInjectRow += AD_ROW_INTERVAL;
     }
 }
 
@@ -151,10 +161,12 @@ static NSString * const NativoSectionUrl = @"http://www.publisher.com/test";
     
 }
 
-
 - (void)section:(nonnull NSString *)sectionUrl didFailAdAtLocation:(nullable id)identifier inView:(nullable UIView *)view withError:(nullable NSString *)errMsg container:(nullable UIView *)container {
-    [self.tableView reloadData];
-    
+    if (identifier) {
+        NSIndexPath *indexPath = (NSIndexPath *)identifier;
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+
     // Initialize article feed if Nativo fails
     if (self.articlesDataSource.count == 0) {
         [self startArticleFeed];

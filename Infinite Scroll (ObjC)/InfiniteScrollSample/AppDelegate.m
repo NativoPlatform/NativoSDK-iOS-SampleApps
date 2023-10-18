@@ -46,6 +46,4 @@
     [[UINavigationBar appearance] setScrollEdgeAppearance:ntvAppearance];
 }
 
-
-
 @end

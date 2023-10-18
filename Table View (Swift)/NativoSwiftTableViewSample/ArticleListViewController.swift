@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  NativoSwiftTableViewSample
 //
-//  Copyright © 2022 Nativo. All rights reserved.
+//  Copyright © 2023 Nativo. All rights reserved.
 //
 
 import UIKit
@@ -30,8 +30,9 @@ class ArticleListViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupNavBar()
+        startArticleFeed()
         
-        // Initialize advertiser app tracking authorization
+        // Wait for Active application state before requesting advertiser app tracking authorization (IDFA)
         if (UIApplication.shared.applicationState == .active) {
             self.requestTracking()
         } else {
@@ -39,25 +40,25 @@ class ArticleListViewController: UIViewController {
                 self.requestTracking()
             }
         }
-        
-        // Register blank cell to be used as container for Nativo ads
-        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: NativoReuseIdentifier)
-        
-        startArticleFeed()
     }
     
     func requestTracking() {
         ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
             // Tracking authorization completed. Start loading ads here.
-            NativoSDK.enableDevLogs()
-            NativoSDK.enableTestAdvertisements()
-            NativoSDK.enablePlaceholderMode(true);
-            NativoSDK.setSectionDelegate(self, forSection: self.NativoSectionUrl)
-            NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
-            NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
-            NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
-            NativoSDK.registerClass(NativoBannerView.classForCoder(), for: .standardDisplay)
+            self.startNativo()
         })
+    }
+    
+    func startNativo() {
+        NativoSDK.enableDevLogs()
+        NativoSDK.enableTestAdvertisements()
+        NativoSDK.setSectionDelegate(self, forSection: self.NativoSectionUrl)
+        NativoSDK.register(UINib(nibName: "NativoAdView", bundle: nil), for: .native)
+        NativoSDK.register(UINib(nibName: "NativoVideoAdView", bundle: nil), for: .video)
+        NativoSDK.register(UINib(nibName: "SponsoredLandingPageViewController", bundle: nil), for: .landingPage)
+        NativoSDK.registerClass(NativoBannerView.classForCoder(), for: .standardDisplay)
+        // Register blank cell to be used as container for Nativo ads
+        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: NativoReuseIdentifier)
     }
     
 }
@@ -65,32 +66,32 @@ class ArticleListViewController: UIViewController {
 extension ArticleListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("numberOfRowsInSection: \(self.articlesDataSource.count)")
         return self.articlesDataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell: UITableViewCell!
         
-        var didGetNativoAdFill = false
-        var cell : UITableViewCell!
-        let isNativoRow : Bool = nativoRows.contains(indexPath.row)
-        if isNativoRow {
-            // Dequeue the UITableViewCell we registered for Nativo Ads
-            cell = tableView.dequeueReusableCell(withIdentifier: NativoReuseIdentifier, for: indexPath)
-            // Use the NativoSDK to place an ad in the cell
-            didGetNativoAdFill = NativoSDK.placeAd(in: cell,
-                                                   atLocationIdentifier: indexPath,
-                                                   inContainer: tableView,
-                                                   forSection: NativoSectionUrl)
+        // Check if this index path should be a Nativo ad unit
+        let itemForIndex = articlesDataSource[indexPath.row]
+        let isNativoItem = itemForIndex.contains { (key: String, value: Any) in
+            return key == "Nativo"
         }
-        
-        if !didGetNativoAdFill {
+        if isNativoItem {
+            // Dequeue the UITableViewCell we registered for Nativo Ads
+            cell = tableView.dequeueReusableCell(withIdentifier: NativoReuseIdentifier)
+            // Use NativoSDK to create ad unit
+            NativoSDK.placeAd(in: cell,
+                              atLocationIdentifier: indexPath,
+                              inContainer: tableView, 
+                              forSection: NativoSectionUrl)
+        } else {
+            // Create article cell as normal
             let articleCell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: ArticleCellIdentifier, for: indexPath) as! ArticleCell
             let data = self.articlesDataSource[indexPath.row]
             self.injectCell(articleCell, withData: data)
             cell = articleCell
         }
-        
         return cell
     }
     
@@ -122,8 +123,8 @@ extension ArticleListViewController: NtvSectionDelegate {
     }
     
     func section(_ sectionUrl: String, didReceiveAd didGetFill: Bool) {
+        // Add Nativo placeholder to our datasource if we get fill
         if didGetFill, let nativoIndex = nextNativoIndex() {
-            // Add Nativo placeholder to our datasource
             articlesDataSource.insert(["Nativo" : nativoIndex.row], at: nativoIndex.row)
             
             // Insert row into table
@@ -181,6 +182,7 @@ extension ArticleListViewController {
         let feedItems = feed["items"] as! Array<Dictionary<String, Any>>
         self.articlesDataSource.append(contentsOf: feedItems)
         self.articlesDataSource.append(contentsOf: feedItems)
+        self.tableView.reloadData()
     }
     
     func injectCell(_ cell: ArticleCell, withData data: Dictionary<String, Any> ) {

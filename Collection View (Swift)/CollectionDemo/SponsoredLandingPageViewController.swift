@@ -2,7 +2,7 @@
 //  SponsoredLandingPageViewController.swift
 //  CollectionDemo
 //
-//  Copyright © 2022 Nativo. All rights reserved.
+//  Copyright © 2023 Nativo. All rights reserved.
 //
 
 import UIKit
