@@ -181,7 +181,6 @@ extension ArticleListViewController {
         let feed = try! JSONSerialization.jsonObject(with: feedData) as! Dictionary<String, Any>
         let feedItems = feed["items"] as! Array<Dictionary<String, Any>>
         self.articlesDataSource.append(contentsOf: feedItems)
-        self.articlesDataSource.append(contentsOf: feedItems)
         self.tableView.reloadData()
     }
     
