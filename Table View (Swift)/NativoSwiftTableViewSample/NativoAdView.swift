@@ -16,6 +16,7 @@ class NativoAdView: UIView, NtvAdInterface {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var previewTextLabel: UILabel!
     @IBOutlet weak var adImageView: UIImageView!
+    @IBOutlet weak var isiContentView: UIView!
     
     func shouldPrependAuthorByline() -> Bool {
         return true

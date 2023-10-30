@@ -63,7 +63,7 @@ class CollectionViewController: UICollectionViewController {
     // Create Datasource with Nativo placeholders
     func initDatasource() {
         for i in 0...20 {
-            if (i % 3 == 1) {
+            if (i % adInjectRow == 1) {
                 self.articleDatasource.append("Nativo placeholder")
             } else {
                 self.articleDatasource.append("Article \(i)")
