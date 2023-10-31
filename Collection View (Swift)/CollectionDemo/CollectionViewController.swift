@@ -49,7 +49,7 @@ class CollectionViewController: UICollectionViewController {
     
     func startNativo() {
         NativoSDK.enableDevLogs()
-        NativoSDK.enableTestAdvertisements()
+        //NativoSDK.enableTestAdvertisements()
         NativoSDK.enablePlaceholderMode(true) // Enable placeholder mode since Nativo ad units are already in the original datasource
         NativoSDK.setSectionDelegate(self, forSection: self.SectionUrl)
         NativoSDK.registerReuseId(self.ReuseIdentifier, for: .native) // reuseIdentifier "Cell" comes from Main.storyboard dynamic prototype cell
@@ -58,6 +58,9 @@ class CollectionViewController: UICollectionViewController {
         
         // Register specialized collectionViewCell for Nativo
         self.collectionView.register(NtvCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: NativoReuseIdentifier)
+        
+        NativoSDK.prefetchAd(forSection: self.SectionUrl)
+        NativoSDK.prefetchAd(forSection: self.SectionUrl)
     }
     
     // Create Datasource with Nativo placeholders
