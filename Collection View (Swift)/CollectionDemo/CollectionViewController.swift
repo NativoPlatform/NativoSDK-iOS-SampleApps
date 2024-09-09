@@ -143,10 +143,12 @@ class CollectionViewController: UICollectionViewController {
                 UIAction(title: "Give Consent", image: UIImage(systemName: "plus"), handler: { action in
                     UserDefaults.standard.set("BOXjEnFOXjEnFAKALBENB5-AAAAid7_______9______9uz_Gv_v_f__33e8__9v_l_7_-___u_-33d4-_1vf99yfm1-7ftr3tp_87ues2_Xur_959__3z3_EA", forKey: "IABTCF_TCString")
                     UserDefaults.standard.set("1YNY", forKey: "IABUSPrivacy_String")
+                    UserDefaults.standard.set("DBACNYA~CPonToAPonToABEACBENC7CoAP_AAH_AAAwII4Nf_X__b3_n-_7___t0eY1f9_7__-0zjhfdt-8N3f_X_L8X_2M7vF36tr4KuR4ku3bBIQdtHOncTUmx6olVrzPsbk2cr7NKJ7Pkmnsbe2dYGH9_n93T_ZKZ7___f__7___________________v____-_____9________________________________8EcGv_r__t7_z_f9___26PMav-_9___aZxwvu2_eG7v_r_l-L_7Gd3i79W18FXI8SXbtgkIO2jnTuJqTY9USq15n2NybOV9mlE9nyTT2NvbOsDD-_z-7p_slM9___v__9___________________3_____f____-________________________________-AAAA.YAAAAAAAAAAA~1---", forKey: "IABGPP_HDR_GppString")
                 }),
                 UIAction(title: "Remove Consent", image: UIImage(systemName: "minus"), handler: { action in
                     UserDefaults.standard.set(nil, forKey: "IABTCF_TCString")
                     UserDefaults.standard.set("1NNN", forKey: "IABUSPrivacy_String")
+                    UserDefaults.standard.set("", forKey: "IABGPP_HDR_GppString")
                 })
             ]
         )
