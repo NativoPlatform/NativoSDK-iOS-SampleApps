@@ -147,7 +147,7 @@ class CollectionViewController: UICollectionViewController {
                 }),
                 UIAction(title: "Remove Consent", image: UIImage(systemName: "minus"), handler: { action in
                     UserDefaults.standard.set(nil, forKey: "IABTCF_TCString")
-                    UserDefaults.standard.set("1NNN", forKey: "IABUSPrivacy_String")
+                    UserDefaults.standard.set("", forKey: "IABUSPrivacy_String")
                     UserDefaults.standard.set("", forKey: "IABGPP_HDR_GppString")
                 })
             ]
