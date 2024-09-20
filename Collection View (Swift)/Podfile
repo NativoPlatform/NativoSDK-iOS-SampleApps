@@ -6,7 +6,7 @@ target 'CollectionDemo' do
   use_frameworks!
 
   # Pods for CollectionDemo
-  pod 'NativoSDK', '7.2.0'
-  pod 'GoogleAds-IMA-iOS-SDK', '3.19.1'
+  pod 'NativoSDK'
+  pod 'GoogleAds-IMA-iOS-SDK', '3.23.0'
 
 end
