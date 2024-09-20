@@ -5,8 +5,6 @@ There are three sample apps available that are each implemented differently to s
 **Infinite Scroll (ObjC)** - Uses UITableView in Obj-C to display Nativo ads. Uses Nib files or dynamic prototype cells for ad templates. Articles includes bottom-of-article placement ad unit.<br/>
 **Table View (Swift)** - A simple news feed using a UITableView. Uses dynamic prototype cells. Articles included bottom-of-article placement ad unit. <br/>
 **Collection View (Swift)** - Uses UICollectionView to display articles. Uses self-sizing dynamic prototype cells. Articles include middle-of-article placement ad unit. <br/>
-**GAM Integration (Swift)** - The same codebase as the Table View sample, except integrated with Google Ad Manager platform set to run creatives using a "Nativo tag" that ultimately places a Nativo ad in the feed.
-
 
 ## Setup
 
