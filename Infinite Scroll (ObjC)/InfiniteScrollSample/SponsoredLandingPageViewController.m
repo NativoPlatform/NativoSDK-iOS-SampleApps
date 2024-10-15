@@ -25,7 +25,6 @@
 
 -(void)viewDidDisappear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.nativoWebView stopLoadingNativo];
 }
 
 -(void)shareButtonTouched {

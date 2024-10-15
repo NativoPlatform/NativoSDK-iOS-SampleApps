@@ -45,7 +45,6 @@ class SponsoredLandingPageViewController: UIViewController, NtvLandingPageInterf
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.contentWKWebView.stopLoadingNativo()
     }
     
     @objc
